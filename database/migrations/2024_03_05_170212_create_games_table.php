@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('color');
             $table->longText('alternative_photo');
             $table->longText('banner');
+            $table->boolean('has_characters');
+            $table->boolean('active');
             $table->timestamps();
         });
     }

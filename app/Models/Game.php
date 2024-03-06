@@ -15,6 +15,13 @@ class Game extends Model
         'photo',
         'color',
         'alternative_photo',
-        'banner'
+        'banner',
+        'has_characters',
+        'active',
+    ];
+
+    protected $casts = [
+        'has_characters' => 'boolean',
+        'active' => 'boolean',
     ];
 }

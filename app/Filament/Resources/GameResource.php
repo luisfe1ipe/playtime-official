@@ -7,6 +7,7 @@ use App\Filament\Resources\GameResource\RelationManagers;
 use App\Models\Game;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -35,12 +36,9 @@ class GameResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->reactive()
-                    ->afterStateUpdated(function ($state, $set) {
-                        $state = Str::slug($state);
-                        $set('slug', $state);
-                    }),
+                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
                 Forms\Components\TextInput::make('slug')
-                    ->disabled(),
+                    ->unique(table: 'games', column: 'slug', ignoreRecord: true),
                 Forms\Components\Select::make('color')
                     ->columnSpanFull()
                     ->native(false)
@@ -86,6 +84,11 @@ class GameResource extends Resource
                     ->columnSpanFull()
                     ->image()
                     ->directory('games/banner/'),
+                Forms\Components\Toggle::make('has_characters')
+                    ->label('O jogo possui personagens ?'),
+                Forms\Components\Toggle::make('active')
+                    ->label('O jogo está ativo ?'),
+
             ]);
     }
 
@@ -95,25 +98,30 @@ class GameResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')
                     ->sortable(),
-                Tables\Columns\ImageColumn::make('photo'),
+                Tables\Columns\ImageColumn::make('photo')
+                    ->label('Imagem'),
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Nome')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('positions_count')
-                    ->label('Position Count')
-                    ->searchable()
-                    ->toggleable()
-                    ->counts('positions'),
-                Tables\Columns\TextColumn::make('characters_count')
-                    ->label('Character Count')
-                    ->searchable()
-                    ->toggleable()
-                    ->counts('characters'),
+                // Tables\Columns\TextColumn::make('positions_count')
+                //     ->label('Position Count')
+                //     ->searchable()
+                //     ->toggleable()
+                //     ->counts('positions'),
+                // Tables\Columns\TextColumn::make('characters_count')
+                //     ->label('Character Count')
+                //     ->searchable()
+                //     ->toggleable()
+                //     ->counts('characters'),
                 Tables\Columns\ColorColumn::make('color')
-                    ->toggleable(),
+                    ->toggleable()
+                    ->label('Cor'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('d/m/Y')
+                    ->label('Criado em')
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Atualizado em')
                     ->dateTime('d/m/Y')
                     ->toggleable(),
             ])
