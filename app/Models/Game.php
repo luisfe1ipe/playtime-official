@@ -35,4 +35,14 @@ class Game extends Model
     {
         return $this->hasMany(Character::class);
     }
+
+    /**
+     * Get all of the positions for the Game
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function positions(): HasMany
+    {
+        return $this->hasMany(Position::class);
+    }
 }
