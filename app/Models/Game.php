@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Game extends Model
 {
@@ -24,4 +25,14 @@ class Game extends Model
         'has_characters' => 'boolean',
         'active' => 'boolean',
     ];
+
+    /**
+     * Get all of the characters for the Game
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function characters(): HasMany
+    {
+        return $this->hasMany(Character::class);
+    }
 }
