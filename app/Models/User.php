@@ -34,12 +34,14 @@ class User extends Authenticatable implements FilamentUser
         'photo',
         'banner',
         'email',
-        'password',
         'birth',
         'is_blocked',
         'points',
         'likes',
         'bio',
+        'google_id',
+        'google_token',
+        'google_refresh_token',
     ];
 
     /**
@@ -48,7 +50,6 @@ class User extends Authenticatable implements FilamentUser
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
         'remember_token',
         'is_admin'
     ];

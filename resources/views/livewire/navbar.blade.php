@@ -16,10 +16,16 @@
                 @auth
                 <button class="flex items-center gap-2">
                     <div class="overflow-hidden text-center rounded-full w-14 h-14 bg-primary-500">
-                        <img class="w-full h-full" src="" alt="Foto perfil">
+                        @if(Auth::user()->photo)
+                        <img class="w-full h-full" src="{{Auth::user()->photo}}" alt="Foto perfil">
+                        @else
+                        <img class="w-full h-full"
+                            src="https://ui-avatars.com/api/?name={{Auth::user()->name}}&background=random"
+                            alt="Foto perfil" />
+                        @endif
                     </div>
                     <div class="flex items-end">
-                        <p>Nick usuario</p>
+                        <p>{{Auth::user()->name}}</p>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="lucide lucide-chevron-down">
@@ -29,15 +35,16 @@
                 </button>
                 @endauth
                 @guest
-                <x-primary-button x-on:click.prevent="$dispatch('open-modal', 'login')">
-                    Entrar
-                </x-primary-button>
+                {{-- <x-primary-button x-on:click.prevent="$dispatch('open-modal', 'login')"> --}}
+                    {{-- Entrar --}}
+                    {{-- </x-primary-button> --}}
+                <a href="/auth/google/redirect">Entrar</a>
 
                 @endguest
             </div>
         </div>
     </x-container>
     <x-modal maxWidth='lg' name="login" title="Login">
-        
+
     </x-modal>
 </nav>
