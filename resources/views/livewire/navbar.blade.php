@@ -1,4 +1,4 @@
-<nav class="sticky top-0 z-10 w-full py-2 dark:bg-zinc-900 dark:border-gray-700">
+<nav x-data="" class="sticky top-0 z-10 w-full py-4 dark:bg-zinc-900 dark:border-gray-700">
     <x-container>
         <div class="flex items-center justify-between w-full">
             <a href="/" class="text-3xl font-bold text-primary-500">PlayTime</a>
@@ -13,6 +13,7 @@
                 </ul>
             </div>
             <div>
+                @auth
                 <button class="flex items-center gap-2">
                     <div class="overflow-hidden text-center rounded-full w-14 h-14 bg-primary-500">
                         <img class="w-full h-full" src="" alt="Foto perfil">
@@ -26,7 +27,17 @@
                         </svg>
                     </div>
                 </button>
+                @endauth
+                @guest
+                <x-primary-button x-on:click.prevent="$dispatch('open-modal', 'login')">
+                    Entrar
+                </x-primary-button>
+
+                @endguest
             </div>
         </div>
     </x-container>
+    <x-modal maxWidth='lg' name="login" title="Login">
+        
+    </x-modal>
 </nav>

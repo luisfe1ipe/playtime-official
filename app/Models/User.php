@@ -29,8 +29,17 @@ class User extends Authenticatable implements FilamentUser
      */
     protected $fillable = [
         'name',
+        'nick',
+        'slug_nick',
+        'photo',
+        'banner',
         'email',
         'password',
+        'birth',
+        'is_blocked',
+        'points',
+        'likes',
+        'bio',
     ];
 
     /**
@@ -41,6 +50,7 @@ class User extends Authenticatable implements FilamentUser
     protected $hidden = [
         'password',
         'remember_token',
+        'is_admin'
     ];
 
     /**
@@ -51,6 +61,8 @@ class User extends Authenticatable implements FilamentUser
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'is_admin' => 'boolean',
+        'is_blocked' => 'boolean',
     ];
 
     /**
