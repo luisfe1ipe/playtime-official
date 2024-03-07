@@ -1,6 +1,6 @@
-<nav x-data="" class="sticky top-0 z-10 w-full py-4 dark:bg-zinc-900 dark:border-gray-700">
+<nav x-data="" class="sticky top-0 z-10 w-full dark:bg-zinc-900 dark:border-gray-700">
     <x-container>
-        <div class="flex items-center justify-between w-full">
+        <div class="flex items-center justify-between w-full h-20">
             <a href="/" class="text-3xl font-bold text-primary-500">PlayTime</a>
             <div>
                 <ul>

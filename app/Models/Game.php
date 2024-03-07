@@ -15,7 +15,6 @@ class Game extends Model
         'name',
         'slug',
         'photo',
-        'color',
         'alternative_photo',
         'banner',
         'has_characters',

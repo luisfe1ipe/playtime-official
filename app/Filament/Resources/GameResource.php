@@ -39,34 +39,6 @@ class GameResource extends Resource
                     ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
                 Forms\Components\TextInput::make('slug')
                     ->unique(table: 'games', column: 'slug', ignoreRecord: true),
-                Forms\Components\Select::make('color')
-                    ->columnSpanFull()
-                    ->native(false)
-                    ->required()
-                    ->options([
-                        'gray' => 'gray',
-                        'black' => 'black',
-                        'red' => 'red',
-                        'yellow' => 'yellow',
-                        'green' => 'green',
-                        'blue' => 'blue',
-                        'indigo' => 'indigo',
-                        'purple' => 'purple',
-                        'pink' => 'pink',
-                        'teal' => 'teal',
-                        'cyan' => 'cyan',
-                        'orange' => 'orange',
-                        'slate' => 'slate',
-                        'zinc' => 'zinc',
-                        'neutral' => 'neutral',
-                        'stone' => 'stone',
-                        'amber' => 'amber',
-                        'lime' => 'lime',
-                        'sky' => 'sky',
-                        'violet' => 'violet',
-                        'fuchsia' => 'fuchsia',
-                        'rose' => 'rose',
-                    ]),
                 Forms\Components\FileUpload::make('photo')
                     ->required()
                     ->columnSpanFull()
@@ -113,9 +85,6 @@ class GameResource extends Resource
                 //     ->searchable()
                 //     ->toggleable()
                 //     ->counts('characters'),
-                Tables\Columns\ColorColumn::make('color')
-                    ->toggleable()
-                    ->label('Cor'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('d/m/Y')
                     ->label('Criado em')

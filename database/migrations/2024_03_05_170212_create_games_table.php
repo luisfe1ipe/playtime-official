@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->longText('photo');
-            $table->string('color');
             $table->longText('alternative_photo');
             $table->longText('banner');
             $table->boolean('has_characters');
