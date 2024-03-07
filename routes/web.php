@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Doubts\HowToRegisterANewGame;
+use App\Livewire\FindPlayer\SelectGame;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('duvidas-ao-cadastrar-um-novo-jogo', HowToRegisterANewGame::class)->name('doubts.how-to-register-a-new-game');
+Route::get('/encontrar-player', SelectGame::class)->name('find-player.select-game');

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -25,6 +26,11 @@ class Game extends Model
         'has_characters' => 'boolean',
         'active' => 'boolean',
     ];
+
+    public function scopeActive(Builder $query, bool $active)
+    {
+        $query->where('active', $active);
+    }
 
     /**
      * Get all of the characters for the Game
