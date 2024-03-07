@@ -9,7 +9,8 @@
     @vite(['resources/css/app.css'])
 </head>
 
-<body class="antialiased text-white bg-gray-950">
+<body class="antialiased text-white bg-zinc-950">
+    <livewire:navbar />
     {{ $slot }}
 </body>
 
