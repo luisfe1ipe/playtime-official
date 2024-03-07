@@ -35,11 +35,9 @@
                 </button>
                 @endauth
                 @guest
-                {{-- <x-primary-button x-on:click.prevent="$dispatch('open-modal', 'login')"> --}}
-                    {{-- Entrar --}}
-                    {{-- </x-primary-button> --}}
-                <a href="/auth/google/redirect">Entrar</a>
 
+                <a class="focus:outline-none focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 bg-purple-600 hover:bg-purple-700 focus:ring-purple-900"
+                    href="/auth/google/redirect">Entrar</a>
                 @endguest
             </div>
         </div>

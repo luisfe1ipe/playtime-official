@@ -32,12 +32,13 @@ Route::get('/auth/google/callback', function () {
 
 
   $user = User::updateOrCreate([
-    'google_id' => $googleUser->id,
+    'google_id' => $googleUser->getId(),
   ], [
-    'name' => $googleUser->name,
-    'email' => $googleUser->email,
+    'name' => $googleUser->getName(),
+    'email' => $googleUser->getEmail(),
     'google_token' => $googleUser->token,
     'google_refresh_token' => $googleUser->refreshToken,
+    'photo' => $googleUser->getAvatar(),
   ]);
 
   Auth::login($user);
