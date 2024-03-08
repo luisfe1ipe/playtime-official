@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\News;
+use App\Models\Type;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,5 +22,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'luisfelipe@playtime.com',
             'email_verified_at' => now(),
         ]);
+
+        Type::factory(20)->create();
+        News::factory(100)->create();
     }
 }

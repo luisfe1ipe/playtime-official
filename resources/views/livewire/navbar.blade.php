@@ -3,11 +3,16 @@
         <div class="flex items-center justify-between w-full h-20">
             <a href="/" class="text-3xl font-bold text-primary-500">PlayTime</a>
             <div>
-                <ul>
+                <ul class="flex items-center gap-3">
                     <li>
-                        <x-nav-link
+                        <x-nav-link :href="route('find-player.select-game')"
                             :active="request()->routeIs('find-player.select-game') || request()->routeIs('find-player.select-game')">
                             Encontrar Player
+                        </x-nav-link>
+                    </li>
+                    <li>
+                        <x-nav-link :href="route('news.list')" :active="request()->routeIs('news.list')">
+                            Notícias
                         </x-nav-link>
                     </li>
                 </ul>

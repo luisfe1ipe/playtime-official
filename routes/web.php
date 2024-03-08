@@ -3,6 +3,7 @@
 use App\Http\Controllers\SocialiteController;
 use App\Livewire\Doubts\HowToRegisterANewGame;
 use App\Livewire\FindPlayer\SelectGame;
+use App\Livewire\News\ListNews;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,3 +28,4 @@ Route::prefix('/auth/google')->group(function () {
 
 
 Route::get('/encontrar-player', SelectGame::class)->name('find-player.select-game');
+Route::get('/noticias', ListNews::class)->name('news.list');
