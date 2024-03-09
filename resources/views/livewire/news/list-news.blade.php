@@ -108,7 +108,7 @@
             <x-search-not-found :search="$search" /> --}}
             @else
             @foreach ($news as $n)
-            <a href="#"
+            <a href="{{route('news.show', $n->id)}}"
                 class="flex flex-col justify-between w-full mb-8 bg-transparent border-b-2 shadow cursor-pointer border-primary-500 group hover:bg-zinc-900 rounded-t-md lg:flex-row lg:h-48">
                 <div class="relative w-full overflow-hidden lg:w-80 rounded-t-md">
                     <img class="w-full h-full transition ease-out group-hover:scale-110 delay-50 rounded-t-md"
