@@ -39,7 +39,8 @@
         </div>
         <div>
             @foreach ($myTeams as $tl)
-            <a href="#" class="inline-flex flex-col items-center gap-2 mx-4 my-6 cursor-pointer group">
+            <a wire:navigate href="{{route('my-teams.show', ['slug' => $tl->slug])}}"
+                class="inline-flex flex-col items-center gap-2 mx-4 my-6 cursor-pointer group">
                 <div
                     class="flex items-center justify-center w-32 h-32 overflow-hidden transition-all ease-linear rounded-full bg-zinc-800 group-hover:bg-zinc-800/50">
                     @if ($tl->image === null)
