@@ -14,9 +14,12 @@ class ListNews extends Component
 {
     use WithPagination;
 
+    public $search = '';
     public $types;
     public $selectedTypes = [];
     public $selectedOrder = 'recent';
+
+    protected $queryString = ['search' => ['except' => '']];
 
     public function mount()
     {
@@ -41,6 +44,11 @@ class ListNews extends Component
             case 'older':
                 $news->orderBy('created_at', 'asc');
                 break;
+        }
+
+        if($this->search)
+        {
+            $news->where('title','like','%'. $this->search .'%');
         }
 
         $news = $news->with('type')->paginate(16);

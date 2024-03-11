@@ -4,19 +4,23 @@
         <div class="flex flex-col items-center gap-5 mt-6 lg:gap-0 lg:flex-row lg:justify-between">
             <div class="relative w-full lg:w-1/2">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                    <svg wire:loading.remove class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                     </svg>
+                    <div wire:loading>
+                        <x-filament::loading-indicator class="w-5 h-5" />
+                    </div>
                 </div>
-                <x-text-input wire:model='search' type="search" class="w-full pl-10" placeholder='Digite aqui' />
+                <x-text-input wire:model.live='search' type="search" class="w-full pl-10" placeholder='Digite aqui' />
             </div>
             <div x-data="{ type: false, orderBy: false }"
                 class="relative grid grid-cols-2 gap-3 lg:flex lg:w-full lg:justify-end">
                 <div @click.outside='type = false' @close.stop="type = false">
                     <div class="w-full lg:w-auto">
-                        <button class="w-full px-2 py-1 transition-colors ease-linear border rounded-lg border-zinc-800"
+                        <button
+                            class="w-full px-2 py-1 transition-colors ease-linear border rounded-lg hover:bg-zinc-800 border-zinc-800"
                             x-on:click="type = !type" x-bind:class="{ 'bg-zinc-800': type }">
                             Categorias
                         </button>
@@ -49,8 +53,8 @@
                 <div @click.outside='orderBy = false' @close.stop="orderBy = false">
                     <div class="w-full lg:w-auto">
                         <button
-                            class="w-full px-2 py-1 transition-colors ease-linear border rounded-lg dark:hover:bg-zinc-800 dark:border-zinc-800"
-                            x-on:click="orderBy = !orderBy" x-bind:class="{ 'bg-gray-100 dark:bg-zinc-800': orderBy }">
+                            class="w-full px-2 py-1 transition-colors ease-linear border rounded-lg hover:bg-zinc-800 border-zinc-800"
+                            x-on:click="orderBy = !orderBy" x-bind:class="{ 'bg-zinc-800': orderBy }">
                             Ordenar por
                         </button>
                     </div>
