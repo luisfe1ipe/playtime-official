@@ -5,6 +5,7 @@ use App\Livewire\Doubts\HowToRegisterANewGame;
 use App\Livewire\FindPlayer\SelectGame;
 use App\Livewire\News\ListNews;
 use App\Livewire\News\ShowNews;
+use App\Livewire\Teams\MyTeams\ListMyTeams;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,5 +30,8 @@ Route::prefix('/auth/google')->group(function () {
 
 
 Route::get('/encontrar-player', SelectGame::class)->name('find-player.select-game');
+
 Route::get('/noticias', ListNews::class)->name('news.list');
 Route::get('/noticias/{id}', ShowNews::class)->name('news.show');
+
+Route::get('/meus-times', ListMyTeams::class)->name('my-teams.list');

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\News;
+use App\Models\Team;
 use App\Models\Type;
 use Illuminate\Database\Seeder;
 
@@ -25,5 +26,6 @@ class DatabaseSeeder extends Seeder
 
         Type::factory(20)->create();
         News::factory(100)->create();
+        Team::factory(5)->create();
     }
 }
