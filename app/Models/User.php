@@ -76,4 +76,14 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->hasMany(News::class);
     }
+
+    /**
+     * Get all of the teams for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function teams(): HasMany
+    {
+        return $this->hasMany(Team::class);
+    }
 }
