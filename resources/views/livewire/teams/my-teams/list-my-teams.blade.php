@@ -10,7 +10,7 @@
             <x-primary-button x-on:click.prevent="$dispatch('open-modal', 'create-team')">
                 Criar time
             </x-primary-button>
-            <x-modal maxWidth='xl' show="true" name="create-team" title="Criar Time">
+            <x-modal maxWidth='xl' name="create-team" title="Criar Time">
                 <form wire:submit.prevent='submit'>
                     <div class="p-2 space-y-2">
                         <div class="px-4 py-2 space-y-4">
