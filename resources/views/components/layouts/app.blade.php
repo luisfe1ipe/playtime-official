@@ -1,17 +1,30 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html class="dark" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{{ $title ?? 'Page Title' }}</title>
+
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
+
+
+    @filamentStyles
     @vite(['resources/css/app.css'])
 </head>
 
 <body class="antialiased text-white bg-zinc-950">
     <livewire:navbar />
     {{ $slot }}
+
+    @livewire('notifications')
+
+    @filamentScripts
 </body>
 
 </html>

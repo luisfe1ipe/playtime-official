@@ -3,6 +3,7 @@
 namespace App\Livewire\Teams\MyTeams\Setting;
 
 use App\Models\Team;
+use Filament\Notifications\Notification;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Illuminate\Validation\Rule;
@@ -109,5 +110,10 @@ class AboutTeam extends Component
         ]);
 
         $this->team->save();
+
+        return Notification::make()
+            ->title('Informações atualizadas!')
+            ->success()
+            ->send();
     }
 }

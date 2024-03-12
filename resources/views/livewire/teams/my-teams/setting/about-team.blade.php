@@ -164,7 +164,14 @@
                         <x-input-error :messages="$errors->get('email')" />
                     </div>
                     <div class="flex justify-end w-full mt-12">
-                        <x-primary-button type="submit">Salvar</x-primary-button>
+                        <x-primary-button type="submit">
+                            <p wire:loading.remove wire:target='save'>
+                                Salvar
+                            </p>
+                            <div wire:loading wire:target='save'>
+                                <x-filament::loading-indicator class="w-5 h-5" />
+                            </div>
+                        </x-primary-button>
                     </div>
                 </form>
             </div>
