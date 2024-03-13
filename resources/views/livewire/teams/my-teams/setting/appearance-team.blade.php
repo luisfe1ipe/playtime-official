@@ -93,7 +93,8 @@
                         <div
                             class="mt-5 w-[10rem] h-[10rem] bg-gray-800 rounded-md relative  flex flex-col justify-center items-center">
                             @if ($team->image != null)
-                            <img class="object-cover w-full h-full rounded-md" src="{{ Storage::url($team->image) }}" alt="{{$team->name}}">
+                            <img class="object-cover w-full h-full rounded-md" src="{{ Storage::url($team->image) }}"
+                                alt="{{$team->name}}">
                             @else
                             <svg class="size-24 text-zinc-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -128,7 +129,7 @@
                         <div
                             class="relative flex flex-col items-center justify-center w-full mt-5 bg-gray-800 rounded-md h-80">
                             @if ($team->banner != null)
-                            <img class="object-cover w-full h-full rounded-md" src="{{ $team->banner }}" alt="">
+                            <img class="object-cover w-full h-full rounded-md" src="{{ Storage::url($team->banner) }}" alt="Banner {{$team->name}}">
                             @else
                             <svg class="text-zinc-600 size-24" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -162,6 +163,9 @@
         </div>
         <x-modal maxWidth='md' name="edit-image" title="Editar imagem do time">
             <livewire:teams.edit-photo-team :team="$team" @saved="$refresh">
+        </x-modal>
+        <x-modal maxWidth='2xl' name="edit-banner" title="Editar banner do time">
+            <livewire:teams.edit-banner-team :team="$team" @saved="$refresh">
         </x-modal>
     </x-container>
 </div>

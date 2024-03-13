@@ -6,26 +6,25 @@ use App\Models\Team;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Livewire\Component;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
+use Livewire\Component;
 
-class EditPhotoTeam extends Component implements HasForms
+class EditBannerTeam extends Component implements HasForms
 {
     use InteractsWithForms;
 
-
-    public $image;
+    public $banner;
     public $team;
 
-    public function mount(Team $team): void
+    public function mount(Team $team)
     {
         $this->team = $team;
 
-        $this->image = $team->image;
+        $this->banner = $team->banner;
 
         $this->form->fill([
-            'image' => $this->image
+            'banner' => $this->banner
         ]);
     }
 
@@ -33,26 +32,28 @@ class EditPhotoTeam extends Component implements HasForms
     {
         return $form
             ->schema([
-                FileUpload::make('image')
+                FileUpload::make('banner')
                     ->image()
                     ->imageEditor(true)
-                    ->panelLayout('circle')
+                    ->panelLayout('integrated')
+                    ->imagePreviewHeight('250')
+                    ->panelAspectRatio('2:1')
                     ->required()
-                    ->directory('teams/images/')
+                    ->directory('teams/banners/')
             ]);
     }
 
     public function render()
     {
-        return view('livewire.teams.edit-photo-team');
+        return view('livewire.teams.edit-banner-team');
     }
 
     public function create()
     {
         $data = $this->form->getState();
 
-        if (isset($data['image'])) {
-            $this->team->image = $data['image'];
+        if (isset($data['banner'])) {
+            $this->team->banner = $data['banner'];
             $this->team->save();
         }
 
@@ -60,7 +61,7 @@ class EditPhotoTeam extends Component implements HasForms
         $this->dispatch('saved');
 
         return Notification::make()
-            ->title('Imagem atualizada com sucesso!')
+            ->title('Banner atualizado com sucesso!')
             ->success()
             ->send();
     }

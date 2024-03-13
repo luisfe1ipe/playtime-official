@@ -1,6 +1,7 @@
 <div>
     <x-container>
-        <div class="h-[400px] relative" style="background-image: url({{ $team->banner }}); background-size: cover;">
+        <div class="h-[400px] relative"
+            style="background-image: url({{ Storage::url($team->banner) }}); background-size: cover;">
             @if ($team->user->id === auth()->user()->id)
             <div class="absolute top-4 right-6 z-[1]">
                 <button x-on:click.prevent="$dispatch('open-modal', 'edit-banner')"
