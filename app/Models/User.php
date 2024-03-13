@@ -77,6 +77,11 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasMany(News::class);
     }
 
+    public function isTeamLeader(string $slug)
+    {
+        return $this->teams()->where('slug', $slug)->where('user_id', $this->id)->exists();
+    }
+
     /**
      * Get all of the teams for the User
      *

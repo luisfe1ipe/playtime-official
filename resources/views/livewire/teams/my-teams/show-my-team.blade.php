@@ -68,8 +68,9 @@
             </div>
         </div>
         <div class="px-6 mx-auto mt-8 max-w-7xl lg:px-8">
+            @if (Auth::user()->id === $team->user_id)
             <div class="flex items-center justify-end">
-                <a href="#"
+                <a href="{{route('my-teams.settings.about', ['slug' => $team->slug])}}"
                     class="flex items-center gap-2 px-4 py-1 font-medium transition ease-linear border rounded-md bg-zinc-800 border-zinc-700 hover:bg-zinc-700">
                     <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -81,6 +82,7 @@
                     Configurações
                 </a>
             </div>
+            @endif
             <div class="grid grid-cols-3 gap-8 mt-6">
                 <div class="flex flex-col col-span-2 gap-6">
                     <h1 class="col-span-2 mb-4 text-2xl font-bold">Visão geral</h1>
@@ -110,50 +112,45 @@
                             @endif
                             @if ($team->discord_url != null)
                             <a href="{{ $team->discord_url }}" target="_blank"
-                                class="group w-full p-2 flex items-center gap-2 rounded-md border-[1.5px] border-sky-800 hover:bg-gray-800 transition-all ease-linear">
-                                {{--
-                                <x-icons.discord /> --}}
-                                <p class="group-hover:text-sky-600">
+                                class="group w-full p-2 flex items-center gap-2 rounded-md border-[1.5px] border-primary-800 hover:bg-zinc-900 transition-all ease-linear">
+                                <x-icons.discord />
+                                <p class="group-hover:text-primary-600">
                                     {{ $team->discord_url }}
                                 </p>
                             </a>
                             @endif
                             @if ($team->facebook_url != null)
                             <a href="{{ $team->facebook_url }}" target="_blank"
-                                class="group w-full p-2 flex items-center gap-2 rounded-md border-[1.5px] border-sky-800 hover:bg-gray-800 transition-all ease-linear">
-                                {{--
-                                <x-icons.facebook /> --}}
-                                <p class="group-hover:text-sky-600">
+                                class="group w-full p-2 flex items-center gap-2 rounded-md border-[1.5px] border-primary-800 hover:bg-zinc-900 transition-all ease-linear">
+                                <x-icons.facebook />
+                                <p class="group-hover:text-primary-600">
                                     {{ $team->facebook_url }}
                                 </p>
                             </a>
                             @endif
                             @if ($team->instagram_url != null)
                             <a href="{{ $team->instagram_url }}" target="_blank"
-                                class="group w-full p-2 flex items-center gap-2 rounded-md border-[1.5px] border-sky-800 hover:bg-gray-800 transition-all ease-linear">
-                                {{--
-                                <x-icons.instagram /> --}}
-                                <p class="group-hover:text-sky-600">
+                                class="group w-full p-2 flex items-center gap-2 rounded-md border-[1.5px] border-primary-800 hover:bg-zinc-900 transition-all ease-linear">
+                                <x-icons.instagram />
+                                <p class="group-hover:text-primary-600">
                                     {{ $team->instagram_url }}
                                 </p>
                             </a>
                             @endif
                             @if ($team->twitter_url != null)
                             <a href="{{ $team->twitter_url }}" target="_blank"
-                                class="group w-full p-2 flex items-center gap-2 rounded-md border-[1.5px] border-sky-800 hover:bg-gray-800 transition-all ease-linear">
-                                {{--
-                                <x-icons.twitter /> --}}
-                                <p class="group-hover:text-sky-600">
+                                class="group w-full p-2 flex items-center gap-2 rounded-md border-[1.5px] border-primary-800 hover:bg-zinc-900 transition-all ease-linear">
+                                <x-icons.twitter />
+                                <p class="group-hover:text-primary-600">
                                     {{ $team->twitter_url }}
                                 </p>
                             </a>
                             @endif
                             @if ($team->twitch_url != null)
                             <a href="{{ $team->twitch_url }}" target="_blank"
-                                class="group w-full p-2 flex items-center gap-2 rounded-md border-[1.5px] border-sky-800 hover:bg-gray-800 transition-all ease-linear">
-                                {{--
-                                <x-icons.twitch /> --}}
-                                <p class="group-hover:text-sky-600">
+                                class="group w-full p-2 flex items-center gap-2 rounded-md border-[1.5px] border-primary-800 hover:bg-zinc-900 transition-all ease-linear">
+                                <x-icons.twitch />
+                                <p class="group-hover:text-primary-600">
                                     {{ $team->twitch_url }}
                                 </p>
                             </a>

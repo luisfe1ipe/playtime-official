@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::prefix('/duvidas')->group(function () {
   Route::get('/como-cadastrar-um-novo-jogo', HowToRegisterANewGame::class)->name('doubts.how-to-register-a-new-game');
 });
@@ -37,7 +38,13 @@ Route::get('/encontrar-player', SelectGame::class)->name('find-player.select-gam
 Route::get('/noticias', ListNews::class)->name('news.list');
 Route::get('/noticias/{id}', ShowNews::class)->name('news.show');
 
-Route::get('/meus-times', ListMyTeams::class)->name('my-teams.list');
-Route::get('/meus-times/{slug}', ShowMyTeam::class)->name('my-teams.show');
-Route::get('/time/{slug}/configuracoes/sobre', AboutTeam::class)->name('my-teams.settings.about');
-Route::get('/time/{slug}/configuracoes/aparencia', AppearanceTeam::class)->name('my-teams.settings.appearance');
+Route::get('/times', ListMyTeams::class)->name('my-teams.list');
+Route::get('/times/{slug}', ShowMyTeam::class)->name('my-teams.show');
+
+
+// Apenas lider do time
+Route::middleware('auth.team_leader')->group(function () {
+  // Rotas que exigem verificação de liderança de equipe
+  Route::get('/times/{slug}/configuracoes/sobre', AboutTeam::class)->name('my-teams.settings.about');
+  Route::get('/times/{slug}/configuracoes/aparencia', AppearanceTeam::class)->name('my-teams.settings.appearance');
+});
