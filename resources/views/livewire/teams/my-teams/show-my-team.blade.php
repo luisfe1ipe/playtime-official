@@ -70,7 +70,7 @@
         <div class="px-6 mx-auto mt-8 max-w-7xl lg:px-8">
             @if (Auth::user()->id === $team->user_id)
             <div class="flex items-center justify-end">
-                <a href="{{route('my-teams.settings.about', ['slug' => $team->slug])}}"
+                <a wire:navigate href="{{route('my-teams.settings.about', ['slug' => $team->slug])}}"
                     class="flex items-center gap-2 px-4 py-1 font-medium transition ease-linear border rounded-md bg-zinc-800 border-zinc-700 hover:bg-zinc-700">
                     <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
