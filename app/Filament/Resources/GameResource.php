@@ -51,7 +51,7 @@ class GameResource extends Resource
                     ->image()
                     ->directory('games/alternative_photo/'),
                 Forms\Components\FileUpload::make('banner')
-                    ->helperText(new HtmlString('Caso esteja com dúvida de como cadastrar um jogo, <a target="_blank" href="/duvidas-ao-cadastrar-um-novo-jogo"><strong>Clique aqui!</strong></a>'))
+                    ->helperText(new HtmlString('Caso esteja com dúvida de como cadastrar um jogo, <a target="_blank" href="/duvidas/como-cadastrar-um-novo-jogo"><strong>Clique aqui!</strong></a>'))
                     ->required()
                     ->columnSpanFull()
                     ->image()
