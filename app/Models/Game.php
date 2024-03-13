@@ -50,4 +50,14 @@ class Game extends Model
     {
         return $this->hasMany(Position::class);
     }
+
+    /**
+     * Get all of the findPlayers for the Game
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function findPlayers(): HasMany
+    {
+        return $this->hasMany(FindPlayer::class);
+    }
 }
