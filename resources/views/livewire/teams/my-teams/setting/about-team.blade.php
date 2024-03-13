@@ -7,7 +7,7 @@
                         class="min-w-[10rem]  min-h-[10rem] max-w-[10rem] max-h-[10rem] bg-zinc-900 rounded-md relative  flex flex-col justify-center items-center">
                         @if ($team->image)
                         <img class="object-cover w-full h-full rounded-md" src="{{ Storage::url($team->image) }}"
-                            alt="Foto {{$team->image}}">
+                            alt="Foto {{$team->name}}">
                         @else
                         <svg class="text-zinc-600 size-24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

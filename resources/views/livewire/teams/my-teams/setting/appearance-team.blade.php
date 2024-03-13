@@ -7,7 +7,7 @@
                         class="min-w-[10rem]  min-h-[10rem] max-w-[10rem] max-h-[10rem] bg-zinc-900 rounded-md relative  flex flex-col justify-center items-center">
                         @if ($team->image)
                         <img class="object-cover w-full h-full rounded-md" src="{{ Storage::url($team->image) }}"
-                            alt="Foto {{$team->image}}">
+                            alt="Foto {{$team->name}}">
                         @else
                         <svg class="text-zinc-600 size-24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -93,7 +93,7 @@
                         <div
                             class="mt-5 w-[10rem] h-[10rem] bg-gray-800 rounded-md relative  flex flex-col justify-center items-center">
                             @if ($team->image != null)
-                            <img class="object-cover w-full h-full rounded-md" src="{{ $team->photo }}" alt="">
+                            <img class="object-cover w-full h-full rounded-md" src="{{ Storage::url($team->image) }}" alt="{{$team->name}}">
                             @else
                             <svg class="size-24 text-zinc-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -103,7 +103,7 @@
                                 <path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3" />
                             </svg>
                             @endif
-                            <button type="button" x-on:click.prevent="$dispatch('open-modal', 'edit-photo')"
+                            <button type="button" x-on:click.prevent="$dispatch('open-modal', 'edit-image')"
                                 class="absolute bottom-0 flex flex-col items-center justify-center w-10 h-10 transition-all ease-linear border-2 rounded-full cursor-pointer border-zinc-700 bg-zinc-800 hover:bg-zinc-700 -right-3 ">
                                 <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -160,5 +160,8 @@
                 </div>
             </div>
         </div>
+        <x-modal maxWidth='md' name="edit-image" title="Editar imagem do time">
+            <livewire:teams.edit-photo-team :team="$team" @saved="$refresh">
+        </x-modal>
     </x-container>
 </div>
