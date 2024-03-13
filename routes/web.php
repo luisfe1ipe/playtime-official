@@ -7,6 +7,7 @@ use App\Livewire\News\ListNews;
 use App\Livewire\News\ShowNews;
 use App\Livewire\Teams\MyTeams\ListMyTeams;
 use App\Livewire\Teams\MyTeams\Setting\AboutTeam;
+use App\Livewire\Teams\MyTeams\Setting\AppearanceTeam;
 use App\Livewire\Teams\MyTeams\ShowMyTeam;
 use Illuminate\Support\Facades\Route;
 
@@ -39,3 +40,4 @@ Route::get('/noticias/{id}', ShowNews::class)->name('news.show');
 Route::get('/meus-times', ListMyTeams::class)->name('my-teams.list');
 Route::get('/meus-times/{slug}', ShowMyTeam::class)->name('my-teams.show');
 Route::get('/time/{slug}/configuracoes/sobre', AboutTeam::class)->name('my-teams.settings.about');
+Route::get('/time/{slug}/configuracoes/aparencia', AppearanceTeam::class)->name('my-teams.settings.appearance');

@@ -38,7 +38,8 @@
                             </x-team.settings.link>
                         </li>
                         <li>
-                            <x-team.settings.link>
+                            <x-team.settings.link :href="route('my-teams.settings.appearance', ['slug' => $team->slug])"
+                                :active="request()->routeIs('my-teams.settings.appearance')">
                                 <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" class="lucide lucide-brush">
@@ -83,7 +84,7 @@
                 <p class="text-gray-400">
                     Deixe que outras pessoas aprendam mais sobre sua equipe adicionando informações relevantes.
                 </p>
-                <form wire:submit='save' class="mt-6">
+                <form wire:submit.prevent='save' class="mt-6">
                     <h3 class="mb-6 text-xl font-bold">Informações</h3>
                     <div class="flex flex-col gap-6">
                         <div>
