@@ -18,3 +18,19 @@ h3 {
 h4 {
   @apply text-lg font-bold
 }
+
+/* Estilizando a barra de rolagem */
+::-webkit-scrollbar {
+  width: 6px;
+  /* Largura da barra de rolagem */
+}
+
+/* Estilizando o polegar (a parte que você arrasta) */
+::-webkit-scrollbar-thumb {
+  @apply bg-primary-500 rounded-lg
+}
+
+/* Estilizando a área de rastreamento (a área cinza ao redor do polegar) */
+::-webkit-scrollbar-track {
+  @apply bg-zinc-900
+}

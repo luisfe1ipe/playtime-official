@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\SocialiteController;
 use App\Livewire\Doubts\HowToRegisterANewGame;
+use App\Livewire\FindPlayer\FindPlayer;
+use App\Livewire\FindPlayer\FormFindPlayer;
 use App\Livewire\FindPlayer\SelectGame;
 use App\Livewire\News\ListNews;
 use App\Livewire\News\ShowNews;
@@ -34,14 +36,16 @@ Route::prefix('/auth/google')->group(function () {
 
 
 Route::get('/encontrar-player', SelectGame::class)->name('find-player.select-game');
+Route::get('/encontrar-player/{slug}', FindPlayer::class)->name('find-player.index');
+Route::get('/encontrar-player/{slug}/anunciar-vaga', FormFindPlayer::class)->name('find-player.advertise-vacancy');
 
 Route::get('/noticias', ListNews::class)->name('news.list');
 Route::get('/noticias/{id}', ShowNews::class)->name('news.show');
 
+
+
 Route::get('/times', ListMyTeams::class)->name('my-teams.list');
 Route::get('/times/{slug}', ShowMyTeam::class)->name('my-teams.show');
-
-
 // Apenas lider do time
 Route::middleware('auth.team_leader')->group(function () {
   // Rotas que exigem verificação de liderança de equipe

@@ -2,7 +2,7 @@
 'game' => null,
 ])
 
-<a
+<a wire:navigate href="{{route('find-player.index', ['slug' => $game->slug])}}"
   class="text-center cursor-pointer hover:shadow-xl ease-in duration-200 rounded-md border-[1.5px] border-transparent w-full h-64 sm:w-60 sm:h-96 group overflow-hidden flex flex-col items-center relative">
   <div class="absolute bottom-0 w-full h-1/2 from-gray-950/50 group-hover:bg-gradient-to-t z-[1] ">
 
