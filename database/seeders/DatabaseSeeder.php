@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
         Rank::create([
             'name' => 'Ascendente',
             'image' => 'https://static.wikia.nocookie.net/valorant/images/e/e5/Ascendant_1_Rank.png/revision/latest?cb=20220616175506',
-            'game_id' => ''
+            'game_id' => 1
         ]);
 
         Rank::create([
