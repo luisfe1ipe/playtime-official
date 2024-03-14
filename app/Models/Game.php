@@ -36,6 +36,16 @@ class Game extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+    public function ranks(): HasMany
+    {
+        return $this->hasMany(Rank::class);
+    }
+
+    /**
+     * Get all of the characters for the Game
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function characters(): HasMany
     {
         return $this->hasMany(Character::class);
