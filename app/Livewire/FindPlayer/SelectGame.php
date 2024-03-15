@@ -3,6 +3,7 @@
 namespace App\Livewire\FindPlayer;
 
 use App\Models\Game;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
 class SelectGame extends Component
@@ -12,6 +13,7 @@ class SelectGame extends Component
     public function mount()
     {
         $this->games = Game::active(true)->get();
+
     }
 
     public function render()

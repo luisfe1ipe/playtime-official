@@ -3,10 +3,13 @@
 namespace App\Livewire\Components;
 
 use App\Models\Character;
+use App\Traits\CustomGetImage;
 use Livewire\Component;
 
 class SelectWithImage extends Component
 {
+    // use CustomGetImage;
+
     public $item_select;
     public $items;
     public $itemsOriginal;
@@ -49,4 +52,9 @@ class SelectWithImage extends Component
         $this->item_select->model = get_class($this->item_select);
         $this->dispatch('select-item', $this->item_select);
     }
+
+    // public function getCustomImage($image)
+    // {
+    //     return $this->getImage($image);
+    // }
 }

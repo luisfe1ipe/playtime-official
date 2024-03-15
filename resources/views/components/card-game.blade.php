@@ -8,7 +8,7 @@
 
   </div>
   <img class=" w-full h-full object-cover group-hover:brightness-[65%] ease-in duration-200 group-hover:scale-110"
-    src="{{ Storage::url($game->alternative_photo) }}" alt="Imagem {{$game->name}}">
+    src="{{ $game->getImage($game->alternative_photo) }}" alt="Imagem {{$game->name}}">
   <div class="absolute group-hover:bottom-4 ease-in duration-200 -bottom-12 z-[2]">
     <h2>{{ $game->name }}</h2>
   </div>
