@@ -30,39 +30,5 @@ class DatabaseSeeder extends Seeder
 
         Type::factory(20)->create();
         News::factory(100)->create();
-
-        // Game::create([
-        //     'name' => 'Valorant',
-        //     'slug' => 'valorant',
-        //     'photo' => 'https://seeklogo.com/images/V/valorant-logo-FAB2CA0E55-seeklogo.com.png',
-        //     'alternative_photo' => 'https://moewalls.com/wp-content/uploads/2024/03/omen-agent-valorant-thumb.jpg',
-        //     'banner' => 'https://wallpapers.com/images/featured/valorant-305kescxw5dpup7y.jpg',
-        //     'has_characters' => true,
-        //     'active' => true
-        // ]);
-
-        // Position::create([
-        //     'name' => 'Duelista',
-        //     'image' => 'https://static.wikia.nocookie.net/valorant/images/f/fd/DuelistClassSymbol.png/revision/latest?cb=20200408043920',
-        //     'game_id' => 1
-        // ]);
-
-        // Character::create([
-        //     'name' => 'Jett',
-        //     'image' => 'https://static.wikia.nocookie.net/valorant/images/3/35/Jett_icon.png/revision/latest?cb=20220316150455&path-prefix=id',
-        //     'game_id' => 1
-        // ]);
-
-        // Rank::create([
-        //     'name' => 'Ascendente',
-        //     'image' => 'https://static.wikia.nocookie.net/valorant/images/e/e5/Ascendant_1_Rank.png/revision/latest?cb=20220616175506',
-        //     'game_id' => 1
-        // ]);
-
-        // Rank::create([
-        //     'name' => 'Imortal',
-        //     'image' => 'https://cdn3.emoji.gg/emojis/1518-valorant-immortal-1.png',
-        //     'game_id' => 1
-        // ]);
     }
 }

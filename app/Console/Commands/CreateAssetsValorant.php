@@ -95,7 +95,7 @@ class CreateAssetsValorant extends Command
 
              Rank::create([
                 'name' => $rankName,
-                'image' => Storage::disk('public')->putFile('positions/photos/', $image),
+                'image' => Storage::disk('public')->putFile('ranks/photos/', $image),
                 'game_id' => $valorant->id
             ]);
         }
