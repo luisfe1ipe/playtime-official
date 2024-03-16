@@ -22,6 +22,8 @@ return new class extends Migration
             $table->foreignIdFor(Position::class)->nullable();
             $table->foreignIdFor(Character::class)->nullable();
             $table->foreignIdFor(Game::class);
+            $table->foreignId('rank_min_id')->nullable()->constrained('ranks');
+            $table->foreignId('rank_max_id')->nullable()->constrained('ranks');
             $table->timestamps();
         });
     }

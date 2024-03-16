@@ -91,9 +91,13 @@ class CreateAssetsValorant extends Command
 
         foreach ($imageRanks as $image) {
             $imageName = pathinfo($image, PATHINFO_FILENAME);
-            $rankName = preg_replace('/_(\d+)_Rank/', ' $1', $imageName);
+            if ($imageName == 'Radiant_Rank') {
+                $rankName = 'Radiant';
+            } else {
+                $rankName = preg_replace('/_(\d+)_Rank/', ' $1', $imageName);
+            }
 
-             Rank::create([
+            Rank::create([
                 'name' => $rankName,
                 'image' => Storage::disk('public')->putFile('ranks/photos/', $image),
                 'game_id' => $valorant->id

@@ -18,6 +18,8 @@ class FindPlayer extends Model
         'position_id',
         'character_id',
         'game_id',
+        'rank_min_id',
+        'rank_max_id',
     ];
 
     protected $casts = [
@@ -58,5 +60,25 @@ class FindPlayer extends Model
     public function character(): BelongsTo
     {
         return $this->belongsTo(Character::class);
+    }
+
+    /**
+     * Get the rankMin that owns the FindPlayer
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function rankMin(): BelongsTo
+    {
+        return $this->belongsTo(Rank::class, 'rank_min_id');
+    }
+
+    /**
+     * Get the rankMax that owns the FindPlayer
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function rankMax(): BelongsTo
+    {
+        return $this->belongsTo(Rank::class, 'rank_max_id');
     }
 }

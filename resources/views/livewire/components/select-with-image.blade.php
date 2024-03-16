@@ -7,7 +7,7 @@
         </span>
         @else
         <div class="flex items-center w-full gap-4 rounded-lg">
-            <img class="size-8" src="{{Storage::url($item_select->image)}}" alt="Imagem {{$item_select->name}}">
+            <img class="object-contain size-8" src="{{Storage::url($item_select->image)}}" alt="Imagem {{$item_select->name}}">
             <p>
                 {{$item_select->name}}
             </p>
@@ -39,7 +39,7 @@
         x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
         x-transition:leave="transition duration-200 ease-in transform" x-transition:leave-start="opacity-100 scale-100"
         x-transition:leave-end="opacity-0 scale-95"
-        class="absolute w-full px-2 py-2 mt-2 border rounded-lg border-zinc-800 bg-zinc-900">
+        class="absolute z-10 w-full px-2 py-2 mt-2 border rounded-lg border-zinc-800 bg-zinc-900">
         <div class="p-2">
             <label for="input-group-search" class="sr-only">Search</label>
             <div class="relative">
@@ -60,7 +60,7 @@
             @foreach ($items as $i)
             <button x-on:click="open = false" type="button" wire:click='selectItem({{$i->id}})'
                 class="flex items-center w-full gap-4 p-2 rounded-lg cursor-pointer hover:bg-zinc-950/80">
-                <img class="size-8" src="{{Storage::url($i->image)}}" alt="Imagem {{$i->name}}">
+                <img class="object-contain size-8" src="{{Storage::url($i->image)}}" alt="Imagem {{$i->name}}">
                 <p>
                     {{$i->name}}
                 </p>

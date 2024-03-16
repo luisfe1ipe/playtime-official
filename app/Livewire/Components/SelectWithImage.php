@@ -8,33 +8,32 @@ use Livewire\Component;
 
 class SelectWithImage extends Component
 {
-    // use CustomGetImage;
-
     public $item_select;
     public $items;
     public $itemsOriginal;
     public $searchItem = '';
     public $gameId;
+    public $wire_model;
 
-    public function mount($items, $gameId)
+    public function mount($items, $gameId, $wire_model = null)
     {
         $this->items = $items;
-        $this->gameId = $gameId;
+        $this->gameId = $this->gameId;
         $this->itemsOriginal = $this->items;
+        $this->wire_model = $wire_model;
     }
 
     public function render()
     {
-        if (!$this->items->isEmpty()) {
-            $items = $this->items->first()->getModel()->query();
 
-            if ($this->searchItem) {
-                $items->where('game_id', $this->gameId)->where('name', 'like', '%' . $this->searchItem . '%');
-            }
+        $items = $this->itemsOriginal;
 
-            $this->items = $items->get();
-        } else {
-            $this->items = $this->itemsOriginal;
+        $this->items = $items->where('game_id', $this->gameId);
+
+        if ($this->searchItem) {
+            $this->items = $this->items->filter(function ($item) {
+                return stripos($item->name, $this->searchItem) !== false;
+            });
         }
 
 
@@ -50,11 +49,11 @@ class SelectWithImage extends Component
     {
         $this->item_select = $this->items->where('id', $id)->first();
         $this->item_select->model = get_class($this->item_select);
+
+        if ($this->wire_model != null) {
+            $this->item_select->wire_model = $this->wire_model;
+        }
+
         $this->dispatch('select-item', $this->item_select);
     }
-
-    // public function getCustomImage($image)
-    // {
-    //     return $this->getImage($image);
-    // }
 }
