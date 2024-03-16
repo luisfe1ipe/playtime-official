@@ -89,7 +89,75 @@ class CreateAssetsCounterStrike extends Command
 
         foreach ($imageRanks as $image) {
             $imageName = pathinfo($image, PATHINFO_FILENAME);
-            $rankName = preg_replace('/_(\d+)_Rank/', ' $1', $imageName);
+            $nameWithoutCode = preg_replace('/_[a-f0-9]+$/', '', $imageName);
+            $rankName = str_replace('_', ' ', $nameWithoutCode);
+
+            switch ($rankName) {
+                case str_contains($rankName, 'silver'):
+                    switch ($rankName) {
+                        case $rankName == 'silver 1':
+                            $rankName = 'Prata 1';
+                            break;
+                        case $rankName == 'silver 2':
+                            $rankName = 'Prata 2';
+                            break;
+                        case $rankName == 'silver 3':
+                            $rankName = 'Prata 3';
+                            break;
+                        case $rankName == 'silver 4':
+                            $rankName = 'Prata 4';
+                            break;
+                        case $rankName == 'silver elite':
+                            $rankName = 'Prata Elite';
+                            break;
+                        case $rankName == 'silver elite master':
+                            $rankName = 'Prata Elite Mestre';
+                            break;
+                    }
+                    break;
+                case str_contains($rankName, 'gold'):
+                    switch ($rankName) {
+                        case $rankName == 'gold nova 1':
+                            $rankName = 'Ouro 1';
+                            break;
+                        case $rankName == 'gold nova 2':
+                            $rankName = 'Ouro 2';
+                            break;
+                        case $rankName == 'gold nova 3':
+                            $rankName = 'Ouro 3';
+                            break;
+                        case $rankName == 'gold nova master':
+                            $rankName = 'Ouro 4';
+                            break;
+                    }
+                    break;
+                case $rankName == 'master guardian 1':
+                    $rankName = 'AK 1';
+                    break;
+                case $rankName == 'master guardian 2':
+                    $rankName = 'AK 2';
+                    break;
+                case $rankName == 'master guardian elite':
+                    $rankName = 'AK Cruzada';
+                    break;
+                case $rankName == 'distinguished master guardian':
+                    $rankName = 'Xerife';
+                    break;
+                case $rankName == 'legendary eagle':
+                    $rankName = 'Águia 1';
+                    break;
+                case $rankName == 'legendary eagle master':
+                    $rankName = 'Águia 2';
+                    break;
+                case $rankName == 'supreme master first class':
+                    $rankName = 'Supremo';
+                    break;
+                case $rankName == 'global elite':
+                    $rankName = 'Global';
+                    break;
+                default:
+                    break;
+            }
 
             Rank::create([
                 'name' => $rankName,

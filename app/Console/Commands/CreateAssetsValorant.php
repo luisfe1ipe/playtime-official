@@ -91,10 +91,117 @@ class CreateAssetsValorant extends Command
 
         foreach ($imageRanks as $image) {
             $imageName = pathinfo($image, PATHINFO_FILENAME);
-            if ($imageName == 'Radiant_Rank') {
-                $rankName = 'Radiant';
-            } else {
-                $rankName = preg_replace('/_(\d+)_Rank/', ' $1', $imageName);
+
+            $rankName = preg_replace('/_(\d+)_Rank/', ' $1', $imageName);
+
+            switch ($rankName) {
+                case str_contains($rankName, 'Silver'):
+                    switch ($rankName) {
+                        case $rankName == 'Silver 1':
+                            $rankName = 'Prata 1';
+                            break;
+                        case $rankName == 'Silver 2':
+                            $rankName = 'Prata 2';
+                            break;
+                        case $rankName == 'Silver 3':
+                            $rankName = 'Prata 3';
+                            break;
+                    }
+                    break;
+                case str_contains($rankName, 'Gold'):
+                    switch ($rankName) {
+                        case $rankName == 'Gold 1':
+                            $rankName = 'Ouro 1';
+                            break;
+                        case $rankName == 'Gold 2':
+                            $rankName = 'Ouro 2';
+                            break;
+                        case $rankName == 'Gold 3':
+                            $rankName = 'Ouro 3';
+                            break;
+                    }
+                    break;
+                case str_contains($rankName, 'Immortal'):
+                    switch ($rankName) {
+                        case $rankName == 'Immortal 1':
+                            $rankName = 'Imortal 1';
+                            break;
+                        case $rankName == 'Immortal 2':
+                            $rankName = 'Imortal 2';
+                            break;
+                        case $rankName == 'Immortal 3':
+                            $rankName = 'Imortal 3';
+                            break;
+                    }
+                    break;
+                case str_contains($rankName, 'Iron'):
+                    switch ($rankName) {
+                        case $rankName == 'Iron 1':
+                            $rankName = 'Ferro 1';
+                            break;
+                        case $rankName == 'Iron 2':
+                            $rankName = 'Ferro 2';
+                            break;
+                        case $rankName == 'Iron 3':
+                            $rankName = 'Ferro 3';
+                            break;
+                    }
+                    break;
+                case str_contains($rankName, 'Platinum'):
+                    switch ($rankName) {
+                        case $rankName == 'Platinum 1':
+                            $rankName = 'Platina 1';
+                            break;
+                        case $rankName == 'Platinum 2':
+                            $rankName = 'Platina 2';
+                            break;
+                        case $rankName == 'Platinum 3':
+                            $rankName = 'Platina 3';
+                            break;
+                    }
+                    break;
+                case str_contains($rankName, 'Diamond'):
+                    switch ($rankName) {
+                        case $rankName == 'Diamond 1':
+                            $rankName = 'Diamante 1';
+                            break;
+                        case $rankName == 'Diamond 2':
+                            $rankName = 'Diamante 2';
+                            break;
+                        case $rankName == 'Diamond 3':
+                            $rankName = 'Diamante 3';
+                            break;
+                    }
+                    break;
+                case str_contains($rankName, 'Ascendant'):
+                    switch ($rankName) {
+                        case $rankName == 'Ascendant 1':
+                            $rankName = 'Ascendente 1';
+                            break;
+                        case $rankName == 'Ascendant 2':
+                            $rankName = 'Ascendente 2';
+                            break;
+                        case $rankName == 'Ascendant 3':
+                            $rankName = 'Ascendente 3';
+                            break;
+                    }
+                    break;
+                case str_contains($rankName, 'Bronze'):
+                    switch ($rankName) {
+                        case $rankName == 'Bronze 1':
+                            $rankName = 'Bronze 1';
+                            break;
+                        case $rankName == 'Bronze 2':
+                            $rankName = 'Bronze 2';
+                            break;
+                        case $rankName == 'Bronze 3':
+                            $rankName = 'Bronze 3';
+                            break;
+                    }
+                    break;
+                default:
+                    $rankName = 'Radiante';
+                    break;
             }
 
             Rank::create([

@@ -42,12 +42,12 @@
                     <x-input-error :messages="$errors->get('description')" />
                 </div>
                 <div class="flex justify-between w-full gap-6">
-                    <div class="w-1/2">
+                    <div class="w-full">
                         <x-input-label :required="true" value="Rank mínimo" for="rank_min_id" :error="$errors->get('rank_min_id')" />
                         <livewire:components.select-with-image wire_model="rank_min" :items="$ranks" :gameId="$game->id" />
                         <x-input-error :messages="$errors->get('rank_min_id')" />
                     </div>
-                    <div class="w-1/2">
+                    <div class="w-full">
                         <x-input-label value="Rank máximo" for="rank_max_id" :error="$errors->get('rank_max_id')" />
                         <livewire:components.select-with-image wire_model="rank_max" :items="$ranks" :gameId="$game->id" />
                         <x-input-error :messages="$errors->get('rank_max_id')" />
@@ -55,13 +55,13 @@
                 </div>
                 <div class="flex justify-between w-full gap-6">
                     @if ($game->has_characters)
-                    <div class="w-1/2">
+                    <div class="w-full">
                         <x-input-label value="Personagem" for="character_id" :error="$errors->get('character_id')" />
                         <livewire:components.select-with-image :items="$characters" :gameId="$game->id" />
                         <x-input-error :messages="$errors->get('character_id')" />
                     </div>
                     @endif
-                    <div class="w-1/2">
+                    <div class="w-full">
                         <x-input-label value="Posição" for="position_id" :error="$errors->get('position_id')" />
                         <livewire:components.select-with-image :items="$positions" :gameId="$game->id" />
                         <x-input-error :messages="$errors->get('position_id')" />
