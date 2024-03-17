@@ -57,7 +57,6 @@
                 </x-primary-button>
             </div>
         </div>
-        @dump([$position_id, $character_id, $rank_min_id, $rank_max_id])
         <div x-show="filter" x-cloak x-transition:enter="transition duration-300 ease-out transform"
             x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
             x-transition:leave="transition duration-200 ease-in transform"
