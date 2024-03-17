@@ -1,5 +1,5 @@
 <div x-data="{open: false}" x-on:click.away="open = false" class="relative">
-    <button type="button" x-on:click="open = !open"
+    <button type="button" x-on:click="open = !open;$nextTick(() => { $refs.inputSearch.focus(); })"
         class="flex items-center justify-between w-full h-12 px-4 transition duration-75 border rounded-lg shadow-sm outline-none border-zinc-700 focus:ring-1 focus:ring-inset disabled:opacity-70 bg-zinc-900 focus:ring-primary-500 focus:border-primary-500">
         @if ($item_select == null)
         <span class="text-zinc-400">
@@ -7,8 +7,9 @@
         </span>
         @else
         <div class="flex items-center w-full gap-4 rounded-lg">
-            <img class="object-contain size-8" src="{{Storage::url($item_select->image)}}" alt="Imagem {{$item_select->name}}">
-            <p>
+            <img class="object-contain size-8" src="{{Storage::url($item_select->image)}}"
+                alt="Imagem {{$item_select->name}}">
+            <p class="truncate">
                 {{$item_select->name}}
             </p>
         </div>
@@ -39,7 +40,7 @@
         x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
         x-transition:leave="transition duration-200 ease-in transform" x-transition:leave-start="opacity-100 scale-100"
         x-transition:leave-end="opacity-0 scale-95"
-        class="absolute z-10 w-full px-2 py-2 mt-2 border rounded-lg border-zinc-800 bg-zinc-900">
+        class="absolute z-10 w-full px-2 py-2 mt-2 border rounded-lg shadow-lg shadow-black border-zinc-800 bg-zinc-900">
         <div class="p-2">
             <label for="input-group-search" class="sr-only">Search</label>
             <div class="relative">
@@ -53,7 +54,8 @@
                         <x-filament::loading-indicator class="w-5 h-5" />
                     </div>
                 </div>
-                <x-text-input type="search" wire:model.live='searchItem' placeholder="Digite aqui" class="ps-10" />
+                <x-text-input type="search" x-ref="inputSearch" wire:model.live='searchItem' placeholder="Digite aqui"
+                    class="ps-10" />
             </div>
         </div>
         <div class="overflow-y-scroll max-h-36">

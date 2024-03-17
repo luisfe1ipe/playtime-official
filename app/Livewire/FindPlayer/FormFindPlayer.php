@@ -66,17 +66,38 @@ class FormFindPlayer extends Component
     public function setItem($item)
     {
         ds($item);
+        if ($item['value'] == null) {
+            switch ($item) {
+                case $item['model'] === Character::class:
+                    $this->character_id = null;
+                    break;
+                case $item['model'] === Position::class:
+                    $this->position_id = null;
+                    break;
+                case $item['model'] === Rank::class && $item['wire_model'] === 'rank_min':
+                    $this->rank_min_id = null;
+                    break;
+                case $item['model'] === Rank::class && $item['wire_model'] === 'rank_max':
+                    $this->rank_max_id = null;
+                    break;
+            }
+
+            return;
+        }
+
         switch ($item) {
             case $item['model'] === Character::class:
-                $this->character_id = $item['id'];
+                $this->character_id = $item['value']['id'];
                 break;
             case $item['model'] === Position::class:
-                $this->position_id = $item['id'];
+                $this->position_id = $item['value']['id'];
                 break;
-            case $item['model'] === Rank::class && $item['wire_model'] === 'rank_min':
-                $this->rank_min_id = $item['id'];
-            case $item['model'] === Rank::class && $item['wire_model'] === 'rank_max':
-                $this->rank_max_id = $item['id'];
+            case $item['model'] === Rank::class && $item['value']['wire_model'] === 'rank_min':
+                $this->rank_min_id = $item['value']['id'];
+                break;
+            case $item['model'] === Rank::class && $item['value']['wire_model'] === 'rank_max':
+                $this->rank_max_id = $item['value']['id'];
+                break;
         }
     }
 

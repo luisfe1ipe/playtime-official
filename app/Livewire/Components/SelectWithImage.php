@@ -42,18 +42,34 @@ class SelectWithImage extends Component
 
     public function unselectItem()
     {
+        if (!$this->item_select) {
+            return;
+        }
+
+        foreach ($this->item_select as $key => $value) {
+            $this->{$key} = null;
+        }
+
+
+        $this->dispatch('select-item', [
+            'model' => get_class($this->item_select),
+            'value' => null,
+            'wire_model' => $this->item_select->wire_model = $this->wire_model
+        ]);
         $this->item_select = null;
     }
 
     public function selectItem($id)
     {
         $this->item_select = $this->items->where('id', $id)->first();
-        $this->item_select->model = get_class($this->item_select);
 
         if ($this->wire_model != null) {
             $this->item_select->wire_model = $this->wire_model;
         }
 
-        $this->dispatch('select-item', $this->item_select);
+        $this->dispatch('select-item', [
+            'model' => get_class($this->item_select),
+            'value' => $this->item_select
+        ]);
     }
 }
