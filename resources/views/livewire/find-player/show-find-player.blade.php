@@ -104,6 +104,23 @@
                         </div>
                         @endif
                     </div>
+                    <div class="flex justify-end w-full mt-4">
+                        @if($this->vacancy->findPlayerMembers->contains(Auth::user()->id))
+                        <x-danger-button wire:click='unsubscribe'>
+                            Cancelar candidatura
+                            <div class="ml-2" wire:loading wire:target='unsubscribe'>
+                                <x-filament::loading-indicator class="w-5 h-5" />
+                            </div>
+                        </x-danger-button>
+                        @else
+                        <x-primary-button wire:click='signUp'>
+                            Candidatar-se
+                            <div class="ml-2" wire:loading wire:target='signUp'>
+                                <x-filament::loading-indicator class="w-5 h-5" />
+                            </div>
+                        </x-primary-button>
+                        @endif
+                    </div>
                 </div>
             </div>
             <div class="flex flex-col w-2/5 gap-8">
@@ -162,6 +179,7 @@
                 </div>
             </div>
         </div>
-        <x-delete-modal function="delete" text="Tem certeza que deseja excluir esta vaga ?" subtext="Ao excluir a vaga todos os usuários inscritos serão perdidos!" name="delete-vacancy"/>
+        <x-delete-modal function="delete" text="Tem certeza que deseja excluir esta vaga ?"
+            subtext="Ao excluir a vaga todos os usuários inscritos serão perdidos!" name="delete-vacancy" />
     </x-container>
 </div>
