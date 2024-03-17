@@ -39,7 +39,7 @@ Route::prefix('/auth/google')->group(function () {
 Route::get('/encontrar-player', SelectGame::class)->name('find-player.select-game');
 Route::get('/encontrar-player/{slug}', FindPlayer::class)->name('find-player.index');
 Route::get('/encontrar-player/{slug}/anunciar-vaga', FormFindPlayer::class)->name('find-player.advertise-vacancy');
-Route::get('/encontrar-player/{slug}/vaga/{id}', ShowFindPlayer::class)->name('find-player.show');
+Route::get('/encontrar-player/vaga/{id}', ShowFindPlayer::class)->name('find-player.show');
 
 Route::get('/noticias', ListNews::class)->name('news.list');
 Route::get('/noticias/{id}', ShowNews::class)->name('news.show');
