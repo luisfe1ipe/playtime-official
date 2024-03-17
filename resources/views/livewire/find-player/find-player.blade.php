@@ -68,19 +68,17 @@
             </div>
             @if ($game->has_characters)
             <div class="w-full">
-                <x-input-label value="Posição" for="position_id" :error="$errors->get('position_id')" />
+                <x-input-label value="Personagem" for="position_id" :error="$errors->get('position_id')" />
                 <livewire:components.select-with-image :items="$game->characters" :gameId="$game->id" />
             </div>
             @endif
             <div class="w-full">
-                <x-input-label :required="true" value="Rank mínimo" for="rank_min_id"
-                    :error="$errors->get('rank_min_id')" />
+                <x-input-label value="Rank mínimo" for="rank_min_id" :error="$errors->get('rank_min_id')" />
                 <livewire:components.select-with-image wire_model="rank_min" :items="$game->ranks"
                     :gameId="$game->id" />
             </div>
             <div class="w-full">
-                <x-input-label :required="true" value="Rank maxímo" for="rank_max_id"
-                    :error="$errors->get('rank_max_id')" />
+                <x-input-label value="Rank maxímo" for="rank_max_id" :error="$errors->get('rank_max_id')" />
                 <livewire:components.select-with-image wire_model="rank_max" :items="$game->ranks"
                     :gameId="$game->id" />
             </div>

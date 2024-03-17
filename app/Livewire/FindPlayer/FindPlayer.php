@@ -28,7 +28,7 @@ class FindPlayer extends Component
 
     public function mount(string $slug)
     {
-        $this->game = Game::where('slug', $slug)->first();
+        $this->game = Game::where('slug', $slug)->with('ranks', 'characters', 'positions')->first();
 
         if (!$this->game) {
             abort(404);
