@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class FindPlayer extends Model
 {
@@ -91,5 +92,16 @@ class FindPlayer extends Model
     public function rankMax(): BelongsTo
     {
         return $this->belongsTo(Rank::class, 'rank_max_id');
+    }
+
+    /**
+     * The findPlayerMembers that belong to the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function findPlayerMembers(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'find_player_user',)
+            ->withPivot('status');
     }
 }

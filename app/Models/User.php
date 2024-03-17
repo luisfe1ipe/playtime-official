@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Filament\Panel;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -101,5 +102,16 @@ class User extends Authenticatable implements FilamentUser
     public function findPlayers(): HasMany
     {
         return $this->hasMany(FindPlayer::class);
+    }
+
+    /**
+     * The findPlayerMembers that belong to the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function findPlayerMembers(): BelongsToMany
+    {
+        return $this->belongsToMany(FindPlayer::class, 'find_player_user', )
+            ->withPivot('status');
     }
 }
