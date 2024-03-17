@@ -102,6 +102,7 @@ class FindPlayer extends Model
     public function findPlayerMembers(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'find_player_user',)
-            ->withPivot('status');
+            ->withPivot('status')
+            ->withTimestamps();
     }
 }

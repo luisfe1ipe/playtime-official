@@ -1,4 +1,6 @@
 <div>
+    @use('App\Enums\FindPlayerStatus')
+
     <x-container>
         <nav class="flex mt-6 mb-6" aria-label="Breadcrumb">
             <ol class="inline-flex items-end space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -179,6 +181,120 @@
                 </div>
             </div>
         </div>
+        @if (Auth::user()->id === $vacancy->user_id)
+        <div class="mt-12">
+            <h1>Usuários Inscritos</h1>
+            <p class="mt-1 text-lg text-gray-300">
+                Lembre-se de que ao aceitar ou recusar um usuário, um e-mail será enviado a ele para informá-lo sobre
+                sua decisão.
+            </p>
+            <p class="text-lg text-gray-300">
+                Depois de selecionar um usuário, você pode adicioná-lo como amigo e iniciar uma conversa dentro da
+                plataforma. Você
+                também tem a opção de adicioná-lo em outra rede social, basta acessar o perfil do usuário para
+                visualizar suas redes
+                sociais.
+            </p>
+            <div
+                class="relative px-4 py-4 mt-6 transition-colors ease-linear border rounded-lg bg-zinc-900 border-zinc-800">
+                @forelse ($registeredUsers as $m)
+                <div class="flex items-center justify-between p-4 rounded-lg hover:bg-zinc-950/50">
+                    <div class="flex items-center gap-4">
+                        <img class="rounded-lg size-14" src="{{$m->getImage($m->photo)}}" alt="Foto {{$m->nick}}">
+                        <div>
+                            <p class="text-lg font-medium">{{$m->name}}</p>
+                            <a target="_blank" href="#"
+                                class="font-medium text-primary-400 hover:underline">{{"@$m->nick"}}</a>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <p class="text-lg font-medium">Candidatou-se em</p>
+                            <p>{{$m->pivot->created_at}}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        @if($m->pivot->status === FindPlayerStatus::ACCEPTED->value)
+                        <span
+                            class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Aceito</span>
+                        @elseif($m->pivot->status === FindPlayerStatus::REJECTED->value)
+                        <span
+                            class="bg-red-100 text-red-800 text-sm font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Recusado</span>
+                        @else
+                        <span
+                            class="bg-orange-100 text-orange-800 text-sm font-medium px-2.5 py-0.5 rounded dark:bg-orange-900 dark:text-orange-300">Pendente</span>
+                        @endif
+                        <div x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false"
+                            class="relative">
+                            <div x-on:click="open = ! open"
+                                class="p-1 transition-all ease-linear rounded-full cursor-pointer hover:bg-zinc-700 group">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+                                </svg>
+                            </div>
+                            <div x-show="open" x-cloak
+                                class="absolute z-[10] font-medium w-52 rounded-md bg-zinc-900 border border-zinc-800 shadow-lg right-0"
+                                x-transition:enter="transition ease-out duration-200"
+                                x-transition:enter-start="opacity-0 scale-95"
+                                x-transition:enter-end="opacity-100 scale-100"
+                                x-transition:leave="transition ease-in duration-75"
+                                x-transition:leave-start="opacity-100 scale-100"
+                                x-transition:leave-end="opacity-0 scale-95">
+                                <ul class="flex flex-col gap-1 p-2 text-sm">
+                                    <li>
+                                        <button type="button" wire:click="acceptUser({{$m->id}})"
+                                            class="flex items-center w-full gap-2 p-2 transition-all ease-linear rounded-md cursor-pointer hover:bg-zinc-950">
+                                            <svg class="font-bold text-green-600 size-5 group-hover:text-white"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="3" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="m4.5 12.75 6 6 9-13.5" />
+                                            </svg>
+                                            <p>
+                                                Aceitar
+                                            </p>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" wire:click="refuseUser({{$m->id}})"
+                                            class="flex items-center w-full gap-2 p-2 transition-all ease-linear rounded-md cursor-pointer hover:bg-zinc-950">
+                                            <svg class="font-bold text-rose-600 size-5 group-hover:text-white"
+                                                stroke-width="3" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M6 18 18 6M6 6l12 12" />
+                                            </svg>
+                                            <p>
+                                                Recusar
+                                            </p>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-12">
+                    {{ $registeredUsers->links(data: ['scrollTo' => false]) }}
+                </div>
+                @empty
+                <div class="flex items-center justify-center h-full gap-3">
+                    <svg class="size-24 text-primary-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                        fill="currentColor" class="w-6 h-6">
+                        <path fill-rule="evenodd"
+                            d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-2.625 6c-.54 0-.828.419-.936.634a1.96 1.96 0 0 0-.189.866c0 .298.059.605.189.866.108.215.395.634.936.634.54 0 .828-.419.936-.634.13-.26.189-.568.189-.866 0-.298-.059-.605-.189-.866-.108-.215-.395-.634-.936-.634Zm4.314.634c.108-.215.395-.634.936-.634.54 0 .828.419.936.634.13.26.189.568.189.866 0 .298-.059.605-.189.866-.108.215-.395.634-.936.634-.54 0-.828-.419-.936-.634a1.96 1.96 0 0 1-.189-.866c0-.298.059-.605.189-.866Zm-4.34 7.964a.75.75 0 0 1-1.061-1.06 5.236 5.236 0 0 1 3.73-1.538 5.236 5.236 0 0 1 3.695 1.538.75.75 0 1 1-1.061 1.06 3.736 3.736 0 0 0-2.639-1.098 3.736 3.736 0 0 0-2.664 1.098Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <h2>
+                        Infelizmente ainda não há usuários inscritos.
+                    </h2>
+                </div>
+                @endforelse
+            </div>
+        </div>
+        @endif
         <x-delete-modal function="delete" text="Tem certeza que deseja excluir esta vaga ?"
             subtext="Ao excluir a vaga todos os usuários inscritos serão perdidos!" name="delete-vacancy" />
     </x-container>

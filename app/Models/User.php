@@ -112,6 +112,7 @@ class User extends Authenticatable implements FilamentUser
     public function findPlayerMembers(): BelongsToMany
     {
         return $this->belongsToMany(FindPlayer::class, 'find_player_user', )
-            ->withPivot('status');
+            ->withPivot('status')
+            ->withTimestamps();
     }
 }

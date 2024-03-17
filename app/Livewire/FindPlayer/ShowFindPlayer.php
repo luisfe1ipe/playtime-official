@@ -2,16 +2,20 @@
 
 namespace App\Livewire\FindPlayer;
 
+use App\Enums\FindPlayerStatus;
 use App\Models\FindPlayer;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 #[Title('Encontrar Player | Visualizar vaga - PlayTime')]
 class ShowFindPlayer extends Component
 {
+    use WithPagination;
+
     public $vacancy;
     public $slug;
 
@@ -27,7 +31,11 @@ class ShowFindPlayer extends Component
     #[On('refreshComponent')]
     public function render()
     {
-        return view('livewire.find-player.show-find-player');
+        $registeredUsers = $this->vacancy->findPlayerMembers()->paginate(6);
+
+        return view('livewire.find-player.show-find-player', [
+            'registeredUsers' => $registeredUsers
+        ]);
     }
 
     public function active()
@@ -68,8 +76,7 @@ class ShowFindPlayer extends Component
     {
         $user = Auth::user();
 
-        if($user->id == $this->vacancy->user_id)
-        {
+        if ($user->id == $this->vacancy->user_id) {
             return Notification::make()
                 ->title('Inscrição não permitida')
                 ->body('Você não pode se inscrever em sua própria vaga.')
@@ -120,6 +127,33 @@ class ShowFindPlayer extends Component
             ->title('Inscrição não encontrada')
             ->body('Você não está inscrito nesta vaga.')
             ->danger()
+            ->send();
+    }
+
+    public function acceptUser($id)
+    {
+
+        $vacancy = $this->vacancy->findPlayerMembers()->where('user_id', $id)->first();
+        $vacancy->pivot->status = FindPlayerStatus::ACCEPTED;
+        $vacancy->pivot->save();
+
+        return Notification::make()
+            ->title('Usuário aceito!')
+            ->body('O usuário foi aceito com sucesso na vaga.')
+            ->success()
+            ->send();
+    }
+
+    public function refuseUser($id)
+    {
+        $vacancy = $this->vacancy->findPlayerMembers()->where('user_id', $id)->first();
+        $vacancy->pivot->status = FindPlayerStatus::REJECTED;
+        $vacancy->pivot->save();
+
+        return Notification::make()
+            ->title('Usuário recusado!')
+            ->body('O usuário foi recusado com sucesso para a vaga.')
+            ->success()
             ->send();
     }
 }
