@@ -46,6 +46,9 @@ class Kernel extends HttpKernel
         'auth.team_leader' => [
             \App\Http\Middleware\VerifyTeamLeader::class
         ],
+        'checkNickname' => [
+            \App\Http\Middleware\CheckNickname::class,
+        ]
     ];
 
     /**
