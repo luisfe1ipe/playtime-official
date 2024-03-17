@@ -1,0 +1,120 @@
+<div>
+    <x-container>
+        <div class="flex w-full gap-6 mt-12">
+            <div class="w-3/5">
+                <h1 class="mb-6">Detalhes da vaga</h1>
+                <div
+                    class="relative px-4 py-4 transition-colors ease-linear border rounded-lg bg-zinc-900 border-zinc-800">
+                    <div class="absolute top-0 px-1 text-xs font-bold bg-primary-700 text-primary-300">
+                        {{ $vacancy->id }}
+                    </div>
+                    @if ($vacancy->game->has_characters)
+                    <div class="flex w-full gap-6">
+                        <div class="w-full">
+                            <img class="object-contain w-full h-20"
+                                src="{{$vacancy->character->getImage($vacancy->character->image)}}"
+                                alt="{{$vacancy->character->name}}">
+                        </div>
+                        <div>
+                            <p class="mb-3 text-lg font-bold">{{ $vacancy->title }}</p>
+                            <p class="text-base">
+                                {{ strip_tags($vacancy->description) }}
+                            </p>
+                        </div>
+                    </div>
+                    @else
+                    <div>
+                        <p class="mb-3 text-lg font-bold">{{ $vacancy->title }}</p>
+                        <p class="text-base">
+                            {{ strip_tags($vacancy->description) }}
+                        </p>
+                    </div>
+                    @endif
+                    <div class="flex items-center gap-4 mt-6">
+                        <div class="flex flex-col w-full gap-2">
+                            <span>Posição</span>
+                            <div
+                                class="flex items-center w-full gap-1 px-2 py-1 border rounded-lg bg-zinc-800 border-zinc-700">
+                                <img class="object-contain size-8"
+                                    src="{{$vacancy->position->getImage($vacancy->position->image)}}"
+                                    alt="{{$vacancy->position->name}}">
+                                <p>{{$vacancy->position->name}}</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col w-full gap-2">
+                            <span>Rank minímo</span>
+                            <div
+                                class="flex items-center w-full gap-1 px-2 py-1 border rounded-lg bg-zinc-800 border-zinc-700">
+                                <img class="object-contain h-8 w-14"
+                                    src="{{$vacancy->rankMin->getImage($vacancy->rankMin->image)}}"
+                                    alt="{{$vacancy->rankMin->name}}">
+                                <p class="truncate">{{$vacancy->rankMin->name}}</p>
+                            </div>
+                        </div>
+                        @if ($vacancy->rank_min_id)
+                        <div class="flex flex-col w-full gap-2">
+                            <span>Rank maxímo</span>
+                            <div
+                                class="flex items-center w-full gap-1 px-2 py-1 border rounded-lg bg-zinc-800 border-zinc-700">
+                                <img class="object-contain h-8 w-14"
+                                    src="{{$vacancy->rankMax->getImage($vacancy->rankMax->image)}}"
+                                    alt="{{$vacancy->rankMax->name}}">
+                                <p class="truncate">{{$vacancy->rankMax->name}}</p>
+                            </div>
+                        </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col w-2/5 gap-8">
+                <div>
+                    <h1 class="mb-6">Informações adicionais</h1>
+                    <div class="px-4 py-4 transition-colors ease-linear border rounded-lg bg-zinc-900 border-zinc-800">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="mb-1 text-lg font-bold">Jogo</p>
+                                <div class="flex items-center gap-3">
+                                    <img class="rounded-full size-12"
+                                        src="{{$vacancy->game->getImage($vacancy->game->photo)}}"
+                                        alt="Foto {{$vacancy->game->name}}">
+                                    <p class="text-base">{{$vacancy->game->name}}</p>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="mb-1 text-lg font-bold">Anunciada em</p>
+                                <p class="text-base">{{$vacancy->created_at}}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mt-6">
+                            <div>
+                                <p class="mb-1 text-lg font-bold">Usuários inscritos</p>
+                                <div class="flex items-center gap-3">
+                                    <p class="text-base">colocar aqui.</p>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="mb-1 text-lg font-bold">Usuários aprovados</p>
+                                <p class="text-base">colocar aqui.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h1 class="mb-6">Anunciada por</h1>
+                    <div class="px-4 py-4 transition-colors ease-linear border rounded-lg bg-zinc-900 border-zinc-800">
+                        <div class="flex w-full gap-6">
+                            <img class="rounded-full size-24" src="{{$vacancy->user->getImage($vacancy->user->photo)}}"
+                                alt="Foto {{$vacancy->user->name}}">
+                            <div class="flex flex-col gap-1">
+                                <h3>{{$vacancy->user->name}}</h3>
+                                <a class="text-primary-300 hover:underline" href="#" target="_blank">Visualizar
+                                    perfil</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </x-container>
+</div>

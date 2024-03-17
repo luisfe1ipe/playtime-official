@@ -20,6 +20,7 @@ class FindPlayer extends Model
         'game_id',
         'rank_min_id',
         'rank_max_id',
+        'user_id'
     ];
 
     protected $casts = [
@@ -31,6 +32,16 @@ class FindPlayer extends Model
         $query->where('active', $active);
     }
 
+
+    /**
+     * Get the user that owns the FindPlayer
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
     /**
      * Get the game that owns the FindPlayer

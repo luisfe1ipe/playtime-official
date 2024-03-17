@@ -24,6 +24,24 @@
         </div>
     </div>
     <x-container>
-
+        <div class="flex flex-col gap-4 text-2xl font-bold md:gap-0 md:flex-row md:items-center md:justify-between">
+            <div class="flex items-center w-full gap-2">
+                <img class="object-contain size-16" src="{{ $game->getImage($game->photo) }}" alt="{{ $game->name }}">
+                <h1 class="w-full">
+                    {{ $game->name }}
+                </h1>
+            </div>
+            <p class="w-full text-end">
+                {{ $vacancies->total() }} Vagas disponíveis
+            </p>
+        </div>
+        <div class="grid w-full grid-flow-row grid-cols-1 gap-6 mt-12 lg:grid-cols-2">
+            @foreach ($vacancies as $v)
+            <x-find-player.card :vacancy="$v"/>
+            @endforeach
+        </div>
+        <div class="mt-12">
+            {{$vacancies->links()}}
+        </div>
     </x-container>
 </div>

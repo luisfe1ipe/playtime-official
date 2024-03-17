@@ -8,6 +8,7 @@ use App\Models\Game;
 use App\Models\Position;
 use App\Models\Rank;
 use Filament\Notifications\Notification;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
@@ -92,6 +93,7 @@ class FormFindPlayer extends Component
             'rank_max_id' => $this->rank_max_id,
             'character_id' => $this->character_id,
             'position_id' => $this->position_id,
+            'user_id' => Auth::user()->id
         ]);
 
         Notification::make()

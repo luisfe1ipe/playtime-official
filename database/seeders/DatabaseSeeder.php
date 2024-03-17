@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Character;
+use App\Models\FindPlayer;
 use App\Models\Game;
 use App\Models\News;
 use App\Models\Position;
@@ -30,5 +31,6 @@ class DatabaseSeeder extends Seeder
 
         Type::factory(20)->create();
         News::factory(100)->create();
+        FindPlayer::factory(200)->create();
     }
 }
