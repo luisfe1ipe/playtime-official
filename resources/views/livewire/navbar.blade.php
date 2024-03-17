@@ -6,7 +6,7 @@
                 <ul class="flex items-center gap-3">
                     <li>
                         <x-nav-link :href="route('find-player.select-game')"
-                            :active="request()->routeIs('find-player.select-game') || request()->routeIs('find-player.select-game')">
+                            :active="request()->routeIs('find-player.select-game') || request()->routeIs('find-player.index')">
                             Encontrar Player
                         </x-nav-link>
                     </li>

@@ -1,6 +1,27 @@
 <div>
     <x-container>
-        <div class="flex w-full gap-6 mt-12">
+        <nav class="flex mt-6 mb-6" aria-label="Breadcrumb">
+            <ol class="inline-flex items-end space-x-1 md:space-x-2 rtl:space-x-reverse">
+                <li>
+                    <div class="flex items-center">
+                        <a wire:navigate href="{{route('find-player.index', ['slug' => $vacancy->game->slug])}}"
+                            class="text-sm font-medium text-gray-400 ms-1 hover:text-primary-500 md:ms-2">Encontrar
+                            player</a>
+                    </div>
+                </li>
+                <li aria-current="page">
+                    <div class="flex items-center">
+                        <svg class="w-3 h-3 mx-1 text-gray-400 rtl:rotate-180" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 9 4-4-4-4" />
+                        </svg>
+                        <span class="text-sm font-medium text-gray-500 ms-1 md:ms-2 dark:text-gray-400">Visualizar vaga</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+        <div class="flex w-full gap-6">
             <div class="w-3/5">
                 <h1 class="mb-6">Detalhes da vaga</h1>
                 <div
@@ -93,8 +114,14 @@
                                 </div>
                             </div>
                             <div>
-                                <p class="mb-1 text-lg font-bold">Usuários aprovados</p>
-                                <p class="text-base">colocar aqui.</p>
+                                <p class="mb-1 text-lg font-bold">Status</p>
+                                @if ($vacancy->active)
+                                <span
+                                    class="text-sm font-medium tracking-wider  px-2.5 py-0.5 rounded bg-green-900 text-green-300">Ativo</span>
+                                @else
+                                <span
+                                    class="tracking-wider ext-sm font-medium me-2 px-2.5 py-0.5 rounded bg-red-900 text-red-300">Fechado</span>
+                                @endif
                             </div>
                         </div>
                     </div>
