@@ -14,20 +14,31 @@ class FindPlayer extends Component
     use WithPagination;
 
     public $game;
+    public $search = '';
 
     public function mount(string $slug)
     {
         $this->game = Game::where('slug', $slug)->first();
 
-        if(!$this->game)
-        {
+        if (!$this->game) {
             abort(404);
         }
     }
 
     public function render()
     {
-        $vacancies = ModelsFindPlayer::where('game_id', $this->game->id)->with(['character', 'position', 'rankMin', 'rankMax'])->paginate(16);
+        $vacancies = ModelsFindPlayer::query()
+            ->where('game_id', $this->game->id)
+            ->with(['character', 'position', 'rankMin', 'rankMax']);
+
+        if ($this->search) {
+            $vacancies->where(function ($query) {
+                $query->where('title', 'like', '%' . $this->search . '%')
+                    ->orWhere('id', $this->search);
+            });
+        }
+
+        $vacancies = $vacancies->paginate(16);
 
         return view('livewire.find-player.find-player', [
             'vacancies' => $vacancies

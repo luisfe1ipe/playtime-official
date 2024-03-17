@@ -24,7 +24,7 @@
         </div>
     </div>
     <x-container>
-        <div class="flex flex-col gap-4 text-2xl font-bold md:gap-0 md:flex-row md:items-center md:justify-between">
+        <div class="flex flex-col gap-4 mt-6 text-2xl font-bold md:gap-0 md:flex-row md:items-center md:justify-between">
             <div class="flex items-center w-full gap-2">
                 <img class="object-contain size-16" src="{{ $game->getImage($game->photo) }}" alt="{{ $game->name }}">
                 <h1 class="w-full">
@@ -35,9 +35,22 @@
                 {{ $vacancies->total() }} Vagas disponíveis
             </p>
         </div>
+        <div class="relative w-full mt-12 lg:w-1/2">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <svg wire:loading.remove class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                </svg>
+                <div wire:loading>
+                    <x-filament::loading-indicator class="w-5 h-5" />
+                </div>
+            </div>
+            <x-text-input wire:model.live='search' type="search" class="w-full pl-10" placeholder='Digite o ID ou o titulo da vaga' />
+        </div>
         <div class="grid w-full grid-flow-row grid-cols-1 gap-6 mt-12 lg:grid-cols-2">
             @foreach ($vacancies as $v)
-            <x-find-player.card :vacancy="$v"/>
+            <x-find-player.card :vacancy="$v" />
             @endforeach
         </div>
         <div class="mt-12">
