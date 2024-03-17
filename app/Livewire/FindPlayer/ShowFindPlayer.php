@@ -3,6 +3,7 @@
 namespace App\Livewire\FindPlayer;
 
 use App\Models\FindPlayer;
+use Filament\Notifications\Notification;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -24,5 +25,24 @@ class ShowFindPlayer extends Component
     public function render()
     {
         return view('livewire.find-player.show-find-player');
+    }
+
+    public function active()
+    {
+        $this->vacancy->active = !$this->vacancy->active;
+        $this->vacancy->save();
+
+        if($this->vacancy->active)
+        {
+            return Notification::make()
+                ->title('Vaga ativada com sucesso.')
+                ->success()
+                ->send();
+        }
+
+        return Notification::make()
+            ->title('Vaga desativada com sucesso.')
+            ->success()
+            ->send();
     }
 }

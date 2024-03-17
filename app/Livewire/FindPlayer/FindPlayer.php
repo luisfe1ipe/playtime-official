@@ -39,6 +39,7 @@ class FindPlayer extends Component
     {
         $vacancies = ModelsFindPlayer::query()
             ->where('game_id', $this->game->id)
+            ->where('active', true)
             ->with(['character', 'position', 'rankMin', 'rankMax']);
 
         if ($this->search) {

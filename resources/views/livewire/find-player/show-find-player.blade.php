@@ -24,10 +24,19 @@
         </nav>
         @if(Auth::user()->id == $vacancy->user->id)
         <div class="flex justify-end w-full gap-8 mb-12">
-            <x-danger-button>Excluir</x-danger-button>
+            <x-danger-button>
+                Excluir vaga
+            </x-danger-button>
+            <x-secondary-button wire:click='active'>
+                @if ($vacancy->active)
+                Desativar vaga
+                @else
+                Ativar vaga
+                @endif
+            </x-secondary-button>
             <a wire:navigate href="{{route('find-player.edit', ['id' => $vacancy->id])}}"
                 class="flex gap-1 items-center focus:outline-none focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 bg-primary-600 hover:bg-primary-700 focus:ring-primary-900">
-                Editar
+                Editar vaga
             </a>
         </div>
         @endif
