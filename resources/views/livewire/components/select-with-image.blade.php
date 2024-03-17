@@ -16,7 +16,7 @@
         @endif
         <div class="flex items-center">
             @if ($item_select != null)
-            <div class="z-10 flex mr-2 text-zinc-400 hover:text-rose-500" type="button" wire:click.stop='unselectItem'>
+            <div class="flex mr-2 text-zinc-400 hover:text-rose-500" type="button" wire:click.stop='unselectItem'>
                 <svg class="size-5 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="lucide lucide-circle-x">

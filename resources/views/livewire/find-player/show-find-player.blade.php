@@ -16,11 +16,21 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="m1 9 4-4-4-4" />
                         </svg>
-                        <span class="text-sm font-medium text-gray-500 ms-1 md:ms-2 dark:text-gray-400">Visualizar vaga</span>
+                        <span class="text-sm font-medium text-gray-500 ms-1 md:ms-2 dark:text-gray-400">Visualizar
+                            vaga</span>
                     </div>
                 </li>
             </ol>
         </nav>
+        @if(Auth::user()->id == $vacancy->user->id)
+        <div class="flex justify-end w-full gap-8 mb-12">
+            <x-danger-button>Excluir</x-danger-button>
+            <a wire:navigate href="{{route('find-player.edit', ['id' => $vacancy->id])}}"
+                class="flex gap-1 items-center focus:outline-none focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 bg-primary-600 hover:bg-primary-700 focus:ring-primary-900">
+                Editar
+            </a>
+        </div>
+        @endif
         <div class="flex w-full gap-6">
             <div class="w-3/5">
                 <h1 class="mb-6">Detalhes da vaga</h1>

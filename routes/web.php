@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\SocialiteController;
 use App\Livewire\Doubts\HowToRegisterANewGame;
+use App\Livewire\Findplayer\EditFindPlayer;
 use App\Livewire\FindPlayer\FindPlayer;
 use App\Livewire\FindPlayer\FormFindPlayer;
 use App\Livewire\FindPlayer\SelectGame;
@@ -40,6 +41,7 @@ Route::get('/encontrar-player', SelectGame::class)->name('find-player.select-gam
 Route::get('/encontrar-player/{slug}', FindPlayer::class)->name('find-player.index');
 Route::get('/encontrar-player/{slug}/anunciar-vaga', FormFindPlayer::class)->name('find-player.advertise-vacancy');
 Route::get('/encontrar-player/vaga/{id}', ShowFindPlayer::class)->name('find-player.show');
+Route::get('/encontrar-player/vaga/{id}/editar', EditFindPlayer::class)->name('find-player.edit');
 
 Route::get('/noticias', ListNews::class)->name('news.list');
 Route::get('/noticias/{id}', ShowNews::class)->name('news.show');

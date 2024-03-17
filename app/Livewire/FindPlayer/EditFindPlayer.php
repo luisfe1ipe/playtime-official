@@ -1,25 +1,19 @@
 <?php
 
-namespace App\Livewire\FindPlayer;
+namespace App\Livewire\Findplayer;
 
 use App\Models\Character;
 use App\Models\FindPlayer;
-use App\Models\Game;
 use App\Models\Position;
 use App\Models\Rank;
 use Filament\Notifications\Notification;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
-use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use phpDocumentor\Reflection\Types\This;
 
-#[Title('Encontrar Player | Anunciar vaga - Playtime')]
-class FormFindPlayer extends Component
+class EditFindPlayer extends Component
 {
-    public $game;
-
-
     #[Validate('required')]
     public  $title;
 
@@ -45,19 +39,34 @@ class FormFindPlayer extends Component
     public $positions;
     public $ranks;
 
-    public function mount(string $slug)
+    public $vacancy;
+
+    public function mount($id)
     {
-        $this->game = Game::where('slug', $slug)->first();
-        $this->game_id = $this->game->id;
+        $this->vacancy = FindPlayer::with(['game', 'character', 'position', 'rankMin', 'rankMax'])->find($id);
+
+        $this->title = $this->vacancy->title;
+        $this->description = $this->vacancy->description;
+        $this->position_id = $this->vacancy->position_id;
+        $this->character_id = $this->vacancy->character_id;
+        $this->rank_min_id = $this->vacancy->rank_min_id;
+        $this->rank_max_id = $this->vacancy->rank_max_id;
+
+        $this->dispatch('teste', [
+            'character_id' => $this->character_id,
+            'position_id' => $this->position_id,
+            'rank_min_id' => $this->rank_min_id,
+            'rank_max_id' => $this->rank_max_id,
+        ]);
     }
 
     public function render()
     {
-        $this->characters = Character::where('game_id', $this->game_id)->orderBy('name', 'asc')->get();
-        $this->positions = Position::where('game_id', $this->game_id)->orderBy('name', 'asc')->get();
-        $this->ranks = Rank::where('game_id', $this->game_id)->orderBy('name', 'asc')->get();
+        $this->characters = Character::where('game_id', $this->vacancy->game->id)->orderBy('name', 'asc')->get();
+        $this->positions = Position::where('game_id', $this->vacancy->game->id)->orderBy('name', 'asc')->get();
+        $this->ranks = Rank::where('game_id', $this->vacancy->game->id)->orderBy('name', 'asc')->get();
 
-        return view('livewire.find-player.form-find-player');
+        return view('livewire.findplayer.edit-find-player');
     }
 
     #[On('select-item')]
@@ -102,24 +111,23 @@ class FormFindPlayer extends Component
     {
         $this->validate();
 
-        FindPlayer::create([
+        $this->vacancy->update([
             'title' => $this->title,
             'description' => $this->description,
-            'active' => true,
-            'game_id' => $this->game->id,
-            'rank_min_id' => $this->rank_min_id,
-            'rank_max_id' => $this->rank_max_id,
             'character_id' => $this->character_id,
             'position_id' => $this->position_id,
-            'user_id' => Auth::user()->id
+            'rank_min_id' => $this->rank_min_id,
+            'rank_max_id' => $this->rank_max_id,
         ]);
 
+        $this->vacancy->save();
+
         Notification::make()
-            ->title('Vaga criada com sucesso!')
-            ->body('Sua vaga foi criada com sucesso. Agora outros jogadores podem se juntar a você para jogar.')
+            ->title('Vaga atualizada com sucesso!')
+            ->body('Sua vaga foi atualizada com sucesso.')
             ->success()
             ->send();
 
-        return $this->redirect('/encontrar-player/' . $this->game->slug, navigate: true);
+        return $this->redirect('/encontrar-player/vaga/' . $this->vacancy->id, navigate: true);
     }
 }

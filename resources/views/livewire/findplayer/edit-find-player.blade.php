@@ -4,7 +4,7 @@
             <ol class="inline-flex items-end space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li>
                     <div class="flex items-center">
-                        <a wire:navigate href="{{route('find-player.index', ['slug' => $game->slug])}}"
+                        <a wire:navigate href="{{route('find-player.index', ['slug' => $vacancy->game->slug])}}"
                             class="text-sm font-medium text-gray-400 ms-1 hover:text-primary-500 md:ms-2">Encontrar
                             player</a>
                     </div>
@@ -16,16 +16,30 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="m1 9 4-4-4-4" />
                         </svg>
-                        <span class="text-sm font-medium text-gray-500 ms-1 md:ms-2 dark:text-gray-400">Anunciar
-                            vaga</span>
+                        <a wire:navigate href="{{route('find-player.show', ['id' => $vacancy->id])}}"
+                            class="text-sm font-medium text-gray-400 ms-1 hover:text-primary-500 md:ms-2">
+                            Visualizar vaga
+                        </a>
+                    </div>
+                </li>
+                <li aria-current="page">
+                    <div class="flex items-center">
+                        <svg class="w-3 h-3 mx-1 text-gray-400 rtl:rotate-180" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 9 4-4-4-4" />
+                        </svg>
+                        <span class="text-sm font-medium text-gray-500 ms-1 md:ms-2 dark:text-gray-400">
+                            Editar vaga
+                        </span>
                     </div>
                 </li>
             </ol>
         </nav>
 
-        <h1>Anunciar Vaga</h1>
+        <h1>Editar Vaga</h1>
         <p class="mt-1">
-            Preencha os detalhes abaixo para criar sua vaga e comece a encontrar parceiros de jogo.
+            Preencha os detalhes abaixo para editar sua vaga e comece a encontrar parceiros de jogo.
         </p>
         <form wire:submit.prevent='save' class="mt-12">
             <div class="flex flex-col gap-6">
@@ -45,28 +59,30 @@
                     <div class="w-full">
                         <x-input-label :required="true" value="Rank mínimo" for="rank_min_id"
                             :error="$errors->get('rank_min_id')" />
-                        <livewire:components.select-with-image wire_model="rank_min" :items="$ranks"
-                            :gameId="$game->id" />
+                        <livewire:components.select-with-image :item_select="$vacancy->rankMin" wire_model="rank_min"
+                            :items="$ranks" :gameId="$vacancy->game->id" />
                         <x-input-error :messages="$errors->get('rank_min_id')" />
                     </div>
                     <div class="w-full">
                         <x-input-label value="Rank máximo" for="rank_max_id" :error="$errors->get('rank_max_id')" />
-                        <livewire:components.select-with-image wire_model="rank_max" :items="$ranks"
-                            :gameId="$game->id" />
+                        <livewire:components.select-with-image :item_select="$vacancy->rankMax" wire_model="rank_max"
+                            :items="$ranks" :gameId="$vacancy->game->id" />
                         <x-input-error :messages="$errors->get('rank_max_id')" />
                     </div>
                 </div>
                 <div class="flex justify-between w-full gap-6">
-                    @if ($game->has_characters)
+                    @if ($vacancy->game->has_characters)
                     <div class="w-full">
                         <x-input-label value="Personagem" for="character_id" :error="$errors->get('character_id')" />
-                        <livewire:components.select-with-image :items="$characters" :gameId="$game->id" />
+                        <livewire:components.select-with-image :item_select="$vacancy->character" :items="$characters"
+                            :gameId="$vacancy->game->id" />
                         <x-input-error :messages="$errors->get('character_id')" />
                     </div>
                     @endif
                     <div class="w-full">
                         <x-input-label value="Posição" for="position_id" :error="$errors->get('position_id')" />
-                        <livewire:components.select-with-image :items="$positions" :gameId="$game->id" />
+                        <livewire:components.select-with-image :item_select="$vacancy->position" :items="$positions"
+                            :gameId="$vacancy->game->id" />
                         <x-input-error :messages="$errors->get('position_id')" />
                     </div>
                 </div>

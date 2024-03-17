@@ -4,6 +4,7 @@ namespace App\Livewire\Components;
 
 use App\Models\Character;
 use App\Traits\CustomGetImage;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class SelectWithImage extends Component
@@ -15,12 +16,13 @@ class SelectWithImage extends Component
     public $gameId;
     public $wire_model;
 
-    public function mount($items, $gameId, $wire_model = null)
+    public function mount($items, $gameId, $wire_model = null, $item_select = null)
     {
         $this->items = $items;
         $this->gameId = $this->gameId;
         $this->itemsOriginal = $this->items;
         $this->wire_model = $wire_model;
+        $this->item_select = $item_select;
     }
 
     public function render()
