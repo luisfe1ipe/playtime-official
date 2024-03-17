@@ -59,13 +59,15 @@
                 <div class="flex justify-between w-full gap-6">
                     @if ($game->has_characters)
                     <div class="w-full">
-                        <x-input-label value="Personagem" for="character_id" :error="$errors->get('character_id')" />
+                        <x-input-label :required="true" value="Personagem" for="character_id"
+                            :error="$errors->get('character_id')" />
                         <livewire:components.select-with-image :items="$characters" :gameId="$game->id" />
                         <x-input-error :messages="$errors->get('character_id')" />
                     </div>
                     @endif
                     <div class="w-full">
-                        <x-input-label value="Posição" for="position_id" :error="$errors->get('position_id')" />
+                        <x-input-label :required="true" value="Posição" for="position_id"
+                            :error="$errors->get('position_id')" />
                         <livewire:components.select-with-image :items="$positions" :gameId="$game->id" />
                         <x-input-error :messages="$errors->get('position_id')" />
                     </div>

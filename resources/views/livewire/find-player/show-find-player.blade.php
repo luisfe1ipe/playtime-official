@@ -52,8 +52,8 @@
                     </div>
                     @if ($vacancy->game->has_characters)
                     <div class="flex w-full gap-6">
-                        <div class="w-full">
-                            <img class="object-contain w-full h-20"
+                        <div>
+                            <img class="object-contain max-w-20 max-h-20"
                                 src="{{$vacancy->character->getImage($vacancy->character->image)}}"
                                 alt="{{$vacancy->character->name}}">
                         </div>
@@ -196,7 +196,7 @@
                 sociais.
             </p>
             <div
-                class="relative px-4 py-4 mt-6 transition-colors ease-linear border rounded-lg bg-zinc-900 border-zinc-800">
+                class="relative flex flex-col gap-12 px-4 py-4 mt-6 transition-colors ease-linear border rounded-lg bg-zinc-900 border-zinc-800">
                 @forelse ($registeredUsers as $m)
                 <div class="flex items-center justify-between p-4 rounded-lg hover:bg-zinc-950/50">
                     <div class="flex items-center gap-4">
@@ -276,9 +276,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-12">
-                    {{ $registeredUsers->links(data: ['scrollTo' => false]) }}
-                </div>
                 @empty
                 <div class="flex items-center justify-center h-full gap-3">
                     <svg class="size-24 text-primary-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -292,6 +289,9 @@
                     </h2>
                 </div>
                 @endforelse
+                <div>
+                    {{ $registeredUsers->links(data: ['scrollTo' => false]) }}
+                </div>
             </div>
         </div>
         @endif

@@ -26,10 +26,10 @@ class FormFindPlayer extends Component
     #[Validate('required')]
     public  $description;
 
-    #[Validate('exists:positions,id|nullable')]
+    #[Validate('exists:positions,id|required')]
     public  $position_id;
 
-    #[Validate('exists:characters,id|nullable')]
+    #[Validate('required_if:game.has_characters,true|exists:characters,id|nullable')]
     public  $character_id;
 
     #[Validate('exists:ranks,id|required')]
