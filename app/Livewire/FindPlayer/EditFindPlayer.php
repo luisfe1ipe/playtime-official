@@ -7,6 +7,7 @@ use App\Models\FindPlayer;
 use App\Models\Position;
 use App\Models\Rank;
 use Filament\Notifications\Notification;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -44,6 +45,11 @@ class EditFindPlayer extends Component
     public function mount($id)
     {
         $this->vacancy = FindPlayer::with(['game', 'character', 'position', 'rankMin', 'rankMax'])->find($id);
+
+        if(Auth::user()->id != $this->vacancy->user_id)
+        {
+            return abort('403');
+        }
 
         $this->title = $this->vacancy->title;
         $this->description = $this->vacancy->description;
