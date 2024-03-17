@@ -24,7 +24,7 @@
         </nav>
         @if(Auth::user()->id == $vacancy->user->id)
         <div class="flex justify-end w-full gap-8 mb-12">
-            <x-danger-button>
+            <x-danger-button x-on:click="$dispatch('open-modal', 'delete-vacancy')">
                 Excluir vaga
             </x-danger-button>
             <x-secondary-button wire:click='active'>
@@ -162,5 +162,6 @@
                 </div>
             </div>
         </div>
+        <x-delete-modal function="delete" text="Tem certeza que deseja excluir esta vaga ?" subtext="Ao excluir a vaga todos os usuários inscritos serão perdidos!" name="delete-vacancy"/>
     </x-container>
 </div>

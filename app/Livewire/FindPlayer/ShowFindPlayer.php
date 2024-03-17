@@ -29,6 +29,8 @@ class ShowFindPlayer extends Component
 
     public function active()
     {
+        $this->authorize('isAuthor', $this->vacancy);
+
         $this->vacancy->active = !$this->vacancy->active;
         $this->vacancy->save();
 
@@ -44,5 +46,19 @@ class ShowFindPlayer extends Component
             ->title('Vaga desativada com sucesso.')
             ->success()
             ->send();
+    }
+
+    public function delete()
+    {
+        $this->authorize('isAuthor', $this->vacancy);
+
+        $this->vacancy->delete();
+
+        Notification::make()
+            ->title('Vaga excluída com sucesso.')
+            ->success()
+            ->send();
+            
+        return $this->redirect('/encontrar-player/' . $this->vacancy->game->slug, true);
     }
 }
