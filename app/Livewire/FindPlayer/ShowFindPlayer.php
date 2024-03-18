@@ -3,6 +3,7 @@
 namespace App\Livewire\FindPlayer;
 
 use App\Enums\FindPlayerStatus;
+use App\Events\UserSignedUpEvent;
 use App\Models\FindPlayer;
 use App\Notifications\UserSignedUp;
 use Filament\Notifications\Notification;
@@ -91,6 +92,8 @@ class ShowFindPlayer extends Component
             $this->dispatch('refreshComponent');
 
             $this->vacancy->user->notify( new UserSignedUp($this->vacancy, $user));
+            
+            UserSignedUpEvent::dispatch();
 
             return Notification::make()
                 ->title('Inscrição realizada')

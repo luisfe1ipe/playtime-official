@@ -93,7 +93,7 @@
                                 <p class="truncate">{{$vacancy->rankMin->name}}</p>
                             </div>
                         </div>
-                        @if ($vacancy->rank_min_id)
+                        @if ($vacancy->rank_max_id)
                         <div class="flex flex-col w-full gap-2">
                             <span>Rank maxímo</span>
                             <div

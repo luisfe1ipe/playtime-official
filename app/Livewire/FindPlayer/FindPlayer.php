@@ -73,7 +73,7 @@ class FindPlayer extends Component
             });
         }
 
-        $vacancies = $vacancies->paginate(16);
+        $vacancies = $vacancies->orderBy('created_at', 'desc')->paginate(16);
 
         return view('livewire.find-player.find-player', [
             'vacancies' => $vacancies

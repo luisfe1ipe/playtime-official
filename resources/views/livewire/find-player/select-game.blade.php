@@ -9,5 +9,8 @@
             <x-card-game :game="$game" />
             @endforeach
         </div>
+        @foreach ($items as $item)
+            {{$item}}
+        @endforeach
     </x-container>
 </div>

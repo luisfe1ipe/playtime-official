@@ -6,11 +6,11 @@
   </div>
   @if ($vacancy->game->has_characters)
   <div class="flex w-full gap-6">
-    <div class="w-full">
+    <div class="w-1/2">
       <img class="object-contain w-full h-20" src="{{$vacancy->character->getImage($vacancy->character->image)}}"
         alt="{{$vacancy->character->name}}">
     </div>
-    <div>
+    <div class="w-full">
       <p class="mb-1 text-base font-bold line-clamp-2">{{ $vacancy->title }}</p>
       <p class="text-sm line-clamp-3">
         {{ strip_tags($vacancy->description) }}

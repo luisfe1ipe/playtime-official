@@ -10,7 +10,7 @@ class Notification extends Component
 {
     public $viewNotifications = 'new';
 
-    #[On('delete-notifications')]
+    #[On(['echo:registered-user-find-player,UserSignedUpEvent', 'delete-notifications'])]
     public function render()
     {
         if (Auth::user()) {
