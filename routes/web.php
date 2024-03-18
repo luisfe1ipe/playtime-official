@@ -9,6 +9,7 @@ use App\Livewire\FindPlayer\SelectGame;
 use App\Livewire\FindPlayer\ShowFindPlayer;
 use App\Livewire\News\ListNews;
 use App\Livewire\News\ShowNews;
+use App\Livewire\Notification\ListNotifications;
 use App\Livewire\Teams\MyTeams\ListMyTeams;
 use App\Livewire\Teams\MyTeams\Setting\AboutTeam;
 use App\Livewire\Teams\MyTeams\Setting\AppearanceTeam;
@@ -53,6 +54,10 @@ Route::middleware(['checkNickname'])->group(function () {
 
   Route::get('/noticias', ListNews::class)->name('news.list');
   Route::get('/noticias/{id}', ShowNews::class)->name('news.show');
+
+
+
+  Route::get('visualizar-minhas-notificacoes', ListNotifications::class)->name('notifications.index');
 
 
 

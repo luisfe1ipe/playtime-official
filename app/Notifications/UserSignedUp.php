@@ -54,6 +54,7 @@ class UserSignedUp extends Notification
     public function toArray(object $notifiable): array
     {
         return [
+            'message' => 'se inscreveu em sua vaga.',
             'find_player' => $this->find_player,
             'user_registered' => $this->registered_user
         ];

@@ -46,7 +46,7 @@
                                         {{"@".$n->data['user_registered']['nick']}}
                                     </a>
                                     <p>
-                                        se inscreveu em sua vaga.
+                                        {{$n->data['message']}}
                                     </p>
                                 </div>
                                 <span class="text-xs text-gray-400">
@@ -136,7 +136,7 @@
                         </div>
                     </button>
                     @endif
-                    <a wire:navigate href="#" class="w-full text-xs text-end text-primary-500 hover:underline">
+                    <a wire:navigate href="{{route('notifications.index')}}" class="w-full text-xs text-end text-primary-500 hover:underline">
                         visualizar todas
                     </a>
                 </div>
