@@ -42,7 +42,9 @@ Route::prefix('/auth/google')->group(function () {
 });
 
 
-Route::middleware(['auth', 'checkNickname'])->group(function () {
+// Route::middleware(['auth', 'checkNickname'])->group(function ()
+Route::middleware(['checkNickname'])->group(function () {
+
   Route::get('/encontrar-player', SelectGame::class)->name('find-player.select-game');
   Route::get('/encontrar-player/{slug}', FindPlayer::class)->name('find-player.index');
   Route::get('/encontrar-player/{slug}/anunciar-vaga', FormFindPlayer::class)->name('find-player.advertise-vacancy');
