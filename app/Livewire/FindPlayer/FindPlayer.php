@@ -25,6 +25,8 @@ class FindPlayer extends Component
     public  $rank_min_id;
     public  $rank_max_id;
 
+    public $selectedOrder = 'asc';
+
 
     public function mount(string $slug)
     {
@@ -73,7 +75,7 @@ class FindPlayer extends Component
             });
         }
 
-        $vacancies = $vacancies->orderBy('created_at', 'desc')->paginate(16);
+        $vacancies = $vacancies->orderBy('created_at', $this->selectedOrder)->paginate(16);
 
         return view('livewire.find-player.find-player', [
             'vacancies' => $vacancies

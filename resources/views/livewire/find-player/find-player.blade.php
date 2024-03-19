@@ -51,7 +51,40 @@
                 <x-text-input wire:model.live='search' type="search" class="w-full pl-10"
                     placeholder='Digite o ID ou o titulo da vaga' />
             </div>
-            <div>
+            <div class="flex items-center justify-between gap-6" x-data="{orderBy: false}">
+                <div class="relative" @click.outside='orderBy = false' @close.stop="orderBy = false">
+                    <x-secondary-button x-on:click="orderBy = !orderBy">
+                        Ordenar por
+                    </x-secondary-button>
+                    <div class="absolute right-0 z-20 w-full p-2 border rounded-lg shadow-lg max-h-44 lg:w-44 top-10 lg:top-12 shadow-black border-zinc-800 bg-zinc-900"
+                        x-cloak x-show="orderBy" x-transition:enter="ease-out duration-300"
+                        x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                        x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100"
+                        x-transition:leave-end="opacity-0">
+                        <div class="grid grid-cols-1 gap-y-1">
+                            <div>
+                                <input type="radio" id="recent" wire:model.live='selectedOrder' value="desc"
+                                    class="hidden peer" required>
+                                <label for="recent"
+                                    class="flex px-2 py-2 transition-all ease-linear rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-zinc-950 dark:peer-checked:bg-zinc-950 peer-checked:bg-gray-100 peer-checked:text-primary-500">
+                                    <p class="w-full ml-2 text-sm font-medium">
+                                        Mais recentes
+                                    </p>
+                                </label>
+                            </div>
+                            <div>
+                                <input type="radio" id="older" wire:model.live='selectedOrder' value="asc"
+                                    class="hidden peer" required>
+                                <label for="older"
+                                    class="flex px-2 py-2 transition-all ease-linear rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-zinc-950 dark:peer-checked:bg-zinc-950 peer-checked:bg-gray-100 peer-checked:text-primary-500">
+                                    <p class="w-full ml-2 text-sm font-medium">
+                                        Mais antigos
+                                    </p>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <x-primary-button x-on:click="filter = !filter">
                     Exibir filtros
                 </x-primary-button>
