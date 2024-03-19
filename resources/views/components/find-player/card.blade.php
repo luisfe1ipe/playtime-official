@@ -1,6 +1,6 @@
 @props(['vacancy'])
 <a href="{{route('find-player.show', ['id' => $vacancy->id])}}"
-  class="relative w-full px-4 py-4 transition-colors ease-linear border rounded-lg hover:bg-zinc-800 bg-zinc-900 border-zinc-800">
+  class="relative w-full px-4 py-4 transition-colors ease-linear border-l-4 rounded-lg border-l-transparent hover:border-l-primary-500 hover:rounded-l-none hover:bg-zinc-800 bg-zinc-900 border-zinc-800">
   <div class="absolute top-0 px-1 text-xs font-bold bg-primary-700 text-primary-300">
     {{ $vacancy->id }}
   </div>

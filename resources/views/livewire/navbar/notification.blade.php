@@ -1,6 +1,6 @@
-<div x-data="{notification: false}" class="flex items-center gap-6">
+<div x-data="{notification: false, open: false}" class="flex items-center gap-6">
     <div class="relative" x-on:click.outside="notification = false">
-        <button x-on:click.stop="notification = !notification" class="relative group">
+        <button x-on:click.stop="notification = !notification; open = false" class="relative group">
             <div
                 class="absolute flex items-center justify-center p-2 text-xs font-bold rounded-full -right-1 -top-[6px] size-3 text-primary-300 bg-primary-700">
                 {{$notifications->count()}}
@@ -77,17 +77,28 @@
             </div>
         </div>
     </div>
-    <button class="flex items-center gap-2">
-        <div class="overflow-hidden text-center rounded-full w-14 h-14 bg-primary-500">
-            <img class="w-full h-full" src="{{Auth::user()->photo}}" alt="Foto perfil">
+    <div class="relative" x-on:click.outside="open = false">
+        <button x-on:click="open = !open; notification = false" class="flex items-center gap-2">
+            <div class="overflow-hidden text-center rounded-full w-14 h-14 bg-primary-500">
+                <img class="w-full h-full" src="{{Auth::user()->photo}}" alt="Foto perfil">
+            </div>
+            <div class="flex items-end">
+                <p>{{Auth::user()->name}}</p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-chevron-down">
+                    <path d="m6 9 6 6 6-6" />
+                </svg>
+            </div>
+        </button>
+        <div x-show="open" x-cloak x-transition:enter="transition x-transition:enter-end=" opacity-100 scale-100"
+            x-transition:leave="transition duration-200 eeas duration-300 ease-out transform"
+            x-transition:enter-start="opacity-0 scale-95" -in transform"
+            x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
+            class="absolute right-0 z-10 w-56 px-2 py-2 mt-2 border rounded-lg shadow-lg shadow-black border-zinc-800 bg-zinc-900">
+            <a wire:navigate href="{{route('find-player.my')}}" class="flex w-full p-2 rounded-lg cursor-pointer hover:bg-zinc-950/80">
+                Minhas vagas
+            </a>
         </div>
-        <div class="flex items-end">
-            <p>{{Auth::user()->name}}</p>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="lucide lucide-chevron-down">
-                <path d="m6 9 6 6 6-6" />
-            </svg>
-        </div>
-    </button>
+    </div>
 </div>
