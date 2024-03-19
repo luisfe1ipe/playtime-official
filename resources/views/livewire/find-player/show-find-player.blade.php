@@ -246,7 +246,12 @@
                                     <li>
                                         <button type="button" wire:click="acceptUser({{$m->id}})"
                                             class="flex items-center w-full gap-2 p-2 transition-all ease-linear rounded-md cursor-pointer hover:bg-zinc-950">
-                                            <svg class="font-bold text-green-600 size-5 group-hover:text-white"
+                                            <div class="text-green-600" wire:loading
+                                                wire:target='acceptUser({{$m->id}})'>
+                                                <x-filament::loading-indicator class="w-5 h-5" />
+                                            </div>
+                                            <svg wire:loading.remove wire:target='acceptUser({{$m->id}})'
+                                                class="font-bold text-green-600 size-5 group-hover:text-white"
                                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="3" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -260,7 +265,12 @@
                                     <li>
                                         <button type="button" wire:click="refuseUser({{$m->id}})"
                                             class="flex items-center w-full gap-2 p-2 transition-all ease-linear rounded-md cursor-pointer hover:bg-zinc-950">
-                                            <svg class="font-bold text-rose-600 size-5 group-hover:text-white"
+                                            <div class="text-rose-600" wire:loading
+                                                wire:target='refuseUser({{$m->id}})'>
+                                                <x-filament::loading-indicator class="w-5 h-5" />
+                                            </div>
+                                            <svg wire:loading.remove wire:target='refuseUser({{$m->id}})'
+                                                class="font-bold text-rose-600 size-5 group-hover:text-white"
                                                 stroke-width="3" xmlns="http://www.w3.org/2000/svg" fill="none"
                                                 viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round"

@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class UserAcceptVacancyNotification extends Notification
+class UserAcceptOrRefuseVacancyNotification extends Notification
 {
     use Queueable;
 
@@ -20,7 +20,7 @@ class UserAcceptVacancyNotification extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct(FindPlayer $find_player, User $find_player_creator_user, string $message = 'aceitou sua inscrição na vaga.')
+    public function __construct(FindPlayer $find_player, User $find_player_creator_user, string $message = '<span style="color:#22c55e">aceitou</span> sua inscrição na vaga.')
     {
         $this->find_player = $find_player;
         $this->find_player_creator_user = $find_player_creator_user;
@@ -68,6 +68,6 @@ class UserAcceptVacancyNotification extends Notification
      */
     public function databaseType(object $notifiable): string
     {
-        return 'user-accept-vacancy';
+        return 'user-accept-or-refuse-vacancy';
     }
 }

@@ -5,9 +5,8 @@ namespace App\Livewire\FindPlayer;
 use App\Enums\FindPlayerStatus;
 use App\Events\UpdateNotificationEvent;
 use App\Events\UpdateVacancyRegistrationsEvent;
-use App\Events\UserSignedUpEvent;
 use App\Models\FindPlayer;
-use App\Notifications\UserAcceptVacancyNotification;
+use App\Notifications\UserAcceptOrRefuseVacancyNotification;
 use App\Notifications\UserSignedUp;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +32,7 @@ class ShowFindPlayer extends Component
         }
     }
 
-    #[On(['echo:update-vacancy-registrations,UpdateVacancyRegistrationsEvent' ,'refreshComponent'])]
+    #[On(['echo:update-vacancy-registrations,UpdateVacancyRegistrationsEvent', 'refreshComponent'])]
     public function render()
     {
         $registeredUsers = $this->vacancy->findPlayerMembers()->paginate(6);
@@ -152,30 +151,37 @@ class ShowFindPlayer extends Component
     {
 
         $vacancy = $this->vacancy->findPlayerMembers()->where('user_id', $id)->first();
+        if ($vacancy->pivot->status == FindPlayerStatus::ACCEPTED->value) {
+            return Notification::make()
+                ->title('Usuário já foi aceito anteriormente!')
+                ->warning()
+                ->send();
+        }
+
         $vacancy->pivot->status = FindPlayerStatus::ACCEPTED;
         $vacancy->pivot->save();
 
-        $vacancy->notify(new UserAcceptVacancyNotification($this->vacancy, $this->vacancy->user));
+        $vacancy->notify(new UserAcceptOrRefuseVacancyNotification($this->vacancy, $this->vacancy->user));
 
         UpdateNotificationEvent::dispatch();
-
-        return Notification::make()
-            ->title('Usuário aceito!')
-            ->body('O usuário foi aceito com sucesso na vaga.')
-            ->success()
-            ->send();
     }
 
     public function refuseUser($id)
     {
         $vacancy = $this->vacancy->findPlayerMembers()->where('user_id', $id)->first();
+
+        if ($vacancy->pivot->status == FindPlayerStatus::REJECTED->value) {
+            return Notification::make()
+                ->title('Usuário já foi rejeitado anteriormente!')
+                ->warning()
+                ->send();
+        }
+
         $vacancy->pivot->status = FindPlayerStatus::REJECTED;
         $vacancy->pivot->save();
 
-        return Notification::make()
-            ->title('Usuário recusado!')
-            ->body('O usuário foi recusado com sucesso para a vaga.')
-            ->success()
-            ->send();
+        $vacancy->notify(new UserAcceptOrRefuseVacancyNotification($this->vacancy, $this->vacancy->user, '<span style="color:#f43f5e">recusou</span> sua inscrição na vaga'));
+
+        UpdateNotificationEvent::dispatch();
     }
 }
