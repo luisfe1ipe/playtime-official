@@ -1,5 +1,4 @@
-<div x-data="{notification: false}" class="flex items-center gap-6">
-    @use('Carbon\Carbon')
+<div x-data="{notification: true}" class="flex items-center gap-6">
     <div class="relative" x-on:click.outside="notification = false">
         <button x-on:click.stop="notification = !notification" class="relative group">
             <div
@@ -35,40 +34,7 @@
                 <div class="py-2 overflow-y-scroll max-h-72">
                     @if ($viewNotifications == 'new')
                     @forelse ($notifications as $n)
-                    <div wire:key="{{$n}}"
-                        class="flex items-center w-full gap-4 p-2 rounded-lg cursor-pointer hover:bg-zinc-950/80">
-                        <div class="flex w-full gap-1">
-                            <img class="rounded-full size-10" src="{{$n->data['user_registered']['photo']}}"
-                                alt="Foto {{$n->data['user_registered']['name']}}">
-                            <div class="w-full">
-                                <div class="flex items-start gap-1 text-sm">
-                                    <a class="text-primary-400 hover:underline">
-                                        {{"@".$n->data['user_registered']['nick']}}
-                                    </a>
-                                    <p>
-                                        {{$n->data['message']}}
-                                    </p>
-                                </div>
-                                <span class="text-xs text-gray-400">
-                                    {{Carbon::parse($n->created_at)->diffForHumans()}}
-                                </span>
-                                <div class="flex justify-end gap-1">
-                                    <button wire:click="readNotification('{{$n->id}}')"
-                                        class="flex items-center gap-1 px-2 py-1 text-xs rounded-lg bg-zinc-800 hover:bg-zinc-700">
-                                        marcar como lido
-                                        <div wire:loading wire:target='readNotification("{{$n->id}}")'>
-                                            <x-filament::loading-indicator class="size-4" />
-                                        </div>
-                                    </button>
-                                    <a wire:navigate
-                                        href="{{route('find-player.show', ['id' => $n->data['find_player']['id']])}}"
-                                        class="px-2 py-1 text-xs rounded-lg bg-primary-600 hover:bg-primary-500">
-                                        visualizar
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <x-notifications.type-notification :notification="$n" />
                     @empty
                     <p class="text-sm text-gray-400">
                         Você não possui nenhuma notificação.
@@ -76,40 +42,7 @@
                     @endforelse
                     @else
                     @forelse ($readNotifications as $rn)
-                    <div wire:key="{{$rn}}"
-                        class="flex items-center w-full gap-4 p-2 rounded-lg cursor-pointer hover:bg-zinc-950/80">
-                        <div class="flex w-full gap-1">
-                            <img class="rounded-full size-10" src="{{$rn->data['user_registered']['photo']}}"
-                                alt="Foto {{$rn->data['user_registered']['name']}}">
-                            <div class="w-full">
-                                <div class="flex items-start gap-1 text-sm">
-                                    <a class="text-primary-400 hover:underline">
-                                        {{"@".$rn->data['user_registered']['nick']}}
-                                    </a>
-                                    <p>
-                                        se inscreveu em sua vaga.
-                                    </p>
-                                </div>
-                                <span class="text-xs text-gray-400">
-                                    {{Carbon::parse($rn->created_at)->diffForHumans()}}
-                                </span>
-                                <div class="flex justify-end gap-1">
-                                    <button wire:click="deleteNotification('{{$rn->id}}')"
-                                        class="flex items-center gap-1 px-2 py-1 text-xs rounded-lg bg-rose-700 hover:bg-rose-600">
-                                        apagar
-                                        <div wire:loading wire:target='deleteNotification("{{$rn->id}}")'>
-                                            <x-filament::loading-indicator class="size-4" />
-                                        </div>
-                                    </button>
-                                    <a wire:navigate
-                                        href="{{route('find-player.show', ['id' => $rn->data['find_player']['id']])}}"
-                                        class="px-2 py-1 text-xs rounded-lg bg-primary-600 hover:bg-primary-500">
-                                        visualizar
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <x-notifications.type-notification :notification="$rn" />
                     @empty
                     <p class="text-sm text-gray-400">
                         Você não possui nenhuma notificação lida.
@@ -136,7 +69,8 @@
                         </div>
                     </button>
                     @endif
-                    <a wire:navigate href="{{route('notifications.index')}}" class="w-full text-xs text-end text-primary-500 hover:underline">
+                    <a wire:navigate href="{{route('notifications.index')}}"
+                        class="w-full text-xs text-end text-primary-500 hover:underline">
                         visualizar todas
                     </a>
                 </div>

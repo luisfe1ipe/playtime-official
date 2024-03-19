@@ -148,7 +148,7 @@
                             <div>
                                 <p class="mb-1 text-lg font-bold">Usuários inscritos</p>
                                 <div class="flex items-center gap-3">
-                                    <p class="text-base">colocar aqui.</p>
+                                    <p class="text-base">{{$vacancy->findPlayerMembers->count()}} usuários</p>
                                 </div>
                             </div>
                             <div>

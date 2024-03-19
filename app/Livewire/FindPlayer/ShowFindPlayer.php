@@ -3,8 +3,11 @@
 namespace App\Livewire\FindPlayer;
 
 use App\Enums\FindPlayerStatus;
+use App\Events\UpdateNotificationEvent;
+use App\Events\UpdateVacancyRegistrationsEvent;
 use App\Events\UserSignedUpEvent;
 use App\Models\FindPlayer;
+use App\Notifications\UserAcceptVacancyNotification;
 use App\Notifications\UserSignedUp;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +33,7 @@ class ShowFindPlayer extends Component
         }
     }
 
-    #[On('refreshComponent')]
+    #[On(['echo:update-vacancy-registrations,UpdateVacancyRegistrationsEvent' ,'refreshComponent'])]
     public function render()
     {
         $registeredUsers = $this->vacancy->findPlayerMembers()->paginate(6);
@@ -38,6 +41,12 @@ class ShowFindPlayer extends Component
         return view('livewire.find-player.show-find-player', [
             'registeredUsers' => $registeredUsers
         ]);
+    }
+
+    #[On('echo:update-vacancy-registrations,UpdateVacancyRegistrationsEvent')]
+    public function resetPagination()
+    {
+        $this->resetPage();
     }
 
     public function active()
@@ -91,9 +100,10 @@ class ShowFindPlayer extends Component
 
             $this->dispatch('refreshComponent');
 
-            $this->vacancy->user->notify( new UserSignedUp($this->vacancy, $user));
-            
-            UserSignedUpEvent::dispatch();
+            $this->vacancy->user->notify(new UserSignedUp($this->vacancy, $user));
+
+            UpdateNotificationEvent::dispatch();
+            UpdateVacancyRegistrationsEvent::dispatch();
 
             return Notification::make()
                 ->title('Inscrição realizada')
@@ -120,6 +130,8 @@ class ShowFindPlayer extends Component
 
             $this->dispatch('refreshComponent');
 
+            UpdateVacancyRegistrationsEvent::dispatch();
+
             return Notification::make()
                 ->title('Inscrição cancelada')
                 ->body('Sua inscrição nesta vaga foi cancelada com sucesso.')
@@ -142,6 +154,10 @@ class ShowFindPlayer extends Component
         $vacancy = $this->vacancy->findPlayerMembers()->where('user_id', $id)->first();
         $vacancy->pivot->status = FindPlayerStatus::ACCEPTED;
         $vacancy->pivot->save();
+
+        $vacancy->notify(new UserAcceptVacancyNotification($this->vacancy, $this->vacancy->user));
+
+        UpdateNotificationEvent::dispatch();
 
         return Notification::make()
             ->title('Usuário aceito!')

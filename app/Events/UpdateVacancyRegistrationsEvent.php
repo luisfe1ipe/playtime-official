@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UserSignedUpEvent implements ShouldBroadcast
+class UpdateVacancyRegistrationsEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -30,7 +30,7 @@ class UserSignedUpEvent implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new Channel('registered-user-find-player'),
+            new Channel('update-vacancy-registrations'),
         ];
     }
 }

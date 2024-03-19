@@ -10,7 +10,7 @@ class Notification extends Component
 {
     public $viewNotifications = 'new';
 
-    #[On(['echo:registered-user-find-player,UserSignedUpEvent', 'delete-notifications'])]
+    #[On(['echo:update-notification,UpdateNotificationEvent', 'delete-notifications'])]
     public function render()
     {
         if (Auth::user()) {
@@ -29,18 +29,13 @@ class Notification extends Component
         $user = Auth::user();
 
         $not = $user->notifications->where('id', $id)->first();
-        $not->read_at = now();
-        $not->save();
+        $not->markAsRead();
     }
 
     public function readAllNotifications()
     {
         $user = Auth::user();
-
-        foreach ($user->notifications as $not) {
-            $not->read_at = now();
-            $not->save();
-        }
+        $user->notifications->markAsRead();
     }
 
     public function deleteNotification($id)
