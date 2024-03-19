@@ -22,6 +22,8 @@ class ShowFindPlayer extends Component
 
     public $vacancy;
     public $slug;
+    public $search;
+    public $selectedOrder;
 
     public function mount($id)
     {
@@ -35,7 +37,20 @@ class ShowFindPlayer extends Component
     #[On(['echo:update-vacancy-registrations,UpdateVacancyRegistrationsEvent', 'refreshComponent'])]
     public function render()
     {
-        $registeredUsers = $this->vacancy->findPlayerMembers()->paginate(6);
+        $vacancy = $this->vacancy->findPlayerMembers();
+
+        if ($this->selectedOrder) {
+            $vacancy->orderBy('pivot_created_at', $this->selectedOrder);
+        }
+
+        if ($this->search) {
+            $vacancy->where(function ($query) {
+                $query->where('name', 'like', '%' . $this->search . '%')
+                    ->orWhere('nick', 'like', '%' . $this->search . '%');
+            });
+        }
+
+        $registeredUsers = $vacancy->paginate(6);
 
         return view('livewire.find-player.show-find-player', [
             'registeredUsers' => $registeredUsers
@@ -149,6 +164,7 @@ class ShowFindPlayer extends Component
 
     public function acceptUser($id)
     {
+        $this->authorize('isAuthor', $this->vacancy);
 
         $vacancy = $this->vacancy->findPlayerMembers()->where('user_id', $id)->first();
         if ($vacancy->pivot->status == FindPlayerStatus::ACCEPTED->value) {
@@ -168,6 +184,8 @@ class ShowFindPlayer extends Component
 
     public function refuseUser($id)
     {
+        $this->authorize('isAuthor', $this->vacancy);
+
         $vacancy = $this->vacancy->findPlayerMembers()->where('user_id', $id)->first();
 
         if ($vacancy->pivot->status == FindPlayerStatus::REJECTED->value) {
