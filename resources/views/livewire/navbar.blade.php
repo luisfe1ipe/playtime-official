@@ -28,7 +28,4 @@
             </div>
         </div>
     </x-container>
-    <x-modal maxWidth='lg' name="login" title="Login">
-
-    </x-modal>
 </nav>

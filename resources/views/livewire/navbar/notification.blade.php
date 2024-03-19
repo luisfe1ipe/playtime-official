@@ -96,7 +96,7 @@
             x-transition:enter-start="opacity-0 scale-95" -in transform"
             x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
             class="absolute right-0 z-10 w-56 px-2 py-2 mt-2 border rounded-lg shadow-lg shadow-black border-zinc-800 bg-zinc-900">
-            <a wire:navigate href="{{route('find-player.my')}}" class="flex w-full p-2 rounded-lg cursor-pointer hover:bg-zinc-950/80">
+            <a wire:navigate href="#" class="flex w-full p-2 rounded-lg cursor-pointer hover:bg-zinc-950/80">
                 Minhas vagas
             </a>
         </div>
