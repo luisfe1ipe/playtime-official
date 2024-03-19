@@ -1,4 +1,4 @@
-<div x-data="{notification: true}" class="flex items-center gap-6">
+<div x-data="{notification: false}" class="flex items-center gap-6">
     <div class="relative" x-on:click.outside="notification = false">
         <button x-on:click.stop="notification = !notification" class="relative group">
             <div
