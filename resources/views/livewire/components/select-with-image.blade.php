@@ -7,6 +7,12 @@
         </span>
         @else
         <div class="flex items-center w-full gap-4 rounded-lg">
+            @php
+            if($item_select->photo != null)
+            {
+            $item_select->image = $item_select->photo;
+            }
+            @endphp
             <img class="object-contain size-8" src="{{Storage::url($item_select->image)}}"
                 alt="Imagem {{$item_select->name}}">
             <p class="truncate">
@@ -40,7 +46,9 @@
         x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
         x-transition:leave="transition duration-200 ease-in transform" x-transition:leave-start="opacity-100 scale-100"
         x-transition:leave-end="opacity-0 scale-95"
-        class="absolute z-10 w-full px-2 py-2 mt-2 border rounded-lg shadow-lg shadow-black border-zinc-800 bg-zinc-900">
+        class="@if ($absolute == true)
+            absolute
+        @endif z-10 w-full px-2 py-2 mt-2 border rounded-lg shadow-lg shadow-black border-zinc-800 bg-zinc-900">
         <div class="p-2">
             <label for="input-group-search" class="sr-only">Search</label>
             <div class="relative">
@@ -60,6 +68,12 @@
         </div>
         <div class="overflow-y-scroll max-h-36">
             @foreach ($items as $i)
+            @php
+            if($i->photo != null)
+            {
+            $i->image = $i->photo;
+            }
+            @endphp
             <button x-on:click="open = false" type="button" wire:click='selectItem({{$i->id}})'
                 class="flex items-center w-full gap-4 p-2 rounded-lg cursor-pointer hover:bg-zinc-950/80">
                 <img class="object-contain size-8" src="{{Storage::url($i->image)}}" alt="Imagem {{$i->name}}">

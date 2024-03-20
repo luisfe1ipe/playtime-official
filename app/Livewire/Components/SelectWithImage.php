@@ -15,14 +15,16 @@ class SelectWithImage extends Component
     public $searchItem = '';
     public $gameId;
     public $wire_model;
+    public $absolute;
 
-    public function mount($items, $gameId, $wire_model = null, $item_select = null)
+    public function mount($items, $gameId, $wire_model = null, $item_select = null, $absolute = true)
     {
         $this->items = $items;
         $this->gameId = $this->gameId;
         $this->itemsOriginal = $this->items;
         $this->wire_model = $wire_model;
         $this->item_select = $item_select;
+        $this->absolute = $absolute;
     }
 
     public function render()
@@ -30,7 +32,9 @@ class SelectWithImage extends Component
 
         $items = $this->itemsOriginal;
 
-        $this->items = $items->where('game_id', $this->gameId);
+        if ($this->gameId != null) {
+            $this->items = $items->where('game_id', $this->gameId);
+        }
 
         if ($this->searchItem) {
             $this->items = $this->items->filter(function ($item) {
