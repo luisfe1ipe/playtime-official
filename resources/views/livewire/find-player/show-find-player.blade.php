@@ -171,8 +171,10 @@
                             <img class="rounded-full size-24" src="{{$vacancy->user->getImage($vacancy->user->photo)}}"
                                 alt="Foto {{$vacancy->user->name}}">
                             <div class="flex flex-col gap-1">
-                                <h3>{{$vacancy->user->name}}</h3>
-                                <a class="text-primary-300 hover:underline" href="#" target="_blank">Visualizar
+                                <h3>{{'@'.$vacancy->user->nick}}</h3>
+                                <a class="text-primary-300 hover:underline"
+                                    href="{{route('profile', ['nick' => $vacancy->user->nick])}}"
+                                    target="_blank">Visualizar
                                     perfil</a>
                             </div>
 

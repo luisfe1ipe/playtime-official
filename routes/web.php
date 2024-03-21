@@ -16,6 +16,9 @@ use App\Livewire\Teams\MyTeams\Setting\AboutTeam;
 use App\Livewire\Teams\MyTeams\Setting\AppearanceTeam;
 use App\Livewire\Teams\MyTeams\ShowMyTeam;
 use App\Livewire\User\CreateNickname;
+use App\Livewire\User\Profile;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,6 +49,10 @@ Route::prefix('/auth/google')->group(function () {
 
 // Route::middleware(['auth', 'checkNickname'])->group(function ()
 Route::middleware(['checkNickname'])->group(function () {
+
+
+  Route::get('/@{nick}', Profile::class)->name('profile');
+
 
   Route::get('/encontrar-player/criadas-por-mim', MyFindPlayer::class)->name('find-player.create-for-my');
 
