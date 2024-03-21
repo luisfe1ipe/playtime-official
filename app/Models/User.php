@@ -70,6 +70,16 @@ class User extends Authenticatable implements FilamentUser
     ];
 
     /**
+     * The games that belong to the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function games(): BelongsToMany
+    {
+        return $this->belongsToMany(Game::class, 'game_user');
+    }
+
+    /**
      * Get all of the news for the User
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

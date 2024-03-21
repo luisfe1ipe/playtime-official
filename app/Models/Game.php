@@ -6,6 +6,7 @@ use App\Traits\CustomGetImage;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Game extends Model
@@ -30,6 +31,17 @@ class Game extends Model
     public function scopeActive(Builder $query, bool $active)
     {
         $query->where('active', $active);
+    }
+    
+
+    /**
+     * The users that belong to the Game
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'game_user');
     }
 
     /**
