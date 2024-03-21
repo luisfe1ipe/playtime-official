@@ -38,7 +38,6 @@ class User extends Authenticatable implements FilamentUser
         'email',
         'birth',
         'is_blocked',
-        'points',
         'likes',
         'bio',
         'google_id',

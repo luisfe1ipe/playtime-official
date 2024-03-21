@@ -47,9 +47,14 @@
                         </button>
                         @endif
                     </div>
-                    <div>
-                        <h2>{{$user->name}}</h2>
-                        <h4 class="font-semibold text-primary-500">{{'@'.$user->nick}}</h4>
+                    <div class="flex justify-between w-full">
+                        <div>
+                            <h2>{{$user->name}}</h2>
+                            <h4 class="font-semibold text-primary-500">{{'@'.$user->nick}}</h4>
+                        </div>
+                        <a wire:navigate href="{{route('profile.edit', ['nick', $user->nick])}}">
+                            Editar perfil
+                        </a>
                     </div>
                 </div>
             </div>
