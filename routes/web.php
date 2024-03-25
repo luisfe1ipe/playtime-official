@@ -17,6 +17,7 @@ use App\Livewire\Teams\MyTeams\Setting\AppearanceTeam;
 use App\Livewire\Teams\MyTeams\ShowMyTeam;
 use App\Livewire\User\CreateNickname;
 use App\Livewire\User\Profile;
+use App\Livewire\User\Profile\AddGameProfile;
 use App\Livewire\User\Profile\EditProfile;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -54,6 +55,7 @@ Route::middleware(['checkNickname'])->group(function () {
 
   Route::get('/@{nick}', Profile::class)->name('profile');
   Route::get('/editar-perfil', EditProfile::class)->name('profile.edit');
+  Route::get('/editar-perfil/adicionar-jogo', AddGameProfile::class)->name('profile.add-game');
 
 
   Route::get('/encontrar-player/criadas-por-mim', MyFindPlayer::class)->name('find-player.create-for-my');

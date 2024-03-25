@@ -7,8 +7,6 @@ use Livewire\Component;
 
 class EditProfile extends Component
 {
-    public $i = 0;
-    
     public function render()
     {
         $this->authorize('update', Auth::user());

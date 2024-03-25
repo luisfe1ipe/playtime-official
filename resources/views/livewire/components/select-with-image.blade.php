@@ -32,9 +32,10 @@
                 </svg>
             </div>
             @endif
-            <svg wire:loading.remove wire:target='selectItem, unselectItem' class="size-5 text-zinc-400"
-                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down">
+            <svg x-bind:class="{ 'transform -rotate-180': open }" wire:loading.remove
+                wire:target='selectItem, unselectItem' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="transition-transform duration-200 transform size-5 text-zinc-400 lucide lucide-chevron-down">
                 <path d="m6 9 6 6 6-6" />
             </svg>
             <div wire:loading wire:target='selectItem, unselectItem'>
@@ -45,8 +46,7 @@
     <div x-show="open" x-cloak x-transition:enter="transition duration-300 ease-out transform"
         x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
         x-transition:leave="transition duration-200 ease-in transform" x-transition:leave-start="opacity-100 scale-100"
-        x-transition:leave-end="opacity-0 scale-95"
-        class="@if ($absolute == true)
+        x-transition:leave-end="opacity-0 scale-95" class="@if ($absolute == true)
             absolute
         @endif z-10 w-full px-2 py-2 mt-2 border rounded-lg shadow-lg shadow-black border-zinc-800 bg-zinc-900">
         <div class="p-2">

@@ -2,7 +2,7 @@
     <div class="relative w-full h-[500px]  flex justify-center overflow-hidden">
         <div class="absolute bottom-0 w-full h-full from-zinc-950 bg-gradient-to-t z-[1]"></div>
         <div class="absolute inset-0 object-cover w-full h-full bg-center bg-no-repeat -z-0 brightness-50"
-            style="background-image: url({{ $game->getImage($game->banner) }}); background-size: co$ver;">
+            style="background-image: url({{ $game->getImage($game->banner) }}); background-size: cover;">
         </div>
         <div class="px-6 lg:px-8 relative w-full h-full max-w-screen-xl z-[1] ">
             <div class="flex flex-col justify-center h-full max-w-lg gap-8 text-white">
@@ -85,8 +85,14 @@
                         </div>
                     </div>
                 </div>
-                <x-primary-button x-on:click="filter = !filter">
-                    Exibir filtros
+                <x-primary-button x-on:click="filter = !filter" class="flex items-end">
+                    <span x-text="filter ? 'Ocultar filtros' : 'Exibir filtros'">Exibir filtros</span>
+                    <svg x-bind:class="{ 'transform -rotate-180': filter }" xmlns="http://www.w3.org/2000/svg"
+                        width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round"
+                        class="transition-transform duration-200 transform size-4 lucide lucide-chevron-down">
+                        <path d="m6 9 6 6 6-6" />
+                    </svg>
                 </x-primary-button>
             </div>
         </div>

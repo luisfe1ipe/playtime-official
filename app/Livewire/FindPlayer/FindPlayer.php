@@ -31,7 +31,7 @@ class FindPlayer extends Component
     public function mount(string $slug)
     {
         $this->game = Game::where('slug', $slug)->with('ranks', 'characters', 'positions')->first();
-
+        $this->selectedOrder = 'desc';
         if (!$this->game) {
             abort(404);
         }
@@ -91,37 +91,25 @@ class FindPlayer extends Component
     public function setItem($item)
     {
         if ($item['value'] == null) {
-            switch ($item) {
-                case $item['model'] === Character::class:
-                    $this->character_id = null;
-                    break;
-                case $item['model'] === Position::class:
-                    $this->position_id = null;
-                    break;
-                case $item['model'] === Rank::class && $item['wire_model'] === 'rank_min':
-                    $this->rank_min_id = null;
-                    break;
-                case $item['model'] === Rank::class && $item['wire_model'] === 'rank_max':
-                    $this->rank_max_id = null;
-                    break;
-            }
+            match ($item['model']) {
+                Character::class => $this->character_id = null,
+                Position::class => $this->position_id = null,
+                Rank::class => match ($item['wire_model']) {
+                    'rank_min' => $this->rank_min_id = null,
+                    'rank_max' => $this->rank_max_id = null,
+                }
+            };
 
             return;
         }
 
-        switch ($item) {
-            case $item['model'] === Character::class:
-                $this->character_id = $item['value']['id'];
-                break;
-            case $item['model'] === Position::class:
-                $this->position_id = $item['value']['id'];
-                break;
-            case $item['model'] === Rank::class && $item['value']['wire_model'] === 'rank_min':
-                $this->rank_min_id = $item['value']['id'];
-                break;
-            case $item['model'] === Rank::class && $item['value']['wire_model'] === 'rank_max':
-                $this->rank_max_id = $item['value']['id'];
-                break;
-        }
+        match ($item['model']) {
+            Character::class => $this->character_id = $item['value']['id'],
+            Position::class => $this->position_id = $item['value']['id'],
+            Rank::class => match ($item['value']['wire_model']) {
+                'rank_min' => $this->rank_min_id = $item['value']['id'],
+                'rank_max' => $this->rank_max_id = $item['value']['id'],
+            },
+        };
     }
 }

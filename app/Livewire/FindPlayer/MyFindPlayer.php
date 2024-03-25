@@ -25,15 +25,6 @@ class MyFindPlayer extends Component
 
     public $selectedOrder;
 
-    public function mount()
-    {
-        $this->filters['game_select'] = Game::find(1);
-        $this->filters['character'] = Character::find(11);
-        $this->filters['position'] = Position::find(2);
-        $this->filters['rank_min'] = Rank::find(1);
-        $this->filters['rank_max'] = Rank::find(5);
-    }
-
 
     public function render()
     {
@@ -70,8 +61,7 @@ class MyFindPlayer extends Component
             });
         }
 
-        if($this->selectedOrder)
-        {
+        if ($this->selectedOrder) {
             switch ($this->selectedOrder) {
                 case 'desc':
                     $vacancies->orderBy('created_at', 'desc');
