@@ -7,6 +7,11 @@ use Livewire\Component;
 
 class EditProfile extends Component
 {
+    public function mount(string $nick)
+    {
+
+    }
+
     public function render()
     {
         $this->authorize('update', Auth::user());

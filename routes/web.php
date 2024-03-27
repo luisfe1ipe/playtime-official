@@ -54,8 +54,8 @@ Route::middleware(['checkNickname'])->group(function () {
 
 
   Route::get('/@{nick}', Profile::class)->name('profile');
-  Route::get('/editar-perfil', EditProfile::class)->name('profile.edit');
-  Route::get('/editar-perfil/adicionar-jogo', AddGameProfile::class)->name('profile.add-game');
+  Route::get('/@{nick}/editar', EditProfile::class)->name('profile.edit');
+  Route::get('/@{nick}/editar/adicionar-jogo', AddGameProfile::class)->name('profile.add-game');
 
 
   Route::get('/encontrar-player/criadas-por-mim', MyFindPlayer::class)->name('find-player.create-for-my');

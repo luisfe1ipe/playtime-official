@@ -19,7 +19,9 @@ class AddGameProfile extends Component
     public array $days_times_play = [];
     public int $rank_select;
 
-
+    public function mount(string $nick)
+    {
+    }
 
     public function render()
     {

@@ -21,7 +21,7 @@
                     <ul class="flex flex-col w-full gap-1 font-bold">
                         <li>
                             <x-team.settings.link class="border bg-zinc-900 border-zinc-800"
-                                :href="route('profile.add-game')" :active="request()->routeIs('profile.add-game')">
+                                :href="route('profile.add-game', $user->nick)" :active="request()->routeIs('profile.add-game')">
                                 <svg class="size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gamepad-2">
