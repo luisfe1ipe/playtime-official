@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(Game::class);
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Rank::class)->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->json('days_times_play');
             $table->json('positions')->nullable();
             $table->json('characters')->nullable();

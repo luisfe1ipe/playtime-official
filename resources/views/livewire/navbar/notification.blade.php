@@ -84,8 +84,9 @@
             </div>
             <div class="flex items-end">
                 <p>{{Auth::user()->name}}</p>
-                <svg x-bind:class="{'transform -rotate-180': open}" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                <svg x-bind:class="{'transform -rotate-180': open}" xmlns="http://www.w3.org/2000/svg" width="20"
+                    height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"
                     class="transition-transform duration-200 transform lucide lucide-chevron-down">
                     <path d="m6 9 6 6 6-6" />
                 </svg>
@@ -96,10 +97,14 @@
             x-transition:enter-start="opacity-0 scale-95" -in transform"
             x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
             class="absolute right-0 z-10 w-56 px-2 py-2 mt-2 border rounded-lg shadow-lg shadow-black border-zinc-800 bg-zinc-900">
-            <a wire:navigate href="{{route('profile', ['nick' => Auth::user()->nick])}}" class="flex w-full p-2 rounded-lg cursor-pointer hover:bg-zinc-950/80">
+            @if (Auth::user()->nick)
+            <a wire:navigate href="{{route('profile', ['nick' => Auth::user()->nick])}}"
+                class="flex w-full p-2 rounded-lg cursor-pointer hover:bg-zinc-950/80">
                 Meu perfil
             </a>
-            <a wire:navigate href="{{route('find-player.create-for-my')}}" class="flex w-full p-2 rounded-lg cursor-pointer hover:bg-zinc-950/80">
+            @endif
+            <a wire:navigate href="{{route('find-player.create-for-my')}}"
+                class="flex w-full p-2 rounded-lg cursor-pointer hover:bg-zinc-950/80">
                 Minhas vagas
             </a>
         </div>

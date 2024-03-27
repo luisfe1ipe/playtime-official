@@ -32,7 +32,7 @@ class Game extends Model
     {
         $query->where('active', $active);
     }
-    
+
 
     /**
      * The users that belong to the Game
@@ -41,7 +41,9 @@ class Game extends Model
      */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'game_user');
+        return $this->belongsToMany(User::class, 'game_user', 'game_id', 'user_id')
+            ->withPivot(['rank_id', 'description', 'days_times_play', 'positions', 'characters'])
+            ->withTimestamps();
     }
 
     /**

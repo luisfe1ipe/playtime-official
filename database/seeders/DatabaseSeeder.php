@@ -22,16 +22,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Luis Felipe',
-        //     'email' => 'luisfelipe@playtime.com',
-        //     'email_verified_at' => now(),
-        // ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Luis Felipe',
+            'email' => 'luisfelipe@playtime.com',
+            'email_verified_at' => now(),
+        ]);
 
-        // Type::factory(20)->create();
-        // News::factory(100)->create();
-        // \App\Models\User::factory(500)->create();
-        // FindPlayer::factory(200)->create();
+        Type::factory(20)->create();
+        News::factory(100)->create();
+        \App\Models\User::factory(500)->create();
+        FindPlayer::factory(200)->create();
         FindPlayerUser::factory(800)->create();
     }
 }

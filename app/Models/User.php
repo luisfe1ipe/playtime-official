@@ -75,7 +75,9 @@ class User extends Authenticatable implements FilamentUser
      */
     public function games(): BelongsToMany
     {
-        return $this->belongsToMany(Game::class, 'game_user');
+        return $this->belongsToMany(Game::class, 'game_user', 'user_id', 'game_id')
+            ->withPivot(['rank_id', 'description', 'days_times_play', 'positions', 'characters'])
+            ->withTimestamps();
     }
 
     /**
@@ -120,7 +122,7 @@ class User extends Authenticatable implements FilamentUser
      */
     public function findPlayerMembers(): BelongsToMany
     {
-        return $this->belongsToMany(FindPlayer::class, 'find_player_user', )
+        return $this->belongsToMany(FindPlayer::class, 'find_player_user',)
             ->withPivot('status')
             ->withTimestamps();
     }
