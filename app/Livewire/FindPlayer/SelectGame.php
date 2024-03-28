@@ -3,6 +3,7 @@
 namespace App\Livewire\FindPlayer;
 
 use App\Models\Game;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
 use Livewire\Component;
