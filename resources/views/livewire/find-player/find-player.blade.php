@@ -1,4 +1,4 @@
-<div x-data="{filter: false}">
+<div x-data="{ filter: false }">
     <div class="relative w-full h-[500px]  flex justify-center overflow-hidden">
         <div class="absolute bottom-0 w-full h-full from-zinc-950 bg-gradient-to-t z-[1]"></div>
         <div class="absolute inset-0 object-cover w-full h-full bg-center bg-no-repeat -z-0 brightness-50"
@@ -15,7 +15,7 @@
                     </p>
                 </div>
                 <div>
-                    <a wire:navigate href="{{route('find-player.advertise-vacancy', ['slug' => $game->slug])}}"
+                    <a wire:navigate href="{{ route('find-player.advertise-vacancy', ['slug' => $game->slug]) }}"
                         class="px-4 py-2 text-base font-semibold bg-primary-600 hover:bg-primary-700">
                         ANUNCIAR VAGA
                     </a>
@@ -24,19 +24,16 @@
         </div>
     </div>
     <x-container>
-        <div
-            class="flex flex-col gap-4 mt-6 text-2xl font-bold md:gap-0 md:flex-row md:items-center md:justify-between">
+        <div class="flex items-center justify-between mt-6 font-bold">
             <div class="flex items-center w-full gap-2">
-                <img class="object-contain size-16" src="{{ $game->getImage($game->photo) }}" alt="{{ $game->name }}">
-                <h1 class="w-full">
+                <img class="object-contain rounded-lg size-12 lg:size-16" src="{{ $game->getImage($game->photo) }}"
+                    alt="{{ $game->name }}">
+                <h1 class="w-full text-2xl ">
                     {{ $game->name }}
                 </h1>
             </div>
-            <p class="w-full text-end">
-                {{ $vacancies->total() }} Vagas disponíveis
-            </p>
         </div>
-        <div class="flex items-end justify-between">
+        <div class="flex flex-col gap-4 lg:gap-0 lg:justify-between lg:items-end lg:flex-row">
             <div class="relative w-full mt-12 lg:w-1/2">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <svg wire:loading.remove class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -51,12 +48,13 @@
                 <x-text-input wire:model.live='search' type="search" class="w-full pl-10"
                     placeholder='Digite o ID ou o titulo da vaga' />
             </div>
-            <div class="flex items-center justify-between gap-6" x-data="{orderBy: false}">
-                <div class="relative" @click.outside='orderBy = false' @close.stop="orderBy = false">
-                    <x-secondary-button x-on:click="orderBy = !orderBy">
+            <div class="flex items-center justify-between w-full gap-6 lg:w-auto" x-data="{ orderBy: false }">
+                <div class="relative w-full lg:w-auto" @click.outside='orderBy = false' @close.stop="orderBy = false">
+                    <x-secondary-button class="flex justify-center w-full lg:justify-start"
+                        x-on:click="orderBy = !orderBy">
                         Ordenar por
                     </x-secondary-button>
-                    <div class="absolute right-0 z-20 w-full p-2 border rounded-lg shadow-lg max-h-44 lg:w-44 top-10 lg:top-12 shadow-black border-zinc-800 bg-zinc-900"
+                    <div class="absolute right-0 z-20 w-full p-2 border rounded-lg shadow-lg max-h-44 lg:w-44 top-12 shadow-black border-zinc-800 bg-zinc-900"
                         x-cloak x-show="orderBy" x-transition:enter="ease-out duration-300"
                         x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
                         x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100"
@@ -85,11 +83,12 @@
                         </div>
                     </div>
                 </div>
-                <x-primary-button x-on:click="filter = !filter" class="flex items-end">
+                <x-primary-button x-on:click="filter = !filter"
+                    class="flex items-end justify-center w-full lg:w-auto lg:justify-start">
                     <span x-text="filter ? 'Ocultar filtros' : 'Exibir filtros'">Exibir filtros</span>
                     <svg x-bind:class="{ 'transform -rotate-180': filter }" xmlns="http://www.w3.org/2000/svg"
-                        width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round"
+                        width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="transition-transform duration-200 transform size-4 lucide lucide-chevron-down">
                         <path d="m6 9 6 6 6-6" />
                     </svg>
@@ -100,35 +99,36 @@
             x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
             x-transition:leave="transition duration-200 ease-in transform"
             x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
-            class="flex justify-end w-full gap-6 mt-8">
+            class="flex flex-col justify-end w-full gap-6 mt-8 lg:flex-row">
             <div class="w-full">
                 <x-input-label value="Posição" for="position_id" :error="$errors->get('position_id')" />
                 <livewire:components.select-with-image :items="$game->positions" :gameId="$game->id" />
             </div>
             @if ($game->has_characters)
-            <div class="w-full">
-                <x-input-label value="Personagem" for="position_id" :error="$errors->get('position_id')" />
-                <livewire:components.select-with-image :items="$game->characters" :gameId="$game->id" />
-            </div>
+                <div class="w-full">
+                    <x-input-label value="Personagem" for="position_id" :error="$errors->get('position_id')" />
+                    <livewire:components.select-with-image :items="$game->characters" :gameId="$game->id" />
+                </div>
             @endif
             <div class="w-full">
                 <x-input-label value="Rank mínimo" for="rank_min_id" :error="$errors->get('rank_min_id')" />
-                <livewire:components.select-with-image wire_model="rank_min" :items="$game->ranks"
-                    :gameId="$game->id" />
+                <livewire:components.select-with-image wire_model="rank_min" :items="$game->ranks" :gameId="$game->id" />
             </div>
             <div class="w-full">
                 <x-input-label value="Rank maxímo" for="rank_max_id" :error="$errors->get('rank_max_id')" />
-                <livewire:components.select-with-image wire_model="rank_max" :items="$game->ranks"
-                    :gameId="$game->id" />
+                <livewire:components.select-with-image wire_model="rank_max" :items="$game->ranks" :gameId="$game->id" />
             </div>
         </div>
+        <h2 class="w-full mt-6 text-2xl font-bold">
+            {{ $vacancies->total() }} Vagas disponíveis
+        </h2>
         <div class="grid w-full grid-flow-row grid-cols-1 gap-6 mt-12 lg:grid-cols-2">
             @foreach ($vacancies as $v)
-            <x-find-player.card :vacancy="$v" />
+                <x-find-player.card :vacancy="$v" />
             @endforeach
         </div>
         <div class="mt-12">
-            {{$vacancies->links()}}
+            {{ $vacancies->links() }}
         </div>
     </x-container>
 </div>

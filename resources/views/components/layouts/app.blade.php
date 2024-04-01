@@ -33,7 +33,7 @@
             </svg>
         </button>
     </div>
-    <livewire:navbar />
+    {{-- <livewire:navbar /> --}}
     <div class="min-h-screen">
         {{ $slot }}
     </div>

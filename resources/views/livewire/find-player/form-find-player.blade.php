@@ -1,10 +1,10 @@
-<div class="p-6">
+<div>
     <x-container>
-        <nav class="flex mt-3 mb-6" aria-label="Breadcrumb">
+        <nav class="flex mt-6 mb-6" aria-label="Breadcrumb">
             <ol class="inline-flex items-end space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li>
                     <div class="flex items-center">
-                        <a wire:navigate href="{{route('find-player.index', ['slug' => $game->slug])}}"
+                        <a wire:navigate href="{{ route('find-player.index', ['slug' => $game->slug]) }}"
                             class="text-sm font-medium text-gray-400 ms-1 hover:text-primary-500 md:ms-2">Encontrar
                             player</a>
                     </div>
@@ -35,16 +35,14 @@
                     <x-input-error :messages="$errors->get('title')" />
                 </div>
                 <div>
-                    <x-input-label value="Descrição" :required="true" for="description"
-                        :error="$errors->get('description')" />
-                    <x-textarea wire:model='description' id="description" :error="$errors->get('description')"
-                        :value="$description" cols="30" rows="5" />
+                    <x-input-label value="Descrição" :required="true" for="description" :error="$errors->get('description')" />
+                    <x-textarea wire:model='description' id="description" :error="$errors->get('description')" :value="$description"
+                        cols="30" rows="5" />
                     <x-input-error :messages="$errors->get('description')" />
                 </div>
-                <div class="flex justify-between w-full gap-6">
+                <div class="flex flex-col w-full gap-6 lg:flex-row lg:justify-between">
                     <div class="w-full">
-                        <x-input-label :required="true" value="Rank mínimo" for="rank_min_id"
-                            :error="$errors->get('rank_min_id')" />
+                        <x-input-label :required="true" value="Rank mínimo" for="rank_min_id" :error="$errors->get('rank_min_id')" />
                         <livewire:components.select-with-image wire_model="rank_min" :items="$ranks"
                             :gameId="$game->id" />
                         <x-input-error :messages="$errors->get('rank_min_id')" />
@@ -56,18 +54,17 @@
                         <x-input-error :messages="$errors->get('rank_max_id')" />
                     </div>
                 </div>
-                <div class="flex justify-between w-full gap-6">
+                <div class="flex flex-col w-full gap-6 lg:flex-row lg:justify-between">
                     @if ($game->has_characters)
-                    <div class="w-full">
-                        <x-input-label :required="true" value="Personagem" for="character_id"
-                            :error="$errors->get('character_id')" />
-                        <livewire:components.select-with-image :items="$characters" :gameId="$game->id" />
-                        <x-input-error :messages="$errors->get('character_id')" />
-                    </div>
+                        <div class="w-full">
+                            <x-input-label :required="true" value="Personagem" for="character_id"
+                                :error="$errors->get('character_id')" />
+                            <livewire:components.select-with-image :items="$characters" :gameId="$game->id" />
+                            <x-input-error :messages="$errors->get('character_id')" />
+                        </div>
                     @endif
                     <div class="w-full">
-                        <x-input-label :required="true" value="Posição" for="position_id"
-                            :error="$errors->get('position_id')" />
+                        <x-input-label :required="true" value="Posição" for="position_id" :error="$errors->get('position_id')" />
                         <livewire:components.select-with-image :items="$positions" :gameId="$game->id" />
                         <x-input-error :messages="$errors->get('position_id')" />
                     </div>
