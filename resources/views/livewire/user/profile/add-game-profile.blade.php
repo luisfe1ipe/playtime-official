@@ -1,7 +1,7 @@
 <div>
     <x-container>
         <div class="grid grid-cols-8">
-            <x-profile.info :user="$user"/>
+            <x-profile.info :user="$user" />
             <div class="w-full col-span-6 px-8 pt-24">
                 <div class="pb-8 border-b border-zinc-800">
                     <h1 class="text-4xl font-bold">Adicione um jogo ao seu perfil</h1>
@@ -23,8 +23,8 @@
                             @foreach ($games as $game)
                                 <div wire:key='{{ $game->id }}'
                                     wire:click='$set("game_select_id", {{ $game->id }})'>
-                                    <input type="radio" id="game-{{ $game->id }}" name="hosting"
-                                        value="{{ $game->id }}" class="hidden peer" required />
+                                    <input type="radio" id="game-{{ $game->id }}" value="{{ $game->id }}"
+                                        class="hidden peer" required />
                                     <label for="game-{{ $game->id }}"
                                         class="inline-flex items-center justify-between w-full px-5 py-3 text-gray-500 transition-colors ease-linear border rounded-lg cursor-pointer bg-zinc-900 border-zinc-700 peer-checked:bg-primary-500/10 peer-checked:border-primary-600 peer-checked:text-primary-600 hover:bg-zinc-800">
                                         <div class="flex items-center gap-4">
@@ -64,6 +64,7 @@
                                                     </div>
                                                 @endforeach
                                             </div>
+                                            <x-input-error class="mt-4" :messages="$errors->get('characters_select')" />
                                         @endif
                                     </div>
                                     <div class="mt-6">
@@ -89,6 +90,8 @@
                                                 </div>
                                             @endforeach
                                         </div>
+                                        @ds($errors)
+                                        <x-input-error class="mt-4" :messages="$errors->get('positions_select')" />
                                     </div>
                                     <div class="mt-6">
                                         <p class="text-lg font-semibold">Escolha seu nível de habilidade</p>
@@ -113,13 +116,15 @@
                                                 </div>
                                             @endforeach
                                         </div>
+                                        <x-input-error class="mt-4" :messages="$errors->get('rank_select')" />
                                     </div>
                                     <div class="mt-6">
                                         <p class="text-lg font-semibold">Selecione os dias que você joga</p>
                                         <span class="text-gray-400">
-                                            Escolha o horário de início e término das suas sessões de jogo para cada dia da semana.
+                                            Escolha o horário de início e término das suas sessões de jogo para cada dia
+                                            da semana.
                                         </span>
-                                        <div class="flex flex-col gap-6">
+                                        <div class="flex flex-col gap-6 mt-4">
                                             <x-add-game.date-time text="Segunda-Feira" />
                                             <x-add-game.date-time text="Terça-Feira" />
                                             <x-add-game.date-time text="Quarta-Feira" />

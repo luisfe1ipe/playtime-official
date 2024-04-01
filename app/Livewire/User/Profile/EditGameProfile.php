@@ -30,10 +30,13 @@ class EditGameProfile extends Component
             return abort(403);
         }
 
-        $this->game = $this->user->games()->with(['characters', 'positions', 'ranks'])->where('game_user.id', $game_user_id)->first();
+        $this->game = $this->user->games()->with(['characters', 'positions', 'ranks'])->find($game_user_id);
 
 
-        $this->characters_select = json_decode($this->game->pivot->characters);
+        if ($this->game->has_characters) {
+            $this->characters_select = json_decode($this->game->pivot->characters);
+        }
+
         $this->positions_select = json_decode($this->game->pivot->positions);
         $this->rank_select = $this->game->pivot->rank_id;
         $this->days_times_play = json_decode($this->game->pivot->days_times_play, true);
