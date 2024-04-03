@@ -105,6 +105,15 @@
                 class="flex w-full p-2 transition-colors ease-linear rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-zinc-950/80">
                 Minhas vagas
             </a>
+            <button id="theme-toggle" type="button"
+                class="flex w-full p-2 transition-colors ease-linear rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-zinc-950/80">
+                <div id="theme-toggle-dark-icon" class="hidden">
+                    Tema escuro
+                </div>
+                <div id="theme-toggle-light-icon" class="hidden">
+                    <p>Tema claro</p>
+                </div>
+            </button>
             <button wire:click='logout'
                 class="flex w-full p-2 transition-colors ease-linear rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-zinc-950/80">
                 Sair
