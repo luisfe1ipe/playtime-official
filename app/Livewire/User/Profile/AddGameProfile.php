@@ -50,9 +50,9 @@ class AddGameProfile extends Component
         $user = Auth::user();
         $games = Game::all();
 
-        
+
         if ($this->game_select_id) {
-        $this->game_select = Game::with(['positions', 'characters', 'ranks'])->find($this->game_select_id);
+            $this->game_select = Game::with(['positions', 'characters', 'ranks'])->find($this->game_select_id);
         }
 
 
@@ -78,5 +78,11 @@ class AddGameProfile extends Component
                 'characters' => json_encode($this->characters_select),
             ]
         );
+
+        Notification::make()
+            ->title('Jogo adicionado com sucesso!')
+            ->body('Você adicionou o jogo ao seu perfil com sucesso.')
+            ->success()
+            ->send();
     }
 }

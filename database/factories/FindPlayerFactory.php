@@ -36,6 +36,7 @@ class FindPlayerFactory extends Factory
                 'rank_min_id' => $game->ranks()->inRandomOrder()->first()->id,
                 'rank_max_id' => $game->ranks()->inRandomOrder()->first()->id,
                 'user_id' => 2,
+                'created_at' => $this->faker->dateTime()
             ];
         }
 
@@ -48,6 +49,7 @@ class FindPlayerFactory extends Factory
             'rank_min_id' => $game->ranks()->inRandomOrder()->first()->id,
             'rank_max_id' => $game->ranks()->inRandomOrder()->first()->id,
             'user_id' => 2,
+            'created_at' => $this->faker->dateTime()
         ];
     }
 }

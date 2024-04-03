@@ -5,6 +5,7 @@ namespace App\Livewire\User;
 use App\Models\Character;
 use App\Models\Game;
 use App\Models\Position;
+use App\Models\Rank;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -16,14 +17,14 @@ class Profile extends Component
     public $game_select;
     public $characters;
     public $positions;
+    public $rank;
 
     public function mount(string $nick)
     {
         $this->user = User::where('nick', $nick)->with(['games'])->first();
         $this->game_select = $this->user->games->first();
 
-        if($this->game_select)
-        {
+        if ($this->game_select) {
             self::setGameInformation();
         }
     }
@@ -47,5 +48,6 @@ class Profile extends Component
         }
 
         $this->positions = Position::select('name', 'image')->whereIn('id', json_decode($this->game_select->pivot->positions))->get();
+        $this->rank = Rank::select('name', 'image')->where('id', $this->game_select->pivot->rank_id)->get();
     }
 }

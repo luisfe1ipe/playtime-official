@@ -62,7 +62,7 @@
         <div class="mt-8">
             @foreach ($user->games as $game)
                 <button
-                    class="@if ($game_select->id == $game->id) text-white border-primary-600 bg-primary-500/30 hover:bg-primary-500/30 @endif px-5 py-3 text-gray-500 transition-colors ease-linear border rounded-lg cursor-pointer bg-zinc-900 border-transparent hover:bg-zinc-800"
+                    class="@if ($game_select->id == $game->id) text-white border-primary-600 border-[1.5px] bg-primary-500/30 hover:bg-primary-500/30 @endif px-5 py-3 text-gray-500 transition-colors ease-linear rounded-lg cursor-pointer bg-zinc-900  hover:bg-zinc-800"
                     wire:key={{ $game->id }} wire:click="selectGame({{ $game->id }})">
                     <div class="flex items-center gap-4">
                         <img class="rounded-lg size-12" src="{{ $game->getImage($game->photo) }}"
@@ -74,36 +74,88 @@
                     </div>
                 </button>
             @endforeach
-            <div class="mt-6">
+            <div class="mt-12">
                 @if ($game_select)
                     <div>
-                        <p>
-                            {{ $game_select->pivot->description }}
-                        </p>
-                        <br>
-                        @foreach (json_decode($game_select->pivot->days_times_play, true) as $day => $details)
-                            <p>Dia: {{ $day }}</p>
-                            @if (isset($details['start']))
-                                <p>Início: {{ $details['start'] }}</p>
-                            @endif
-                            @if (isset($details['end']))
-                                <p>Fim: {{ $details['end'] }}</p>
-                            @endif
-                        @endforeach
-                        @if ($characters)
-                            @foreach ($characters as $ch)
-                                <img src="{{ $ch->getImage($ch->image) }}" alt="">
-                                <p>
-                                    {{ $ch->name }}
-                                </p>
-                            @endforeach
+                        @if ($game_select->pivot->description)
+                            <div>
+                                <h3>Descrição</h3>
+                                <div class="p-6 mt-3 border rounded-lg border-zinc-700 bg-zinc-900">
+                                    <p>
+                                        {{ $game_select->pivot->description }}
+                                    </p>
+                                </div>
+                                <br>
+                            </div>
                         @endif
-                        @foreach ($positions as $position)
-                            <img src="{{ $position->getImage($position->image) }}" alt="">
-                            <p>
-                                {{ $position->name }}
-                            </p>
-                        @endforeach
+                        <div>
+                            <h3 class="mb-3">Horários que costumo jogar</h3>
+                            <div class="flex flex-wrap gap-6 mb-6">
+                                @foreach (json_decode($game_select->pivot->days_times_play, true) as $day => $details)
+                                    <div
+                                        class="inline-flex items-center w-auto border rounded-lg bg-zinc-900 border-zinc-700">
+                                        <div class="px-6 py-2 border-r rounded-l-lg border-zinc-700">
+                                            <p class="text-sm font-medium text-zinc-400 ">Dia</p>
+                                            <span class="font-bold text-zinc-200">{{ $day }}</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            @if (isset($details['start']))
+                                                <div class="px-6 py-2 border-zinc-700">
+                                                    <p class="text-sm font-medium text-zinc-400">Inicio</p>
+                                                    <span
+                                                        class="font-bold text-zinc-200">{{ $details['start'] }}</span>
+                                                </div>
+                                            @endif
+                                            @if (isset($details['end']))
+                                                <div class="px-6 py-2 border-l border-zinc-700">
+                                                    <p class="text-sm font-medium text-zinc-400">Fim</p>
+                                                    <span class="font-bold text-zinc-200">{{ $details['end'] }}</span>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        @if ($characters->isNotEmpty())
+                            <h3>Personagens</h3>
+                            <div class="flex flex-wrap w-full gap-6 mt-3">
+                                @foreach ($characters as $ch)
+                                    <div
+                                        class="inline-flex items-center gap-3 px-5 py-3 text-white transition-colors ease-linear border rounded-lg bg-zinc-900 border-zinc-700">
+                                        <img class="size-8" src="{{ $ch->getImage($ch->image) }}" alt="">
+                                        <p>
+                                            {{ $ch->name }}
+                                        </p>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
+                        <div class="mt-6">
+                            <h3>Posições</h3>
+                            <div class="flex flex-wrap w-full gap-6 mt-3">
+                                @foreach ($positions as $position)
+                                    <div
+                                        class="inline-flex items-center gap-3 px-5 py-3 text-white transition-colors ease-linear border rounded-lg bg-zinc-900 border-zinc-700">
+                                        <img class="size-8" src="{{ $position->getImage($position->image) }}"
+                                            alt="">
+                                        <p>
+                                            {{ $position->name }}
+                                        </p>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <h3>Rank</h3>
+                            <div
+                                class="inline-flex items-center gap-3 px-5 py-3 mt-3 text-white transition-colors ease-linear border rounded-lg bg-zinc-900 border-zinc-700">
+                                <img class="h-8" src="{{ $rank[0]->getImage($rank[0]->image) }}" alt="">
+                                <p>
+                                    {{ $rank[0]->name }}
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 @endif
             </div>

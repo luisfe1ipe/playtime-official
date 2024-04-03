@@ -1,8 +1,8 @@
 <div>
     <x-container>
-        <div class="grid grid-cols-8">
+        <div class="lg:grid-cols-8 lg:grid">
             <x-profile.info :user="$user" />
-            <div class="w-full col-span-6 px-8 pt-24">
+            <div class="w-full lg:px-8 lg:pt-24 lg:col-span-6">
                 <div class="pb-8 border-b border-zinc-800">
                     <h1 class="text-4xl font-bold">Adicione um jogo ao seu perfil</h1>
                     <p class="text-gray-400">

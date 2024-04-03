@@ -1,4 +1,4 @@
-<div class="sticky top-0 flex flex-col items-center w-full h-64 col-span-2 pt-24">
+<div class="flex flex-col items-center w-full pt-24 lg:top-0 lg:h-64 lg:col-span-2 lg:sticky">
     <div class="flex flex-col items-center w-full">
         <div
             class="min-w-[10rem]  min-h-[10rem] max-w-[10rem] max-h-[10rem] bg-zinc-900 rounded-md relative  flex flex-col justify-center items-center">
@@ -14,8 +14,8 @@
         </div>
         <h3 class="mt-2">{{ $user->name }}</h3>
     </div>
-    <nav class="w-full px-10 mt-6">
-        <ul class="flex flex-col w-full gap-1 font-bold">
+    <nav class="w-full mt-6 mb-6 lg:px-10 lg:mb-0">
+        <ul class="flex w-full gap-6 font-bold lg:gap-1 lg:flex-col">
             <li class="w-full">
                 <x-team.settings.link :href="route('profile.edit', $user->nick)">
                     <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
@@ -28,7 +28,7 @@
                     Sobre
                 </x-team.settings.link>
             </li>
-            <li>
+            <li class="w-full">
                 <x-team.settings.link :href="route('profile.add-game', $user->nick)">
                     <svg class="size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

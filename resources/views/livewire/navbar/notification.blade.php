@@ -99,14 +99,18 @@
             class="absolute right-0 z-10 w-56 px-2 py-2 mt-2 border rounded-lg shadow-lg shadow-black border-zinc-800 bg-zinc-900">
             @if (Auth::user()->nick)
             <a wire:navigate href="{{route('profile', ['nick' => Auth::user()->nick])}}"
-                class="flex w-full p-2 rounded-lg cursor-pointer hover:bg-zinc-950/80">
+                class="flex w-full p-2 transition-colors ease-linear rounded-lg cursor-pointer hover:bg-zinc-950/80">
                 Meu perfil
             </a>
             @endif
             <a wire:navigate href="{{route('find-player.create-for-my')}}"
-                class="flex w-full p-2 rounded-lg cursor-pointer hover:bg-zinc-950/80">
+                class="flex w-full p-2 transition-colors ease-linear rounded-lg cursor-pointer hover:bg-zinc-950/80">
                 Minhas vagas
             </a>
+            <button wire:click='logout'
+                class="flex w-full p-2 transition-colors ease-linear rounded-lg cursor-pointer hover:bg-zinc-950/80">
+                Sair
+            </button>
         </div>
     </div>
 </div>

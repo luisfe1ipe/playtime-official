@@ -60,4 +60,11 @@ class Notification extends Component
 
         $this->dispatch('delete-notifications');
     }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect('/');
+    }
 }

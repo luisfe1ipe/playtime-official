@@ -1,8 +1,8 @@
 <div>
     <x-container>
-        <div class="grid grid-cols-8">
+        <div class="lg:grid-cols-8 lg:grid">
             <x-profile.info :user="$user" />
-            <div class="w-full col-span-6 px-8 pt-24">
+            <div class="w-full lg:px-8 lg:pt-24 lg:col-span-6">
                 <h1 class="text-4xl font-bold">Editar jogo</h1>
                 <p class="mt-2 text-gray-400">
                     Esta é a área onde você pode personalizar as informações relacionadas ao jogo que você joga. Aqui,
