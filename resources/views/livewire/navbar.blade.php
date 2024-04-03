@@ -22,7 +22,7 @@
                 <livewire:navbar.notification>
                     @endauth
                     @guest
-                    <a class="focus:outline-none focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 bg-purple-600 hover:bg-purple-700 focus:ring-purple-900"
+                    <a class="focus:outline-none focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 text-white bg-purple-600 hover:bg-purple-700 focus:ring-purple-900"
                         href="/auth/google/redirect">Entrar</a>
                     @endguest
             </div>

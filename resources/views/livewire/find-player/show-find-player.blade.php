@@ -37,7 +37,7 @@
                     @endif
                 </x-secondary-button>
                 <a wire:navigate href="{{ route('find-player.edit', ['id' => $vacancy->id]) }}"
-                    class="flex gap-1 items-center focus:outline-none focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 bg-primary-600 hover:bg-primary-700 focus:ring-primary-900">
+                    class="flex gap-1 text-white items-center focus:outline-none focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 bg-primary-600 hover:bg-primary-700 focus:ring-primary-900">
                     Editar vaga
                 </a>
             </div>
@@ -186,12 +186,12 @@
         @if (Auth::user()->id === $vacancy->user_id)
             <div class="mt-12">
                 <h1>Usuários Inscritos</h1>
-                <p class="mt-1 text-lg text-gray-300">
+                <p class="mt-1 text-lg text-gray-600 dark:text-gray-300">
                     Lembre-se de que ao aceitar ou recusar um usuário, um e-mail será enviado a ele para informá-lo
                     sobre
                     sua decisão.
                 </p>
-                <p class="text-lg text-gray-300">
+                <p class="text-lg text-gray-600 dark:text-gray-300">
                     Depois de selecionar um usuário, você pode adicioná-lo como amigo e iniciar uma conversa dentro da
                     plataforma. Você
                     também tem a opção de adicioná-lo em outra rede social, basta acessar o perfil do usuário para
@@ -218,7 +218,7 @@
                         <x-secondary-button x-on:click="orderBy = !orderBy">
                             Ordenar por
                         </x-secondary-button>
-                        <div class="absolute right-0 z-20 w-full p-2 border rounded-lg shadow-lg max-h-44 lg:w-44 top-10 lg:top-12 shadow-black border-zinc-800 bg-zinc-900"
+                        <div class="absolute right-0 z-20 w-full p-2 bg-white border rounded-lg shadow-lg max-h-44 lg:w-44 top-10 lg:top-12 dark:shadow-black dark:border-zinc-800 boder-gray-300 dark:bg-zinc-900"
                             x-cloak x-show="orderBy" x-transition:enter="ease-out duration-300"
                             x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
                             x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100"
@@ -249,9 +249,10 @@
                     </div>
                 </div>
                 <div
-                    class="relative flex flex-col gap-12 px-4 py-4 mt-6 transition-colors ease-linear border rounded-lg bg-zinc-900 border-zinc-800">
+                    class="relative flex flex-col gap-12 px-4 py-4 mt-6 transition-colors ease-linear bg-white border border-gray-300 rounded-lg dark:bg-zinc-900 dark:border-zinc-800">
                     @forelse ($registeredUsers as $m)
-                        <div class="flex items-center justify-between p-4 rounded-lg hover:bg-zinc-950/50">
+                        <div
+                            class="flex items-center justify-between p-4 transition-colors ease-linear rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-950/50">
                             <div class="flex items-center gap-4">
                                 <img class="rounded-lg size-14" src="{{ $m->getImage($m->photo) }}"
                                     alt="Foto {{ $m->nick }}">
@@ -281,7 +282,7 @@
                                 <div x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false"
                                     class="relative">
                                     <div x-on:click="open = ! open"
-                                        class="p-1 transition-all ease-linear rounded-full cursor-pointer hover:bg-zinc-700 group">
+                                        class="p-1 transition-all ease-linear rounded-full cursor-pointer hover:bg-gray-100 dark:hover:bg-zinc-700 group">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -289,7 +290,7 @@
                                         </svg>
                                     </div>
                                     <div x-show="open" x-cloak
-                                        class="absolute z-[10] font-medium w-52 rounded-md bg-zinc-900 border border-zinc-800 shadow-lg right-0"
+                                        class="absolute z-[10] font-medium w-52 rounded-md bg-white dark:bg-zinc-900 border border-gray-300 dark:border-zinc-800 shadow-lg right-0"
                                         x-transition:enter="transition ease-out duration-200"
                                         x-transition:enter-start="opacity-0 scale-95"
                                         x-transition:enter-end="opacity-100 scale-100"
@@ -299,7 +300,7 @@
                                         <ul class="flex flex-col gap-1 p-2 text-sm">
                                             <li>
                                                 <button type="button" wire:click="acceptUser({{ $m->id }})"
-                                                    class="flex items-center w-full gap-2 p-2 transition-all ease-linear rounded-md cursor-pointer hover:bg-zinc-950">
+                                                    class="flex items-center w-full gap-2 p-2 transition-all ease-linear rounded-md cursor-pointer hover:bg-gray-100 dark:hover:bg-zinc-950">
                                                     <div class="text-green-600" wire:loading
                                                         wire:target='acceptUser({{ $m->id }})'>
                                                         <x-filament::loading-indicator class="w-5 h-5" />
@@ -319,7 +320,7 @@
                                             </li>
                                             <li>
                                                 <button type="button" wire:click="refuseUser({{ $m->id }})"
-                                                    class="flex items-center w-full gap-2 p-2 transition-all ease-linear rounded-md cursor-pointer hover:bg-zinc-950">
+                                                    class="flex items-center w-full gap-2 p-2 transition-all ease-linear rounded-md cursor-pointer hover:bg-gray-100 dark:hover:bg-zinc-950">
                                                     <div class="text-rose-600" wire:loading
                                                         wire:target='refuseUser({{ $m->id }})'>
                                                         <x-filament::loading-indicator class="w-5 h-5" />
