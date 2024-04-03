@@ -1,36 +1,35 @@
-<div x-data="{open: false}" x-on:click.away="open = false" class="relative">
+<div x-data="{ open: false }" x-on:click.away="open = false" class="relative">
     <button type="button" x-on:click="open = !open;$nextTick(() => { $refs.inputSearch.focus(); })"
-        class="flex items-center justify-between w-full h-12 px-4 transition duration-75 border rounded-lg shadow-sm outline-none border-zinc-700 focus:ring-1 focus:ring-inset disabled:opacity-70 bg-zinc-900 focus:ring-primary-500 focus:border-primary-500">
+        class="flex items-center justify-between w-full h-12 px-4 transition duration-75 bg-white border border-gray-300 rounded-lg shadow-sm outline-none dark:border-zinc-700 focus:ring-1 focus:ring-inset disabled:opacity-70 dark:bg-zinc-900 focus:ring-primary-500 focus:border-primary-500">
         @if ($item_select == null)
-        <span class="text-zinc-400">
-            Selecione uma opção
-        </span>
+            <span class="text-zinc-400">
+                Selecione uma opção
+            </span>
         @else
-        <div class="flex items-center w-full gap-4 rounded-lg">
-            @php
-            if($item_select->photo != null)
-            {
-            $item_select->image = $item_select->photo;
-            }
-            @endphp
-            <img class="object-contain size-8" src="{{Storage::url($item_select->image)}}"
-                alt="Imagem {{$item_select->name}}">
-            <p class="truncate">
-                {{$item_select->name}}
-            </p>
-        </div>
+            <div class="flex items-center w-full gap-4 rounded-lg">
+                @php
+                    if ($item_select->photo != null) {
+                        $item_select->image = $item_select->photo;
+                    }
+                @endphp
+                <img class="object-contain size-8" src="{{ Storage::url($item_select->image) }}"
+                    alt="Imagem {{ $item_select->name }}">
+                <p class="truncate">
+                    {{ $item_select->name }}
+                </p>
+            </div>
         @endif
         <div class="flex items-center">
             @if ($item_select != null)
-            <div class="flex mr-2 text-zinc-400 hover:text-rose-500" type="button" wire:click.stop='unselectItem'>
-                <svg class="size-5 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-circle-x">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="m15 9-6 6" />
-                    <path d="m9 9 6 6" />
-                </svg>
-            </div>
+                <div class="flex mr-2 text-zinc-400 hover:text-rose-500" type="button" wire:click.stop='unselectItem'>
+                    <svg class="size-5 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-circle-x">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="m15 9-6 6" />
+                        <path d="m9 9 6 6" />
+                    </svg>
+                </div>
             @endif
             <svg x-bind:class="{ 'transform -rotate-180': open }" wire:loading.remove
                 wire:target='selectItem, unselectItem' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -46,9 +45,8 @@
     <div x-show="open" x-cloak x-transition:enter="transition duration-300 ease-out transform"
         x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
         x-transition:leave="transition duration-200 ease-in transform" x-transition:leave-start="opacity-100 scale-100"
-        x-transition:leave-end="opacity-0 scale-95" class="@if ($absolute == true)
-            absolute
-        @endif z-10 w-full px-2 py-2 mt-2 border rounded-lg shadow-lg shadow-black border-zinc-800 bg-zinc-900">
+        x-transition:leave-end="opacity-0 scale-95"
+        class="@if ($absolute == true) absolute @endif z-10 w-full px-2 py-2 mt-2 border rounded-lg shadow-lg shadow-gray-300 dark:shadow-black bg-white border-gray-300 dark:border-zinc-800 dark:bg-zinc-900">
         <div class="p-2">
             <label for="input-group-search" class="sr-only">Search</label>
             <div class="relative">
@@ -68,19 +66,19 @@
         </div>
         <div class="overflow-y-scroll max-h-36">
             @foreach ($items as $i)
-            @php
-            if($i->photo != null)
-            {
-            $i->image = $i->photo;
-            }
-            @endphp
-            <button x-on:click="open = false" type="button" wire:click='selectItem({{$i->id}})'
-                class="flex items-center w-full gap-4 p-2 rounded-lg cursor-pointer hover:bg-zinc-950/80">
-                <img class="object-contain size-8" src="{{Storage::url($i->image)}}" alt="Imagem {{$i->name}}">
-                <p>
-                    {{$i->name}}
-                </p>
-            </button>
+                @php
+                    if ($i->photo != null) {
+                        $i->image = $i->photo;
+                    }
+                @endphp
+                <button x-on:click="open = false" type="button" wire:click='selectItem({{ $i->id }})'
+                    class="flex items-center w-full gap-4 p-2 transition-colors ease-linear rounded-lg cursor-pointer hover:bg-gray-200/60 dark:hover:bg-zinc-950/80">
+                    <img class="object-contain size-8" src="{{ Storage::url($i->image) }}"
+                        alt="Imagem {{ $i->name }}">
+                    <p>
+                        {{ $i->name }}
+                    </p>
+                </button>
             @endforeach
         </div>
     </div>

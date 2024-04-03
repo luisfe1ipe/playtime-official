@@ -45,8 +45,7 @@
         <div class="flex flex-col w-full gap-6 lg:flex-row">
             <div class="w-full lg:w-3/5">
                 <h1 class="mb-6">Detalhes da vaga</h1>
-                <div
-                    class="relative px-4 py-4 transition-colors ease-linear border rounded-lg bg-zinc-900 border-zinc-800">
+                <x-section class="relative px-4 py-4 transition-colors ease-linear border rounded-lg">
                     <div class="absolute top-0 px-1 text-xs font-bold bg-primary-700 text-primary-300">
                         {{ $vacancy->id }}
                     </div>
@@ -76,7 +75,7 @@
                         <div class="flex flex-col w-full gap-2">
                             <span>Posição</span>
                             <div
-                                class="flex items-center w-full gap-1 px-2 py-1 border rounded-lg bg-zinc-800 border-zinc-700">
+                                class="flex items-center w-full gap-1 px-2 py-1 bg-gray-200 border rounded-lg dark:bg-zinc-800 dark:border-zinc-700">
                                 <img class="object-contain size-8"
                                     src="{{ $vacancy->position->getImage($vacancy->position->image) }}"
                                     alt="{{ $vacancy->position->name }}">
@@ -86,7 +85,7 @@
                         <div class="flex flex-col w-full gap-2">
                             <span>Rank minímo</span>
                             <div
-                                class="flex items-center w-full gap-1 px-2 py-1 border rounded-lg bg-zinc-800 border-zinc-700">
+                                class="flex items-center w-full gap-1 px-2 py-1 bg-gray-200 border rounded-lg dark:bg-zinc-800 dark:border-zinc-700">
                                 <img class="object-contain h-8 w-14"
                                     src="{{ $vacancy->rankMin->getImage($vacancy->rankMin->image) }}"
                                     alt="{{ $vacancy->rankMin->name }}">
@@ -97,7 +96,7 @@
                             <div class="flex flex-col w-full gap-2">
                                 <span>Rank maxímo</span>
                                 <div
-                                    class="flex items-center w-full gap-1 px-2 py-1 border rounded-lg bg-zinc-800 border-zinc-700">
+                                    class="flex items-center w-full gap-1 px-2 py-1 bg-gray-200 border rounded-lg dark:bg-zinc-800 dark:border-zinc-700">
                                     <img class="object-contain h-8 w-14"
                                         src="{{ $vacancy->rankMax->getImage($vacancy->rankMax->image) }}"
                                         alt="{{ $vacancy->rankMax->name }}">
@@ -123,12 +122,12 @@
                             </x-primary-button>
                         @endif
                     </div>
-                </div>
+                </x-section>
             </div>
             <div class="flex flex-col w-full gap-8 lg:w-2/5">
                 <div>
                     <h1 class="mb-6">Informações adicionais</h1>
-                    <div class="px-4 py-4 transition-colors ease-linear border rounded-lg bg-zinc-900 border-zinc-800">
+                    <x-section class="px-4 py-4 transition-colors ease-linear border rounded-lg">
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="mb-1 text-lg font-bold">Jogo</p>
@@ -162,25 +161,25 @@
                                 @endif
                             </div>
                         </div>
-                    </div>
+                    </x-section>
                 </div>
                 <div>
                     <h1 class="mb-6">Anunciada por</h1>
-                    <div class="px-4 py-4 transition-colors ease-linear border rounded-lg bg-zinc-900 border-zinc-800">
+                    <x-section class="px-4 py-4 transition-colors ease-linear border rounded-lg ">
                         <div class="flex w-full gap-6">
                             <img class="rounded-full size-24"
                                 src="{{ $vacancy->user->getImage($vacancy->user->photo) }}"
                                 alt="Foto {{ $vacancy->user->name }}">
                             <div class="flex flex-col gap-1">
                                 <h3>{{ '@' . $vacancy->user->nick }}</h3>
-                                <a class="text-primary-300 hover:underline"
+                                <a class="text-primary-700 dark:text-primary-300 hover:underline"
                                     href="{{ route('profile', ['nick' => $vacancy->user->nick]) }}"
                                     target="_blank">Visualizar
                                     perfil</a>
                             </div>
 
                         </div>
-                    </div>
+                    </x-section>
                 </div>
             </div>
         </div>

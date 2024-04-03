@@ -1,6 +1,6 @@
 <div x-data="{ filter: false }">
     <div class="relative w-full h-[500px]  flex justify-center overflow-hidden">
-        <div class="absolute bottom-0 w-full h-full from-zinc-950 bg-gradient-to-t z-[1]"></div>
+        <div class="absolute bottom-0 w-full h-full dark:from-zinc-950 bg-gradient-to-t z-[1]"></div>
         <div class="absolute inset-0 object-cover w-full h-full bg-center bg-no-repeat -z-0 brightness-50"
             style="background-image: url({{ $game->getImage($game->banner) }}); background-size: cover;">
         </div>

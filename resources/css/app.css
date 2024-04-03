@@ -32,5 +32,5 @@ h4 {
 
 /* Estilizando a área de rastreamento (a área cinza ao redor do polegar) */
 ::-webkit-scrollbar-track {
-  @apply bg-zinc-900
+  @apply bg-white dark:bg-zinc-900
 }
