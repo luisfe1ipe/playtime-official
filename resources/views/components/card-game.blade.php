@@ -3,7 +3,7 @@
 ])
 
 <a wire:navigate href="{{ route('find-player.index', ['slug' => $game->slug]) }}"
-    class="relative flex flex-col items-center w-full h-64 overflow-hidden text-center duration-200 ease-in rounded-md shadow-md cursor-pointer shadow-gray-300 hover:shadow-xl sm:w-60 sm:h-96 group">
+    class="relative flex flex-col items-center w-full h-64 overflow-hidden text-center duration-200 ease-in rounded-md shadow-md cursor-pointer shadow-gray-300 dark:shadow-black hover:shadow-xl sm:w-60 sm:h-96 group">
     <div class="absolute bottom-0 w-full h-1/2 from-gray-950/50 group-hover:bg-gradient-to-t z-[1] ">
 
     </div>
