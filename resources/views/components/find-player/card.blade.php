@@ -3,7 +3,7 @@
 
 @if ($custom == true)
     <a href="{{ route('find-player.show', ['id' => $vacancy->id]) }}"
-        class="relative w-full px-4 py-4 transition-colors ease-linear border-l-4 rounded-r-lg bg-white hover:bg-gray-50 shadow border-gray-300 dark:hover:bg-zinc-800 dark:bg-zinc-900 dark:border-zinc-800 @if ($vacancy->active) border-l-green-500 @else border-l-rose-500 @endif">
+        class="relative w-full px-4 py-4 transition-colors ease-linear border-l-4 rounded-r-lg bg-white hover:bg-gray-50 shadow border-gray-300 dark:hover:bg-zinc-800 dark:bg-zinc-900 @if ($vacancy->active) border-l-green-500 @else border-l-rose-500 @endif">
         <div class="absolute top-0 px-1 text-xs font-bold bg-primary-700 text-primary-300">
             {{ $vacancy->id }}
         </div>
@@ -69,7 +69,7 @@
     </a>
 @else
     <a href="{{ route('find-player.show', ['id' => $vacancy->id]) }}"
-        class="relative w-full px-4 py-4 transition-colors ease-linear bg-white border-l-4 border-gray-300 rounded-lg shadow border-l-transparent hover:border-l-primary-500 hover:rounded-l-none hover:bg-gray-50 dark:hover:bg-zinc-800 dark:bg-zinc-900 dark:border-zinc-800">
+        class="relative w-full px-4 py-4 transition-colors ease-linear bg-white border-l-4 border-gray-300 rounded-lg shadow border-l-transparent hover:border-l-primary-500 hover:rounded-l-none hover:bg-gray-50 dark:hover:bg-zinc-800 dark:bg-zinc-900 ">
         <div class="absolute top-0 px-1 text-xs font-bold bg-primary-700 text-primary-300">
             {{ $vacancy->id }}
         </div>
