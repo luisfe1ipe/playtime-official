@@ -30,7 +30,7 @@
 </head>
 
 <body class="antialiased text-gray-800 bg-gray-100 dark:text-white dark:bg-zinc-950">
-    <div class="fixed z-10 px-4 py-2 bottom-4 right-4">
+    <div class="fixed z-10 px-4 py-2 bottom-4 right-2">
         <button role="button"
             class="inline-flex items-center justify-center text-sm transition-all duration-200 ease-in-out border border-transparent rounded-full outline-none bg-primary-500 focus:ring-offset-white focus:shadow-outline group gap-x-2 hover:shadow-sm focus:border-transparent focus:ring-2 disabled:cursor-not-allowed disabled:opacity-50 w-9 h-9 text-primary-50 ring-primary-500 focus:bg-primary-600 hover:bg-primary-600 focus:ring-offset-2 dark:focus:ring-offset-dark-900 dark:focus:ring-primary-600 dark:bg-primary-700 dark:hover:bg-primary-600 dark:hover:ring-primary-600"
             x-data="{ visible: false }" x-on:scroll.window="visible = window.scrollY > 100"
@@ -48,39 +48,6 @@
     <div class="">
         {{ $slot }}
     </div>
-
-    <footer class="mt-12 bg-white dark:bg-zinc-900">
-        <div class="w-full max-w-screen-xl p-4 mx-auto md:py-8">
-            <div class="sm:flex sm:items-center sm:justify-between">
-                <a href="#"
-                    class="flex items-center mb-4 space-x-3 text-3xl font-bold sm:mb-0 text-primary-500 rtl:space-x-reverse">
-                    PlayTime
-                </a>
-                <ul
-                    class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
-                    <li>
-                        <a href="#" class="hover:underline me-4 md:me-6">About</a>
-                    </li>
-                    <li>
-                        <a href="#" class="hover:underline me-4 md:me-6">Privacy Policy</a>
-                    </li>
-                    <li>
-                        <a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
-                    </li>
-                    <li>
-                        <a href="#" class="hover:underline">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-            <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
-                Desenvolvido por
-                <a href="https://github.com/luisfe1ipe" target="_blank" class="font-bold hover:underline">
-                    Luis Felipe
-                </a>
-            </span>
-        </div>
-    </footer>
 
     @livewire('notifications')
 
