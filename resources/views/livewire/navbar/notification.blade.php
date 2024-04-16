@@ -123,6 +123,10 @@
                     </a>
                 </div>
             </div>
+            <a wire:navigate href="{{ route('friends.chat') }}"
+                class="flex w-full p-2 transition-colors ease-linear rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-zinc-950/80">
+                Amigos
+            </a>
             <button id="theme-toggle" type="button"
                 class="flex w-full p-2 transition-colors ease-linear rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-zinc-950/80">
                 <div id="theme-toggle-dark-icon" class="hidden">

@@ -49,7 +49,7 @@
         {{ $slot }}
     </div>
 
-    <footer class="mt-12 bg-white dark:bg-zinc-900">
+    {{-- <footer class="mt-12 bg-white dark:bg-zinc-900">
         <div class="w-full max-w-screen-xl p-4 mx-auto md:py-8">
             <div class="sm:flex sm:items-center sm:justify-between">
                 <a href="#"
@@ -80,7 +80,7 @@
                 </a>
             </span>
         </div>
-    </footer>
+    </footer> --}}
 
     @livewire('notifications')
 
