@@ -75,7 +75,6 @@ Route::middleware(['checkNickname'])->group(function () {
 
 
   Route::get('/chat', Chat::class)->name('friends.chat');
-  Route::get('/test', Test::class)->name('test.index');
 
 
 
