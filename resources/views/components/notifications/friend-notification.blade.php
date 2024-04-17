@@ -42,7 +42,7 @@
                         </div>
                     </button>
                 @endif
-                <a wire:navigate href="#"
+                <a wire:navigate href="{{ route('friends.friendship-requests') }}"
                     class="px-2 py-1 text-xs text-white rounded-lg bg-primary-600 hover:bg-primary-500">
                     visualizar
                 </a>

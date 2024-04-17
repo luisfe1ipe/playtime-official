@@ -103,7 +103,7 @@
             @endif
             <div x-data="{ openFindPlayer: false }">
                 <button x-on:click="openFindPlayer = !openFindPlayer"
-                    class="flex items-end w-full gap-1 p-2 transition-colors ease-linear rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-zinc-950/80">
+                    class="flex items-end justify-between w-full p-2 transition-colors ease-linear rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-zinc-950/80">
                     Encontrar player
                     <svg x-bind:class="{ 'transform -rotate-180': openFindPlayer }" xmlns="http://www.w3.org/2000/svg"
                         width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
