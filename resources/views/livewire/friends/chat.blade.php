@@ -5,21 +5,22 @@
                 <div class="flex items-center justify-between w-full h-10 gap-1">
                     <div class="relative w-full h-full">
                         <div class="absolute inset-y-0 flex items-center pointer-events-none rtl:inset-r-0 start-0 ps-3">
-                            <svg wire:loading.remove wire:target='searchItem'
+                            <svg wire:loading.remove wire:target='searchChat'
                                 class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                             </svg>
-                            <div wire:loading wire:target='searchItem'>
+                            <div wire:loading wire:target='searchChat'>
                                 <x-filament::loading-indicator class="w-5 h-5" />
                             </div>
                         </div>
-                        <input
+                        <input wire:model.live='searchChat'
                             class="w-full h-full bg-gray-200 border-none rounded-lg focus:ring-primary-500 pl-9 dark:bg-zinc-800"
                             placeholder="Pesquisar amigo" type="search">
                     </div>
-                    <button x-on:click="modalAddFriend = !modalAddFriend; $nextTick(() => { $refs.inputSearch.focus(); })"
+                    <button
+                        x-on:click="modalAddFriend = !modalAddFriend; $nextTick(() => { $refs.inputSearch.focus(); })"
                         class="flex items-center justify-center h-full p-2 transition-all ease-in bg-gray-200 border-none rounded-lg hover:bg-gray-300 dark:hover:bg-zinc-700 dark:bg-zinc-800">
                         <svg class="w-6 h-6 text-gray-500 dark:text-gray-300" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
@@ -32,13 +33,13 @@
                     </button>
                 </div>
                 <div class="relative flex flex-col w-full gap-1 mt-8">
-                    @for ($i = 0; $i < 20; $i++)
+                    @foreach ($friends as $friend)
                         <div
                             class="flex items-center gap-2 p-2 transition-all ease-in rounded-lg cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-800">
-                            <img class="object-cover rounded-full size-14" src="{{ Auth::user()->photo }}"
-                                alt="">
+                            <img class="object-cover rounded-full size-14" src="{{ $friend->photo }}"
+                                alt="Foto {{ $friend->nick }}">
                             <div class="flex flex-col gap-1 truncate">
-                                <p class="font-semibold">{{ Auth::user()->nick }}</p>
+                                <p class="font-semibold">{{ $friend->nick }}</p>
                                 <span class="text-xs text-gray-600 truncate dark:text-gray-300">
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi accusantium
                                     consequatur
@@ -49,7 +50,7 @@
                                 </span>
                             </div>
                         </div>
-                    @endfor
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -129,7 +130,8 @@
             </div>
         </div>
     </div>
-    <div x-cloak x-show="modalAddFriend" class="fixed inset-0 z-50 px-4 py-6 overflow-y-auto sm:px-0">
+    <div x-on:close-modal.window="modalAddFriend = false" x-cloak x-show="modalAddFriend"
+        class="fixed inset-0 z-50 px-4 py-6 overflow-y-auto sm:px-0">
         <div x-show="modalAddFriend" class="fixed inset-0 transition-all transform backdrop-blur-sm"
             x-on:click="modalAddFriend = false" x-transition:enter="ease-out duration-300"
             x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
@@ -138,7 +140,7 @@
             <div class="absolute inset-0 cursor-pointer bg-black/60"></div>
         </div>
         <div x-show="modalAddFriend"
-            class="max-w-4xl transition-all transform bg-white rounded-lg shadow-xl dark:bg-zinc-900 sm:w-full sm:mx-auto"
+            class="max-w-2xl transition-all transform bg-white rounded-lg shadow-xl dark:bg-zinc-900 sm:w-full sm:mx-auto"
             x-transition:enter="ease-out duration-300"
             x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200"
@@ -174,18 +176,30 @@
                 </button>
             </div>
             <div class="flex flex-col gap-3 p-4 overflow-x-hidden rounded-b-lg max-h-80 dark:bg-zinc-900">
-                @foreach ($users as $user)
+                @forelse ($users as $user)
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-2">
                             <img class="rounded-full size-12" src="{{ $user->photo }}"
                                 alt="Foto {{ $user->nick }}">
                             <p>{{ $user->nick }}</p>
                         </div>
-                        <x-primary-button>
-                            Adicionar aos amigos
-                        </x-primary-button>
+                        <livewire:friends.add-friend user_id="{{ $user->id }}" />
                     </div>
-                @endforeach
+                @empty
+                    <div class="text-gray-500 dark:text-gray-300">
+                        <p class="mb-2 text-lg font-medium">
+                            Insira o nome de usuário que você deseja adicionar como amigo.
+                        </p>
+                        <span>
+                            Se nenhum usuário for exibido, pode ser que ele não exista ou que vocês já sejam amigos.
+                            Você
+                            pode verificar sua lista de amigos <a class="underline text-primary-500"
+                                href="">aqui</a> ou procurá-lo no chat
+                            <button wire:click='searchUserInChat("{{ $search }}")'
+                                class="underline text-primary-500">clicando aqui</button>.
+                        </span>
+                    </div>
+                @endforelse
             </div>
         </div>
     </div>

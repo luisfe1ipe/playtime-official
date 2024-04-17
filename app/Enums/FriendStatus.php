@@ -11,10 +11,10 @@ enum FriendStatus: string
   public function getName(): string
   {
     return match ($this) {
-      self::ACCEPTED => 'aceito',
-      self::REJECTED => 'rejeitado',
-      self::PENDING => 'pendente',
-      default => 'status não encontrado'
+      self::ACCEPTED => 'Accepted',
+      self::REJECTED => 'Rejected',
+      self::PENDING => 'Pending',
+      default => 'Status not found'
     };
   }
 
