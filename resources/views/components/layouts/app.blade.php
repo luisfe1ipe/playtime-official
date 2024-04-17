@@ -45,7 +45,7 @@
         </button>
     </div>
     <livewire:navbar />
-    <div class="">
+    <div class="min-h-screen">
         {{ $slot }}
     </div>
 
