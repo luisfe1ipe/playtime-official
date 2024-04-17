@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\FriendStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,6 +15,15 @@ class Friend extends Model
         'user_origin',
         'user_destination',
         'status'
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'status' => FriendStatus::class,
     ];
 
     /**

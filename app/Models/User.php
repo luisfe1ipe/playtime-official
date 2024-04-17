@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Enums\FriendStatus;
 use App\Traits\CustomGetImage;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -125,5 +126,35 @@ class User extends Authenticatable implements FilamentUser
         return $this->belongsToMany(FindPlayer::class, 'find_player_user',)
             ->withPivot('status')
             ->withTimestamps();
+    }
+
+    /**
+     * The friends that belong to the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function friends(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'friends', 'user_origin', 'user_destination')
+            ->wherePivot('status', FriendStatus::ACCEPTED)
+            ->orWhere(function ($query) {
+                $query->where('user_destination', $this->id)
+                    ->where('status', FriendStatus::ACCEPTED);
+            })
+            ->withPivot('status')
+            ->withTimestamps();
+    }
+
+
+    public function sentFriendRequests(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'friends', 'user_origin', 'user_destination')
+            ->wherePivot('status', FriendStatus::PENDING);
+    }
+
+    public function receivedFriendRequests(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'friends', 'user_destination', 'user_origin')
+            ->wherePivot('status', FriendStatus::PENDING);
     }
 }
