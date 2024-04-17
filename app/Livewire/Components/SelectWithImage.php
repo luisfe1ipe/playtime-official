@@ -16,15 +16,17 @@ class SelectWithImage extends Component
     public $gameId;
     public $wire_model;
     public $absolute;
+    public $contrast;
 
-    public function mount($items, $gameId, $wire_model = null, $item_select = null, $absolute = true)
+    public function mount($items, $gameId, $wire_model = null, $item_select = null, $absolute = true, $contrast = false)
     {
         $this->items = $items;
-        $this->gameId = $this->gameId;
+        $this->gameId = $gameId;
         $this->itemsOriginal = $this->items;
         $this->wire_model = $wire_model;
         $this->item_select = $item_select;
         $this->absolute = $absolute;
+        $this->contrast = $contrast;
     }
 
     public function render()

@@ -12,8 +12,8 @@
                         $item_select->image = $item_select->photo;
                     }
                 @endphp
-                <img class="object-contain size-8" src="{{ Storage::url($item_select->image) }}"
-                    alt="Imagem {{ $item_select->name }}">
+                <img class="object-contain size-8 @if ($contrast) brightness-75 dark:brightness-100 @endif"
+                    src="{{ Storage::url($item_select->image) }}" alt="Imagem {{ $item_select->name }}">
                 <p class="truncate">
                     {{ $item_select->name }}
                 </p>
@@ -73,8 +73,8 @@
                 @endphp
                 <button x-on:click="open = false" type="button" wire:click='selectItem({{ $i->id }})'
                     class="flex items-center w-full gap-4 p-2 transition-colors ease-linear rounded-lg cursor-pointer hover:bg-gray-200/60 dark:hover:bg-zinc-950/80">
-                    <img class="object-contain size-8" src="{{ Storage::url($i->image) }}"
-                        alt="Imagem {{ $i->name }}">
+                    <img class="object-contain size-8 @if ($contrast) brightness-75 dark:brightness-100 @endif"
+                        src="{{ Storage::url($i->image) }}" alt="Imagem {{ $i->name }}">
                     <p>
                         {{ $i->name }}
                     </p>

@@ -100,7 +100,7 @@
                 <span>Posição</span>
                 <div
                     class="flex items-center w-full gap-1 px-2 py-1 bg-gray-200 border rounded-lg dark:bg-zinc-800 dark:border-zinc-700">
-                    <img class="object-contain size-8"
+                    <img class="object-contain size-8 brightness-50 dark:brightness-100"
                         src="{{ $vacancy->position->getImage($vacancy->position->image) }}"
                         alt="{{ $vacancy->position->name }}">
                     <p class="truncate">{{ $vacancy->position->name }}</p>

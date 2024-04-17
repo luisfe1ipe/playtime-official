@@ -102,7 +102,7 @@
             class="flex flex-col justify-end w-full gap-6 mt-8 lg:flex-row">
             <div class="w-full">
                 <x-input-label value="Posição" for="position_id" :error="$errors->get('position_id')" />
-                <livewire:components.select-with-image :items="$game->positions" :gameId="$game->id" />
+                <livewire:components.select-with-image :contrast="true" :items="$game->positions" :gameId="$game->id" />
             </div>
             @if ($game->has_characters)
                 <div class="w-full">

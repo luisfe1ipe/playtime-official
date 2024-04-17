@@ -141,7 +141,7 @@
                             <div class="flex flex-wrap w-full gap-6 mt-3">
                                 @foreach ($positions as $position)
                                     <x-section class="inline-flex items-center gap-3 px-5 py-3 border rounded-lg">
-                                        <img class="size-8" src="{{ $position->getImage($position->image) }}"
+                                        <img class="size-8 brightness-75 dark:brightness-100" src="{{ $position->getImage($position->image) }}"
                                             alt="">
                                         <p>
                                             {{ $position->name }}

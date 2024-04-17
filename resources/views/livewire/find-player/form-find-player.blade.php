@@ -65,7 +65,7 @@
                     @endif
                     <div class="w-full">
                         <x-input-label :required="true" value="Posição" for="position_id" :error="$errors->get('position_id')" />
-                        <livewire:components.select-with-image :items="$positions" :gameId="$game->id" />
+                        <livewire:components.select-with-image :contrast="true" :items="$positions" :gameId="$game->id" />
                         <x-input-error :messages="$errors->get('position_id')" />
                     </div>
                 </div>
