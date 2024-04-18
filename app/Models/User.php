@@ -14,11 +14,12 @@ use Filament\Panel;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Sanctum\HasApiTokens;
+use Staudenmeir\LaravelMergedRelations\Eloquent\HasMergedRelationships;
 
 class User extends Authenticatable implements FilamentUser
 
 {
-    use HasApiTokens, HasFactory, Notifiable, CustomGetImage;
+    use HasApiTokens, HasFactory, Notifiable, CustomGetImage, HasMergedRelationships;
 
     public function canAccessPanel(Panel $panel): bool
     {
@@ -68,6 +69,14 @@ class User extends Authenticatable implements FilamentUser
         'is_admin' => 'boolean',
         'is_blocked' => 'boolean',
     ];
+
+
+
+    public function friends()
+    {
+        return $this->mergedRelationWithModel(User::class, 'friends_view');
+    }
+
 
     /**
      * The games that belong to the User
@@ -129,22 +138,30 @@ class User extends Authenticatable implements FilamentUser
     }
 
     /**
-     * The friends that belong to the User
+     * The friendsOfMine that belong to the User
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function friends(): BelongsToMany
+    public function friendsOfMine(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'friends', 'user_origin', 'user_destination')
             ->wherePivot('status', FriendStatus::ACCEPTED)
-            ->orWhere(function ($query) {
-                $query->where('user_destination', $this->id)
-                    ->where('status', FriendStatus::ACCEPTED);
-            })
-            ->withPivot('status')
+            ->withPivot('user_origin', 'user_destination', 'status')
             ->withTimestamps();
     }
 
+    /**
+     * The friendOf that belong to the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function friendOf(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'friends', 'user_destination', 'user_origin')
+            ->wherePivot('status', FriendStatus::ACCEPTED)
+            ->withPivot('user_origin', 'user_destination', 'status')
+            ->withTimestamps();
+    }
 
     public function sentFriendRequests(): BelongsToMany
     {

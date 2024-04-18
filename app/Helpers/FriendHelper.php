@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Enums\FriendStatus;
 use App\Models\Friend;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -18,5 +19,13 @@ class FriendHelper
 
     return $query->whereNotIn('id', $friendsIds)
       ->where('id', '!=', $authId);
+  }
+
+  public static function acceptFriendship(string|int $friendship_id): void
+  {
+    $friendship = Friend::find($friendship_id);
+
+    $friendship->status = FriendStatus::ACCEPTED->getName();
+    $friendship->save();
   }
 }
