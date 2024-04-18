@@ -166,12 +166,16 @@ class User extends Authenticatable implements FilamentUser
     public function sentFriendRequests(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'friends', 'user_origin', 'user_destination')
-            ->wherePivot('status', FriendStatus::PENDING);
+            ->wherePivot('status', FriendStatus::PENDING)
+            ->withPivot('id', 'user_destination', 'user_origin', 'status')
+            ->withTimestamps();
     }
 
     public function receivedFriendRequests(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'friends', 'user_destination', 'user_origin')
-            ->wherePivot('status', FriendStatus::PENDING);
+            ->wherePivot('status', FriendStatus::PENDING)
+            ->withPivot('id', 'user_destination', 'user_origin', 'status')
+            ->withTimestamps();
     }
 }

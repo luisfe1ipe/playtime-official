@@ -1,6 +1,6 @@
 <div class="p-6">
     @foreach ($receivedFriendRequests as $friend)
-        <div
+        <div    
             class="flex w-full h-32 p-3 mb-3 overflow-hidden transition-all ease-in bg-white border border-gray-300 rounded-lg dark:bg-zinc-900 dark:border-zinc-800 lg:inline-block sm:h-44 lg:w-64 lg:h-auto lg:mr-1">
             <div class="w-2/4 lg:w-full">
                 <img class="object-cover w-full h-full rounded-lg" src="{{ $friend->photo }}" alt="">
@@ -11,7 +11,7 @@
                     {{ '@' . $friend->nick }}
                 </a>
                 <div class="flex justify-between gap-2 lg:flex-col lg:mt-3">
-                    <x-primary-button class="w-1/2 lg:w-full" wire:click='acceptFriend({{ $friend->pivot->id }})'>
+                    <x-primary-button class="flex items-center justify-between w-1/2 lg:w-full" wire:click='acceptFriend({{ $friend->pivot->id }})'>
                         Aceitar
                         <div wire:loading wire:target='acceptFriend({{ $friend->pivot->id }})'>
                             <svg aria-hidden="true"

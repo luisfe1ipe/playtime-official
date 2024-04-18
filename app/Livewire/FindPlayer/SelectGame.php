@@ -16,6 +16,7 @@ class SelectGame extends Component
 
     public function mount()
     {
+        // Auth::loginUsingId(13);
         $this->games = Game::active(true)->get();
     }
 

@@ -21,8 +21,6 @@ class Chat extends Component
         $friends = Auth::user()->friends()->getQuery();
 
 
-
-
         if ($this->search) {
             $users->where('nick', 'like', '%' . $this->search . '%');
             $users = $users->get();

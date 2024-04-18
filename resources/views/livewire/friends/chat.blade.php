@@ -183,7 +183,7 @@
                                 alt="Foto {{ $user->nick }}">
                             <p>{{ $user->nick }}</p>
                         </div>
-                        <livewire:friends.add-friend user_id="{{ $user->id }}" />
+                        <livewire:friends.add-friend wire:key='{{$user->id}}' user_id="{{ $user->id }}" />
                     </div>
                 @empty
                     <div class="text-gray-500 dark:text-gray-300">
