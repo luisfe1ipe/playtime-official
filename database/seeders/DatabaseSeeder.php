@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Character;
 use App\Models\FindPlayer;
+use App\Models\Friend;
 use App\Models\Game;
 use App\Models\ManyToMany\FindPlayerUser;
 use App\Models\News;
@@ -30,8 +31,9 @@ class DatabaseSeeder extends Seeder
 
         Type::factory(20)->create();
         News::factory(100)->create();
-        \App\Models\User::factory(500)->create();
+        \App\Models\User::factory(200)->create();
         FindPlayer::factory(200)->create();
         FindPlayerUser::factory(800)->create();
+        Friend::factory(10000)->create();
     }
 }
