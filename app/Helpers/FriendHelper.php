@@ -10,6 +10,12 @@ use Illuminate\Database\Eloquent\Builder;
 
 class FriendHelper
 {
+
+  public static function getCountreceivedFriendRequests(): int
+  {
+    return Auth::user()->receivedFriendRequests->count();
+  }
+
   public static function getNotFriends(): Builder
   {
     $authId = Auth::user()->id;
@@ -27,5 +33,11 @@ class FriendHelper
 
     $friendship->status = FriendStatus::ACCEPTED->getName();
     $friendship->save();
+  }
+
+  public static function recuseFriendship(string|int $friendship_id): void
+  {
+    $friendship = Friend::find($friendship_id);
+    $friendship->delete();
   }
 }

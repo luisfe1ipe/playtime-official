@@ -24,8 +24,22 @@ class FriendshipRequests extends Component
     {
         FriendHelper::acceptFriendship($friend_id);
 
+        $this->dispatch('refresh-sidebar', FriendHelper::getCountreceivedFriendRequests());
+
         return Notification::make()
             ->title('Pedido de amizade aceito!')
+            ->success()
+            ->send();
+    }
+
+    public function recuseFriend(string|int $friend_id)
+    {
+        FriendHelper::recuseFriendship($friend_id);
+
+        $this->dispatch('refresh-sidebar', FriendHelper::getCountreceivedFriendRequests());
+
+        return Notification::make()
+            ->title('Pedido de amizade recusado!')
             ->success()
             ->send();
     }
