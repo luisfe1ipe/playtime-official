@@ -146,7 +146,7 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->belongsToMany(User::class, 'friends', 'user_origin', 'user_destination')
             ->wherePivot('status', FriendStatus::ACCEPTED)
-            ->withPivot('user_origin', 'user_destination', 'status')
+            ->withPivot('id', 'user_origin', 'user_destination', 'status')
             ->withTimestamps();
     }
 
@@ -159,7 +159,7 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->belongsToMany(User::class, 'friends', 'user_destination', 'user_origin')
             ->wherePivot('status', FriendStatus::ACCEPTED)
-            ->withPivot('user_origin', 'user_destination', 'status')
+            ->withPivot('id', 'user_origin', 'user_destination', 'status')
             ->withTimestamps();
     }
 

@@ -10,6 +10,7 @@ use App\Livewire\FindPlayer\SelectGame;
 use App\Livewire\FindPlayer\ShowFindPlayer;
 use App\Livewire\Friends\Chat;
 use App\Livewire\Friends\FriendshipRequests;
+use App\Livewire\Friends\MyFriends;
 use App\Livewire\News\ListNews;
 use App\Livewire\News\ShowNews;
 use App\Livewire\Notification\ListNotifications;
@@ -77,6 +78,7 @@ Route::middleware(['checkNickname'])->group(function () {
 
   Route::get('/chat', Chat::class)->name('friends.chat');
   Route::get('/solicitacoes-de-amizade', FriendshipRequests::class)->name('friends.friendship-requests');
+  Route::get('/amigos', MyFriends::class)->name('friends.index');
 
 
 

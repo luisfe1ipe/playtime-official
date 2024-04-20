@@ -11,9 +11,14 @@ use Illuminate\Database\Eloquent\Builder;
 class FriendHelper
 {
 
-  public static function getCountreceivedFriendRequests(): int
+  public static function getReceivedFriendRequestsCount(): int
   {
     return Auth::user()->receivedFriendRequests->count();
+  }
+
+  public static function getFriendsCount(): int
+  {
+    return Auth::user()->friends->count();
   }
 
   public static function getNotFriends(): Builder

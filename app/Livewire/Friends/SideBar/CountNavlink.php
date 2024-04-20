@@ -9,7 +9,6 @@ class CountNavlink extends Component
 {
     public $count = 0;
 
-    #[On('refresh-sidebar')]
     public function mount(int $count)
     {
         $this->count = $count;

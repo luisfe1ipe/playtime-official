@@ -1,7 +1,8 @@
-<div class="p-6">
+<div class="p-6 mb-32">
     @use('Carbon\Carbon')
+
     <div class="flex flex-col justify-between gap-4 mb-6">
-        <h1>{{ $receivedFriendRequests->total() }} Solicitações de Amizade</h1>
+        <h1>{{ $friends->total() }} Amigos</h1>
         <div class="relative w-1/2">
             <div class="absolute inset-y-0 flex items-center pointer-events-none rtl:inset-r-0 start-0 ps-3">
                 <svg wire:loading.remove wire:target='search' class="w-4 h-4 text-gray-500 dark:text-gray-400"
@@ -18,7 +19,7 @@
                 placeholder="Pesquisar amigo" type="search">
         </div>
     </div>
-    @foreach ($receivedFriendRequests as $friend)
+    @foreach ($friends as $friend)
         <div
             class="flex w-full h-32 p-3 mb-3 overflow-hidden transition-all ease-in bg-white border border-gray-300 rounded-lg dark:bg-zinc-900 dark:border-zinc-800 lg:inline-block sm:h-44 lg:w-64 lg:h-auto lg:mr-1">
             <div class="w-2/4 lg:w-full">
@@ -30,9 +31,8 @@
                     {{ '@' . $friend->nick }}
                 </a>
                 <div class="flex justify-between gap-2 lg:flex-col lg:mt-3">
-                    <x-primary-button class="flex items-center justify-between w-1/2 lg:w-full"
-                        wire:click='acceptFriend({{ $friend->pivot->id }})'>
-                        Aceitar
+                    <x-primary-button class="flex items-center justify-between w-1/2 lg:w-full">
+                        Enviar mensagem
                         <div wire:loading wire:target='acceptFriend({{ $friend->pivot->id }})'>
                             <svg aria-hidden="true"
                                 class="w-4 h-4 ml-2 text-gray-200 animate-spin dark:text-gray-600 fill-white"
@@ -48,9 +48,9 @@
                         </div>
                     </x-primary-button>
                     <x-danger-button class="flex items-center justify-between w-1/2 lg:w-full"
-                        wire:click='recuseFriend({{ $friend->pivot->id }})'>
-                        Recusar
-                        <div wire:loading wire:target='recuseFriend({{ $friend->pivot->id }})'>
+                        wire:click='deleteFriend({{ $friend->pivot->id }})'>
+                        Cancelar amizade
+                        <div wire:loading wire:target='deleteFriend({{ $friend->pivot->id }})'>
                             <svg aria-hidden="true"
                                 class="w-4 h-4 ml-2 text-gray-200 animate-spin dark:text-gray-600 fill-white"
                                 viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -66,9 +66,13 @@
                     </x-danger-button>
                 </div>
                 <span class="mt-3 text-xs text-gray-500 dark:text-gray-400">
-                    Enviado {{ Carbon::parse($friend->pivot->created_at)->diffForHumans() }}
+                    Amigos desde {{ Carbon::parse($friend->pivot->updated_at)->format('d/m/Y') }}
                 </span>
             </div>
         </div>
     @endforeach
+    <div class="mt-6">
+        {{ $friends->links() }}
+
+    </div>
 </div>

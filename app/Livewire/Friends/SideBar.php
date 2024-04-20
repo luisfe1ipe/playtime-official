@@ -9,12 +9,17 @@ use Livewire\Component;
 
 class SideBar extends Component
 {
+    public $receivedFriendRequestsCount, $friendsCount;
+
     public function render()
     {
-        $receivedFriendRequestsCount = FriendHelper::getCountreceivedFriendRequests();
+        $receivedFriendRequestsCount = FriendHelper::getReceivedFriendRequestsCount();
+        $friendsCount = FriendHelper::getFriendsCount();
 
         return view('livewire.friends.side-bar', [
-            'receivedFriendRequestsCount' => $receivedFriendRequestsCount
+            'receivedFriendRequestsCount' => $receivedFriendRequestsCount,
+            'friendsCount' => $friendsCount,
         ]);
     }
+
 }
