@@ -1,4 +1,4 @@
-<div class="p-6">
+<div class="p-6 mb-32">
     @use('Carbon\Carbon')
     <div class="flex flex-col justify-between gap-4 mb-6">
         <h1>{{ $receivedFriendRequests->total() }} Solicitações de Amizade</h1>
@@ -71,4 +71,7 @@
             </div>
         </div>
     @endforeach
+    <div class="mt-6">
+        {{ $receivedFriendRequests->links() }}
+    </div>
 </div>

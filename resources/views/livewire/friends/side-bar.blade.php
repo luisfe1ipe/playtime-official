@@ -1,4 +1,15 @@
 <div class="flex flex-col w-full max-h-screen gap-2 p-3 transition-all ease-in">
+    <x-friend.nav-link :href="route('friends.chat')" :active="request()->routeIs('friends.chat')">
+        <span class="flex items-end gap-1">
+            <svg class="size-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-message-circle">
+                <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+            </svg>
+            Chat
+        </span>
+        {{-- <livewire:friends.side-bar.count-navlink :count="$receivedFriendRequestsCount" /> --}}
+    </x-friend.nav-link>
     <x-friend.nav-link :href="route('friends.index')" :active="request()->routeIs('friends.index')">
         <span class="flex items-end gap-1">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"

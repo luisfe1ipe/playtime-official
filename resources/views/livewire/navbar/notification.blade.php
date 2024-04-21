@@ -123,7 +123,11 @@
                     </a>
                 </div>
             </div>
-            <div x-data="{ openFindPlayer: false }">
+            <a wire:navigate href="{{ route('friends.index') }}"
+                class="flex w-full p-2 transition-colors ease-linear rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-zinc-950/80">
+                Amigos
+            </a>
+            {{-- <div x-data="{ openFindPlayer: false }">
                 <button x-on:click="openFindPlayer = !openFindPlayer"
                     class="flex items-end justify-between w-full p-2 transition-colors ease-linear rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-zinc-950/80">
                     Amigos
@@ -144,7 +148,7 @@
                         Solicitações
                     </a>
                 </div>
-            </div>
+            </div> --}}
             <button id="theme-toggle" type="button"
                 class="flex w-full p-2 transition-colors ease-linear rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-zinc-950/80">
                 <div id="theme-toggle-dark-icon" class="hidden">
