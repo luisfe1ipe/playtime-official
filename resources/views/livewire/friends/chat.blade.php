@@ -34,8 +34,10 @@
                 </div>
                 <div class="relative flex flex-col w-full gap-1 mt-8">
                     @foreach ($friends as $friend)
-                        <div
-                            class="flex items-center gap-2 p-2 transition-all ease-in rounded-lg cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-800">
+                        <button wire:click='selectUser({{ $friend->id }})'
+                            class="@if ($activeUser?->id == $friend->id)
+                                bg-gray-200 dark:bg-zinc-800
+                            @endif flex items-center gap-2 p-2 transition-all ease-in rounded-lg cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-800">
                             <img class="object-cover rounded-full size-14" src="{{ $friend->photo }}"
                                 alt="Foto {{ $friend->nick }}">
                             <div class="flex flex-col gap-1 truncate">
@@ -49,19 +51,21 @@
                                     delectus illo vel aperiam tenetur rem?
                                 </span>
                             </div>
-                        </div>
+                        </button>
                     @endforeach
                 </div>
             </div>
         </div>
         <div class="flex flex-col justify-between h-full col-span-7 bg-gray-100 dark:bg-zinc-950">
-            <div
-                class="sticky top-0 z-10 w-full px-6 py-2 bg-white border-b border-gray-300 dark:bg-zinc-900 dark:border-zinc-800">
-                <div class="flex items-center gap-2">
-                    <img class="rounded-full size-12" src="{{ Auth::user()->photo }}" alt="">
-                    <p>{{ Auth::user()->nick }}</p>
+            @if ($activeUser)
+                <div
+                    class="sticky top-0 z-10 w-full px-6 py-2 bg-white border-b border-gray-300 dark:bg-zinc-900 dark:border-zinc-800">
+                    <div class="flex items-center gap-2">
+                        <img class="rounded-full size-12" src="{{ $activeUser->photo }}" alt="">
+                        <p>{{ $activeUser->nick }}</p>
+                    </div>
                 </div>
-            </div>
+            @endif
 
             <div class="flex flex-col flex-1 gap-4 p-6">
                 @for ($i = 0; $i < 20; $i++)
@@ -183,7 +187,7 @@
                                 alt="Foto {{ $user->nick }}">
                             <p>{{ $user->nick }}</p>
                         </div>
-                        <livewire:friends.add-friend wire:key='{{$user->id}}' user_id="{{ $user->id }}" />
+                        <livewire:friends.add-friend wire:key='{{ $user->id }}' user_id="{{ $user->id }}" />
                     </div>
                 @empty
                     <div class="text-gray-500 dark:text-gray-300">
@@ -193,8 +197,8 @@
                         <span>
                             Se nenhum usuário for exibido, pode ser que ele não exista ou que vocês já sejam amigos.
                             Você
-                            pode verificar sua lista de amigos <a class="underline text-primary-500"
-                                href="">aqui</a> ou procurá-lo no chat
+                            pode verificar sua lista de amigos <a wire:navigate class="underline text-primary-500"
+                                href="{{route('friends.index')}}">aqui</a> ou procurá-lo no chat
                             <button wire:click='searchUserInChat("{{ $search }}")'
                                 class="underline text-primary-500">clicando aqui</button>.
                         </span>

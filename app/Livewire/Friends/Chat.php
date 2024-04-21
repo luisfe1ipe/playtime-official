@@ -14,6 +14,7 @@ class Chat extends Component
 {
     public $search = '';
     public $searchChat = '';
+    public $activeUser;
 
     public function render()
     {
@@ -51,5 +52,10 @@ class Chat extends Component
     {
         $this->searchChat = $search;
         $this->dispatch('close-modal');
+    }
+
+    public function selectUser(string|int $user_id)
+    {
+        $this->activeUser = User::find($user_id);
     }
 }

@@ -9,16 +9,23 @@ use Livewire\Component;
 
 class SideBar extends Component
 {
-    public $receivedFriendRequestsCount, $friendsCount;
+    public $search;
 
     public function render()
     {
         $receivedFriendRequestsCount = FriendHelper::getReceivedFriendRequestsCount();
         $friendsCount = FriendHelper::getFriendsCount();
+        $users = FriendHelper::getNotFriends();
+
+        if ($this->search) {
+            $users->where('nick', 'like', '%' . $this->search . '%');
+            $users = $users->get();
+        }
 
         return view('livewire.friends.side-bar', [
             'receivedFriendRequestsCount' => $receivedFriendRequestsCount,
             'friendsCount' => $friendsCount,
+            'users' => $users
         ]);
     }
 
