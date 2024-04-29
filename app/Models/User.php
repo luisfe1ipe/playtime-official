@@ -178,4 +178,14 @@ class User extends Authenticatable implements FilamentUser
             ->withPivot('id', 'user_destination', 'user_origin', 'status')
             ->withTimestamps();
     }
+
+    /**
+     * The groups that belong to the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function groups(): BelongsToMany
+    {
+        return $this->belongsToMany(Group::class, 'group_users');
+    }
 }

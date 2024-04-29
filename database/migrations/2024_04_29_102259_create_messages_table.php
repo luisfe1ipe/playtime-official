@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->text('text');
+            $table->text('message')->nullable();
             $table->boolean('is_read');
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(User::class, 'sender_id');
+            $table->foreignIdFor(User::class, 'receiver_id')->nullable();
             $table->foreignIdFor(Message::class, 'replied_message_id')->nullable();
             $table->morphs('messageable');
             $table->timestamps();

@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Message;
-use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,11 +12,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('conversations', function (Blueprint $table) {
+        Schema::create('message_attachments', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class, 'user_id_1');
-            $table->foreignIdFor(User::class, 'user_id_2');
-            $table->foreignIdFor(Message::class, 'last_message_id')->nullable();
+            $table->foreignIdFor(Message::class);
+            $table->longText('attachments');
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('conversations');
+        Schema::dropIfExists('message_attachments');
     }
 };
