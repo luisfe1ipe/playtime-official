@@ -6,6 +6,7 @@ use App\Enums\FriendStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Friend extends Model
 {
@@ -14,7 +15,8 @@ class Friend extends Model
     protected $fillable = [
         'user_origin',
         'user_destination',
-        'status'
+        'status',
+        'last_message_id'
     ];
 
     /**
@@ -25,6 +27,15 @@ class Friend extends Model
     protected $casts = [
         'status' => FriendStatus::class,
     ];
+
+    /**
+     * Get all of the conversation's messages.
+     */
+    public function messages(): MorphMany
+    {
+        return $this->morphMany(Message::class, 'messageable');
+    }
+
 
     /**
      * Get the user that owns the Friend
