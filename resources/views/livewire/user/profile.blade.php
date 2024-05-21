@@ -123,7 +123,7 @@
                                 @endforeach
                             </div>
                         </div>
-                        @if ($characters->isNotEmpty())
+                        @if ($characters != null)
                             <p class="font-semibold">Personagens</p>
                             <div class="flex flex-wrap w-full gap-6 mt-3">
                                 @foreach ($characters as $ch)

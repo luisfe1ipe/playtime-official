@@ -68,4 +68,16 @@ class EditGameProfile extends Component
             ->success()
             ->send();
     }
+
+    public function deleteGame()
+    {
+        $this->user->games()->detach($this->game_user_id);
+
+        $this->redirect(route('profile', ['nick' => $this->user->nick]), navigate: true);
+
+        return Notification::make()
+            ->title('Jogo excluído com sucesso.')
+            ->success()
+            ->send();
+    }
 }

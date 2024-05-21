@@ -11,12 +11,22 @@
 
                 <div class="mt-8">
                     <h3>Jogo selecionado:</h3>
-                    <div class="flex items-center gap-2 mt-4">
-                        <img class="rounded-lg size-12" src="{{ $game->getImage($game->photo) }}"
-                            alt="Foto {{ $game->name }}">
-                        <p class="text-lg font-medium">
-                            {{ $game->name }}
-                        </p>
+                    <div class="flex items-end justify-between gap-6">
+                        <div class="flex items-center gap-2 mt-4">
+                            <img class="rounded-lg size-12" src="{{ $game->getImage($game->photo) }}"
+                                alt="Foto {{ $game->name }}">
+                            <p class="text-lg font-medium">
+                                {{ $game->name }}
+                            </p>
+                        </div>
+                        <div>
+                            <x-danger-button wire:click='deleteGame'>
+                                Excluir jogo do perfil
+                                <div wire:loading wire:target='deleteGame'>
+                                    <x-filament::loading-indicator class="w-5 h-5" />
+                                </div>
+                            </x-danger-button>
+                        </div>
                     </div>
                 </div>
                 <form wire:submit.prevent='save' class="mt-6">
