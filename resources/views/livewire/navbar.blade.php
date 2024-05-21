@@ -12,6 +12,11 @@
                         </x-nav-link>
                     </li>
                     <li>
+                        <x-nav-link :href="route('teams.index')" :active="request()->routeIs('teams.index')">
+                            Times
+                        </x-nav-link>
+                    </li>
+                    <li>
                         <x-nav-link :href="route('news.list')" :active="request()->routeIs('news.list')">
                             Notícias
                         </x-nav-link>

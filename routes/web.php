@@ -14,6 +14,7 @@ use App\Livewire\Friends\MyFriends;
 use App\Livewire\News\ListNews;
 use App\Livewire\News\ShowNews;
 use App\Livewire\Notification\ListNotifications;
+use App\Livewire\Teams\ListTeams;
 use App\Livewire\Teams\MyTeams\ListMyTeams;
 use App\Livewire\Teams\MyTeams\Setting\AboutTeam;
 use App\Livewire\Teams\MyTeams\Setting\AppearanceTeam;
@@ -86,7 +87,8 @@ Route::middleware(['checkNickname'])->group(function () {
 
 
 
-  Route::get('/times', ListMyTeams::class)->name('my-teams.list');
+  Route::get('times', ListTeams::class)->name('teams.index');
+  Route::get('/meus-times', ListMyTeams::class)->name('my-teams.list');
   Route::get('/times/{slug}', ShowMyTeam::class)->name('my-teams.show');
 
 

@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory(200)->create();
         FindPlayer::factory(200)->create();
         FindPlayerUser::factory(800)->create();
-        // Friend::factory(10000)->create();
+        Friend::factory(10000)->create();
+        Team::factory(200)->create();
     }
 }
