@@ -11,6 +11,20 @@ use Illuminate\Database\Eloquent\Builder;
 class FriendHelper
 {
 
+  public static function getFriend(string|int $user_id): Friend
+  {
+    $friend =
+      Friend::where(function ($query) use ($user_id) {
+        $query->where('user_origin', $user_id)
+          ->where('user_destination', Auth::user()->id);
+      })->orWhere(function ($query) use ($user_id) {
+        $query->where('user_origin', Auth::user()->id)
+          ->where('user_destination', $user_id);
+      })->with(['userOrigin', 'userDestination', 'messages'])->first();
+    
+    return $friend;
+  }
+
   public static function getReceivedFriendRequestsCount(): int
   {
     return Auth::user()->receivedFriendRequests->count();

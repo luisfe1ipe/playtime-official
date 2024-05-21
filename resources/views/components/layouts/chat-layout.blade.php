@@ -30,7 +30,7 @@
 </head>
 
 <body class="antialiased text-gray-800 bg-gray-100 dark:text-white dark:bg-zinc-950">
-    <div class="fixed z-10 px-4 py-2 bottom-4 right-2">
+    {{-- <div class="fixed z-10 px-4 py-2 bottom-4 right-2">
         <button role="button"
             class="inline-flex items-center justify-center text-sm transition-all duration-200 ease-in-out border border-transparent rounded-full outline-none bg-primary-500 focus:ring-offset-white focus:shadow-outline group gap-x-2 hover:shadow-sm focus:border-transparent focus:ring-2 disabled:cursor-not-allowed disabled:opacity-50 w-9 h-9 text-primary-50 ring-primary-500 focus:bg-primary-600 hover:bg-primary-600 focus:ring-offset-2 dark:focus:ring-offset-dark-900 dark:focus:ring-primary-600 dark:bg-primary-700 dark:hover:bg-primary-600 dark:hover:ring-primary-600"
             x-data="{ visible: false }" x-on:scroll.window="visible = window.scrollY > 100"
@@ -43,7 +43,7 @@
                     clip-rule="evenodd"></path>
             </svg>
         </button>
-    </div>
+    </div> --}}
     <livewire:navbar />
     <div class="">
         {{ $slot }}

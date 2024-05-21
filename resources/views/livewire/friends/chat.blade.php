@@ -35,20 +35,15 @@
                 <div class="relative flex flex-col w-full gap-1 mt-8">
                     @foreach ($friends as $friend)
                         <button wire:click='selectUser({{ $friend->id }})'
-                            class="@if ($activeUser?->id == $friend->id)
-                                bg-gray-200 dark:bg-zinc-800
-                            @endif flex items-center gap-2 p-2 transition-all ease-in rounded-lg cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-800">
+                            class="@if ($activeUser?->id == $friend->id) bg-gray-200 dark:bg-zinc-800 @endif flex items-center gap-2 p-2 transition-all ease-in rounded-lg cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-800">
                             <img class="object-cover rounded-full size-14" src="{{ $friend->photo }}"
                                 alt="Foto {{ $friend->nick }}">
-                            <div class="flex flex-col gap-1 truncate">
+                            <div class="flex flex-col items-start gap-1 truncate">
                                 <p class="font-semibold">{{ $friend->nick }}</p>
                                 <span class="text-xs text-gray-600 truncate dark:text-gray-300">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi accusantium
-                                    consequatur
-                                    optio
-                                    illo molestias facere? Sed fugiat quibusdam, quas, illum inventore eos consectetur
-                                    neque
-                                    delectus illo vel aperiam tenetur rem?
+                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi nam expedita alias
+                                    tempora laboriosam suscipit! Quidem suscipit impedit unde, quibusdam veniam, odit
+                                    possimus aliquam error blanditiis repellendus corporis quia dolore.
                                 </span>
                             </div>
                         </button>
@@ -58,54 +53,71 @@
         </div>
         <div class="flex flex-col justify-between h-full col-span-7 bg-gray-100 dark:bg-zinc-950">
             @if ($activeUser)
-                <div
-                    class="sticky top-0 z-10 w-full px-6 py-2 bg-white border-b border-gray-300 dark:bg-zinc-900 dark:border-zinc-800">
-                    <div class="flex items-center gap-2">
-                        <img class="rounded-full size-12" src="{{ $activeUser->photo }}" alt="">
-                        <p>{{ $activeUser->nick }}</p>
+                @if ($activeUser->user_origin == Auth::user()->id)
+                    <div
+                        class="sticky top-0 z-10 w-full px-6 py-2 bg-white border-b border-gray-300 dark:bg-zinc-900 dark:border-zinc-800">
+                        <div class="flex items-center gap-2">
+                            <img class="rounded-full size-12" src="{{ $activeUser->userDestination->photo }}"
+                                alt="">
+                            <p>{{ $activeUser->userDestination->nick }}</p>
+                        </div>
                     </div>
-                </div>
+                @else
+                    <div
+                        class="sticky top-0 z-10 w-full px-6 py-2 bg-white border-b border-gray-300 dark:bg-zinc-900 dark:border-zinc-800">
+                        <div class="flex items-center gap-2">
+                            <img class="rounded-full size-12" src="{{ $activeUser->userOrigin->photo }}" alt="">
+                            <p>{{ $activeUser->userOrigin->nick }}</p>
+                        </div>
+                    </div>
+                @endif
+
             @endif
 
-            <div class="flex flex-col flex-1 gap-4 p-6">
-                @for ($i = 0; $i < 20; $i++)
-                    <div class="flex justify-start w-full">
-                        <div class="inline-block p-2 bg-white dark:bg-zinc-800 max-w-[55%] rounded-lg relative">
-                            <svg class="absolute top-[8px] -left-[20px] rotate-180 size-10 text-white dark:text-zinc-800"
-                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                fill="currentColor" viewBox="0 0 24 24">
-                                <path fill-rule="evenodd"
-                                    d="M10.271 5.575C8.967 4.501 7 5.43 7 7.12v9.762c0 1.69 1.967 2.618 3.271 1.544l5.927-4.881a2 2 0 0 0 0-3.088l-5.927-4.88Z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, neque corporis dolores
-                            illum
-                            eos fugit obcaecati cupiditate, amet a laborum magnam quia praesentium commodi dolorem
-                            dolore
-                            ipsa suscipit reiciendis maxime!
+            {{-- CHAT --}}
+            <div wire:poll class="flex flex-col flex-1 gap-2 p-6">
+                @if ($activeUser)
+                    @forelse ($activeUser->messages as $message)
+                        @if ($message->sender_id != Auth::user()->id)
+                            <div wire:key='{{ $message->id }}' class="flex justify-start w-full">
+                                <div class="inline-block p-2 bg-white dark:bg-zinc-800 max-w-[55%] rounded-lg relative">
+                                    <svg class="absolute top-[8px] -left-[20px] rotate-180 size-10 text-white dark:text-zinc-800"
+                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd"
+                                            d="M10.271 5.575C8.967 4.501 7 5.43 7 7.12v9.762c0 1.69 1.967 2.618 3.271 1.544l5.927-4.881a2 2 0 0 0 0-3.088l-5.927-4.88Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    {{ $message->message }}
+                                </div>
+                            </div>
+                        @else
+                            <div wire:key='{{ $message->id }}' class="flex justify-end w-full">
+                                <div
+                                    class="inline-block p-2 bg-[#BF85F6] dark:bg-primary-700 max-w-[55%] rounded-lg relative">
+                                    <svg class="absolute top-[8px] -right-[20px] size-10 text-[#BF85F6] dark:text-primary-700"
+                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd"
+                                            d="M10.271 5.575C8.967 4.501 7 5.43 7 7.12v9.762c0 1.69 1.967 2.618 3.271 1.544l5.927-4.881a2 2 0 0 0 0-3.088l-5.927-4.88Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    {{ $message->message }}
+                                </div>
+                            </div>
+                        @endif
+                    @empty
+                        <div>
+                            Nada aqui
                         </div>
-                    </div>
-                    <div class="flex justify-end w-full">
-                        <div class="inline-block p-2 bg-[#BF85F6] dark:bg-primary-700 max-w-[55%] rounded-lg relative">
-                            <svg class="absolute top-[8px] -right-[20px] size-10 text-[#BF85F6] dark:text-primary-700"
-                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                fill="currentColor" viewBox="0 0 24 24">
-                                <path fill-rule="evenodd"
-                                    d="M10.271 5.575C8.967 4.501 7 5.43 7 7.12v9.762c0 1.69 1.967 2.618 3.271 1.544l5.927-4.881a2 2 0 0 0 0-3.088l-5.927-4.88Z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, neque corporis dolores
-                            illum
-                            eos fugit obcaecati cupiditate, amet a laborum magnam quia praesentium commodi dolorem
-                            dolore
-                            ipsa suscipit reiciendis maxime!
-                        </div>
-                    </div>
-                @endfor
+                    @endforelse
+                @endif
+
+
             </div>
-            <div
+            <form wire:submit.prevent='sendMessage'
                 class="sticky bottom-0 flex justify-between w-full gap-6 p-4 bg-white border-t border-gray-300 dark:border-zinc-800 dark:bg-zinc-900">
-                <button
+                <button type="button"
                     class="flex items-center justify-center h-full p-2 transition-all ease-in bg-gray-200 border-none rounded-lg hover:bg-gray-300 dark:hover:bg-zinc-700 dark:bg-zinc-800">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -120,18 +132,27 @@
                         <svg wire:loading.remove wire:target='searchItem'
                             class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                         </svg>
                         <div wire:loading wire:target='searchItem'>
                             <x-filament::loading-indicator class="w-5 h-5" />
                         </div>
                     </div>
-                    <input
+                    <input wire:model='message'
                         class="w-full h-full bg-gray-200 border-none rounded-lg focus:ring-primary-500 pl-9 dark:bg-zinc-800"
                         placeholder="Mensagem" type="search">
+                    <button type="submit"
+                        class="absolute top-0 right-0 flex items-center justify-center h-full px-3 transition ease-in rounded-r-lg hover:bg-primary-700 bg-primary-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="text-white lucide lucide-send">
+                            <path d="m22 2-7 20-4-9-9-4Z" />
+                            <path d="M22 2 11 13" />
+                        </svg>
+                    </button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
     <div x-on:close-modal.window="modalAddFriend = false" x-cloak x-show="modalAddFriend"
@@ -198,7 +219,7 @@
                             Se nenhum usuário for exibido, pode ser que ele não exista ou que vocês já sejam amigos.
                             Você
                             pode verificar sua lista de amigos <a wire:navigate class="underline text-primary-500"
-                                href="{{route('friends.index')}}">aqui</a> ou procurá-lo no chat
+                                href="{{ route('friends.index') }}">aqui</a> ou procurá-lo no chat
                             <button wire:click='searchUserInChat("{{ $search }}")'
                                 class="underline text-primary-500">clicando aqui</button>.
                         </span>

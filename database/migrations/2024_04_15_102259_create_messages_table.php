@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->text('message')->nullable();
-            $table->boolean('is_read');
+            $table->boolean('is_read')->default(false);
             $table->foreignIdFor(User::class, 'sender_id');
             $table->foreignIdFor(User::class, 'receiver_id')->nullable();
             $table->foreignIdFor(Message::class, 'replied_message_id')->nullable();

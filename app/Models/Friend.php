@@ -56,4 +56,14 @@ class Friend extends Model
     {
         return $this->belongsTo(User::class, 'user_destination');
     }
+
+    /**
+     * Get the lastMessage that owns the Friend
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function lastMessage(): BelongsTo
+    {
+        return $this->belongsTo(Message::class, 'last_message_id');
+    }
 }

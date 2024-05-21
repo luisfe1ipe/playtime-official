@@ -3,6 +3,8 @@
 namespace App\Livewire\Friends;
 
 use App\Helpers\FriendHelper;
+use App\Models\Friend;
+use App\Models\Message;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
@@ -15,6 +17,7 @@ class Chat extends Component
     public $search = '';
     public $searchChat = '';
     public $activeUser;
+    public $message = '';
 
     public function render()
     {
@@ -56,6 +59,20 @@ class Chat extends Component
 
     public function selectUser(string|int $user_id)
     {
-        $this->activeUser = User::find($user_id);
+        $this->activeUser = FriendHelper::getFriend($user_id);
+
+    }
+
+    public function sendMessage()
+    {
+        $message = $this->activeUser->messages()->create([
+            'message' => $this->message,
+            'sender_id' => Auth::user()->id,
+            'is_read' => false
+        ]);
+
+        $this->activeUser->last_message_id = $message->id;
+
+        $this->message = '';
     }
 }
