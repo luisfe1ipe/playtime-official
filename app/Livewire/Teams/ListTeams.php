@@ -4,9 +4,12 @@ namespace App\Livewire\Teams;
 
 use App\Models\Team;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ListTeams extends Component
 {
+    use WithPagination;
+
     public $search;
     public $selectedOrder = 'desc';
 
@@ -26,11 +29,10 @@ class ListTeams extends Component
 
         $teams = $teams->paginate(16);
 
-        $team = Team::where('user_id', 202)->first();
+        $this->resetPage();
 
         return view('livewire.teams.list-teams', [
             'teams' => $teams,
-            'team' => $team
         ]);
     }
 }
