@@ -3,9 +3,11 @@
 namespace App\Livewire\Teams;
 
 use App\Models\Team;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+#[Title('Times - PlayTime')]
 class ListTeams extends Component
 {
     use WithPagination;
