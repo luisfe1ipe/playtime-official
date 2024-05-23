@@ -18,6 +18,7 @@ use App\Livewire\Teams\ListTeams;
 use App\Livewire\Teams\MyTeams\ListMyTeams;
 use App\Livewire\Teams\MyTeams\Setting\AboutTeam;
 use App\Livewire\Teams\MyTeams\Setting\AppearanceTeam;
+use App\Livewire\Teams\MyTeams\Setting\MembersTeam;
 use App\Livewire\Teams\MyTeams\ShowMyTeam;
 use App\Livewire\Test;
 use App\Livewire\User\CreateNickname;
@@ -97,5 +98,6 @@ Route::middleware(['checkNickname'])->group(function () {
     // Rotas que exigem verificação de liderança de equipe
     Route::get('/times/{slug}/configuracoes/sobre', AboutTeam::class)->name('my-teams.settings.about');
     Route::get('/times/{slug}/configuracoes/aparencia', AppearanceTeam::class)->name('my-teams.settings.appearance');
+    Route::get('/times/{slug}/configuracoes/membros', MembersTeam::class)->name('my-teams.settings.members');
   });
 });
