@@ -89,13 +89,13 @@
             </div>
             <div class="flex flex-col gap-3 p-4 overflow-x-hidden rounded-b-lg max-h-80 dark:bg-zinc-900">
                 @forelse ($users as $user)
-                    <div class="flex items-center justify-between">
+                    <div wire:key='{{$user->id}}' class="flex items-center justify-between">
                         <div class="flex items-center gap-2">
                             <img class="rounded-full size-12" src="{{ $user->photo }}"
                                 alt="Foto {{ $user->nick }}">
                             <p>{{ $user->nick }}</p>
                         </div>
-                        <x-primary-button wire:click='invite("{{$user->email}}")'>
+                        <x-primary-button wire:click="invite('{{$user->email}}')">
                             Convidar
                             <div wire:target='invite' wire:loading>
                                 <x-filament::loading-indicator class="w-5 h-5" />
