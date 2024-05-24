@@ -3,6 +3,7 @@
 namespace App\Livewire\Teams\MyTeams\Setting;
 
 use App\Mail\InvitingMemberTeam;
+use App\Models\InviteTeamUser;
 use App\Models\Team;
 use App\Models\User;
 use Filament\Notifications\Notification;
@@ -36,6 +37,13 @@ class MembersTeam extends Component
 
     public function invite(string $email)
     {
+        $user_id = User::select('id', 'email')->where('email', $email)->first();
+        
+        InviteTeamUser::create([
+            'user_id' => $user_id->id,
+            'team_id' => $this->team->id,
+        ]);
+
         Mail::to($email)->send(
             new InvitingMemberTeam(
                 teamName: $this->team->name,
@@ -45,6 +53,7 @@ class MembersTeam extends Component
         );
 
         $this->dispatch('close-modal');
+        $this->reset('search');
 
         Notification::make()
             ->title('Convite enviado com sucesso.')
