@@ -18,7 +18,7 @@ class MembersTeam extends Component
 
     public function mount(string $slug)
     {
-        $this->team = Team::where('slug', $slug)->with('user')->first();
+        $this->team = Team::where('slug', $slug)->with(['user', 'members'])->first();
     }
 
 
@@ -39,7 +39,7 @@ class MembersTeam extends Component
     {
         $user_id = User::select('id', 'email')->where('email', $email)->first();
         
-        InviteTeamUser::create([
+        $invite = InviteTeamUser::create([
             'user_id' => $user_id->id,
             'team_id' => $this->team->id,
         ]);
@@ -48,7 +48,8 @@ class MembersTeam extends Component
             new InvitingMemberTeam(
                 teamName: $this->team->name,
                 teamSlug: $this->team->slug,
-                teamLeaderNick: $this->team->user->nick
+                teamLeaderNick: $this->team->user->nick,
+                inviteId: $invite->id
             )
         );
 

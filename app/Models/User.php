@@ -17,7 +17,6 @@ use Laravel\Sanctum\HasApiTokens;
 use Staudenmeir\LaravelMergedRelations\Eloquent\HasMergedRelationships;
 
 class User extends Authenticatable implements FilamentUser
-
 {
     use HasApiTokens, HasFactory, Notifiable, CustomGetImage, HasMergedRelationships;
 
@@ -77,6 +76,16 @@ class User extends Authenticatable implements FilamentUser
         return $this->mergedRelationWithModel(User::class, 'friends_view');
     }
 
+    /**
+     * The memberTeams that belong to the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function memberTeams(): BelongsToMany
+    {
+        return $this->belongsToMany(Team::class, 'member_team')->withTimestamps();
+    }
+
 
     /**
      * The games that belong to the User
@@ -132,7 +141,7 @@ class User extends Authenticatable implements FilamentUser
      */
     public function findPlayerMembers(): BelongsToMany
     {
-        return $this->belongsToMany(FindPlayer::class, 'find_player_user',)
+        return $this->belongsToMany(FindPlayer::class, 'find_player_user', )
             ->withPivot('status')
             ->withTimestamps();
     }

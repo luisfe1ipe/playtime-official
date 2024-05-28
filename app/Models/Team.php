@@ -49,4 +49,15 @@ class Team extends Model
             ->withPivot('accepted')
             ->withTimestamps();
     }
+
+    /**
+     * The members that belong to the Team
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function members(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'member_team')
+            ->withTimestamps();
+    }
 }

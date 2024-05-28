@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\InviteMemberTeamController;
 use App\Http\Controllers\SocialiteController;
 use App\Livewire\Doubts\HowToRegisterANewGame;
 use App\Livewire\Findplayer\EditFindPlayer;
@@ -38,6 +39,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('aceitar-convite-para-o-time/{id}', [InviteMemberTeamController::class, 'accept'])->name('accept-invite');
 
 
 Route::get('/adicionar-nickname', CreateNickname::class)->name('user.create-nickname');

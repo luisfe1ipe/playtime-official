@@ -87,23 +87,27 @@
     <div style="color: #FFFFFF" class="email-container">
         <div class="email-header">
             <a href="" style="text-decoration: none">
-                <h1 style="color:#a855f7">{{getenv('APP_NAME')}}</h1>
+                <h1 style="color:#a855f7">{{ getenv('APP_NAME') }}</h1>
             </a>
         </div>
         <div class="email-body">
             <h2>Convite para Participar do Time</h2>
             <p>Olá, você foi convidado por <a style="color: #a855f7; text-decoration: underline"
-                    href="{{route('profile', ['nick' => $teamLeaderNick])}}"><strong>{{$teamLeaderNick}}</strong></a> para se juntar ao time <a
-                    style="color: #a855f7; text-decoration: underline" href="{{route('my-teams.show', ['slug' => $teamSlug])}}"><strong>{{$teamName}}</strong></a>.</p>
+                    href="{{ route('profile', ['nick' => $teamLeaderNick]) }}"><strong>{{ $teamLeaderNick }}</strong></a>
+                para se juntar ao time <a style="color: #a855f7; text-decoration: underline"
+                    href="{{ route('my-teams.show', ['slug' => $teamSlug]) }}"><strong>{{ $teamName }}</strong></a>.
+            </p>
             <p>Para aceitar ou recusar o convite, clique em um dos botões abaixo:</p>
             <div class="email-buttons">
                 <a href="URL_PARA_RECUSAR" style="color: #FFFFFF" class="button decline">Recusar</a>
-                <a href="URL_PARA_ACEITAR" style="color: #FFFFFF" class="button accept">Aceitar</a>
+                <a href="{{ route('accept-invite', ['id' => $inviteId]) }}" style="color: #FFFFFF"
+                    class="button accept">Aceitar</a>
             </div>
         </div>
         <div class="email-footer">
-            <p>© {{date('Y')}} {{getenv('APP_NAME')}}. Todos os direitos reservados.</p>
-            <p>Você está recebendo este e-mail porque foi convidado para participar de um time no {{getenv('APP_NAME')}}.</p>
+            <p>© {{ date('Y') }} {{ getenv('APP_NAME') }}. Todos os direitos reservados.</p>
+            <p>Você está recebendo este e-mail porque foi convidado para participar de um time no
+                {{ getenv('APP_NAME') }}.</p>
         </div>
     </div>
 </body>

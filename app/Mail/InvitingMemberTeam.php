@@ -20,6 +20,7 @@ class InvitingMemberTeam extends Mailable
         public string $teamName,
         public string $teamLeaderNick,
         public string $teamSlug,
+        public string $inviteId
     ) {
     }
 
