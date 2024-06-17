@@ -41,20 +41,69 @@
                     </div>
                 @endif
                 <div>
-                    @foreach ($team->members as $member)
-                        {{-- {{$member->nick}} --}}
-                        <div class="relative flex items-center w-full h-full gap-4 p-4 transition-all ease-linear border-b border-zinc-800 hover:bg-zinc-700/20">
+                    <div
+                        class="relative flex items-center justify-between w-full h-full gap-4 p-4 transition-all ease-linear border-b border-zinc-800 hover:bg-zinc-700/20">
+
+                        <div class="flex items-center gap-4">
                             <div
                                 class="flex items-center justify-center overflow-hidden rounded-full bg-zinc-800 h-14 w-14">
-                                <img class="w-full h-full rounded-full" src="{{ $member->photo }}"
-                                    alt="{{ $member->photo }}">
+                                <img class="w-full h-full rounded-full" src="{{ $team->user->photo }}"
+                                    alt="{{ $team->user->photo }}">
                             </div>
                             <div class="cursor-pointer hover:text-primary-500">
-                                <a href="#"
-                                    class="block font-bold">{{ $member->nick }}</a>
-                                <span class="text-sm text-gray-400">Membro desde:
-                                    {{ date('d M, Y', strtotime($member->pivot->created_at)) }}
+                                <a wire:navigate href={{ route('profile', ['nick' => $team->user->nick]) }}
+                                    class="block font-bold">{{ $team->user->nick }}</a>
+                                <span
+                                    class="bg-primary-100 text-primary-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">Líder
                                 </span>
+                            </div>
+                        </div>
+                    </div>
+                    @foreach ($team->members as $member)
+                        <div x-data="{ open: true }" x-on:click.outside="open = false"
+                            class="relative flex items-center justify-between w-full h-full gap-4 p-4 transition-all ease-linear border-b border-zinc-800 hover:bg-zinc-700/20">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="flex items-center justify-center overflow-hidden rounded-full bg-zinc-800 h-14 w-14">
+                                    <img class="w-full h-full rounded-full" src="{{ $member->photo }}"
+                                        alt="{{ $member->photo }}">
+                                </div>
+                                <div class="cursor-pointer hover:text-primary-500">
+                                    <a wire:navigate href={{ route('profile', ['nick' => $member->nick]) }}
+                                        class="block font-bold">{{ $member->nick }}</a>
+                                    <span class="text-sm text-gray-400">Membro desde:
+                                        {{ date('d M, Y', strtotime($member->pivot->created_at)) }}
+                                    </span>
+                                </div>
+                            </div>
+                            <div>
+                                <button x-on:click="open = !open; notification = false"
+                                    class="flex items-center gap-2 p-1 rounded-full dark:hover:bg-zinc-700">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="lucide lucide-ellipsis-vertical size-4">
+                                        <circle cx="12" cy="12" r="1" />
+                                        <circle cx="12" cy="5" r="1" />
+                                        <circle cx="12" cy="19" r="1" />
+                                    </svg>
+                                </button>
+                                <div x-show="open" x-cloak x-transition:enter="transition x-transition:enter-end="
+                                    opacity-100 scale-100"
+                                    x-transition:leave="transition duration-200 eeas duration-300 ease-out transform"
+                                    x-transition:enter-start="opacity-0 scale-95" -in transform"
+                                    x-transition:leave-start="opacity-100 scale-100"
+                                    x-transition:leave-end="opacity-0 scale-95"
+                                    class="absolute right-0 z-10 flex flex-col items-start gap-1 px-2 py-2 mt-2 bg-white border border-gray-300 rounded-lg shadow-lg w-60 dark:shadow-black dark:border-zinc-800 dark:bg-zinc-900">
+                                    <button wire:click='makeLeader({{ $member->id }})'
+                                        class="w-full px-2 py-1 rounded-lg hover:bg-zinc-950 text-start">
+                                        Tornar líder
+                                    </button>
+                                    <button wire:click='removeMember({{ $member->id }})'
+                                        class="w-full px-2 py-1 rounded-lg hover:bg-rose-500 text-start">
+                                        Remover membro
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     @endforeach
@@ -83,9 +132,10 @@
                     <div
                         class="absolute inset-y-0 flex items-center pointer-events-none left-4 rtl:inset-r-0 start-0 ps-3">
                         <svg wire:loading.remove wire:target='search' class="w-4 h-4 text-gray-500 dark:text-gray-400"
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                         </svg>
                         <div wire:loading wire:target='search'>
                             <x-filament::loading-indicator class="w-5 h-5" />

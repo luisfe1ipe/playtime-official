@@ -61,4 +61,14 @@ class MembersTeam extends Component
             ->success()
             ->send();
     }
+
+    public function removeMember(string|int $id)
+    {
+        $this->team->members()->detach($id);
+
+        Notification::make()
+            ->title('Membro removido com sucesso!')
+            ->success()
+            ->send();
+    }
 }
