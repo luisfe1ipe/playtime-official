@@ -94,6 +94,7 @@ Route::middleware(['checkNickname'])->group(function () {
   Route::get('times', ListTeams::class)->name('teams.index');
   Route::get('/meus-times', ListMyTeams::class)->name('my-teams.list');
   Route::get('/times/{slug}', ShowMyTeam::class)->name('my-teams.show');
+  Route::get('/times/{slug}/configuracoes/membros', MembersTeam::class)->name('my-teams.settings.members');
 
 
   // Apenas lider do time
@@ -101,6 +102,5 @@ Route::middleware(['checkNickname'])->group(function () {
     // Rotas que exigem verificação de liderança de equipe
     Route::get('/times/{slug}/configuracoes/sobre', AboutTeam::class)->name('my-teams.settings.about');
     Route::get('/times/{slug}/configuracoes/aparencia', AppearanceTeam::class)->name('my-teams.settings.appearance');
-    Route::get('/times/{slug}/configuracoes/membros', MembersTeam::class)->name('my-teams.settings.members');
   });
 });

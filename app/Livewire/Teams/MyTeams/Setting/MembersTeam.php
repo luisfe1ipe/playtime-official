@@ -38,7 +38,7 @@ class MembersTeam extends Component
     public function invite(string $email)
     {
         $user_id = User::select('id', 'email')->where('email', $email)->first();
-        
+
         $invite = InviteTeamUser::create([
             'user_id' => $user_id->id,
             'team_id' => $this->team->id,
@@ -68,6 +68,21 @@ class MembersTeam extends Component
 
         Notification::make()
             ->title('Membro removido com sucesso!')
+            ->success()
+            ->send();
+    }
+
+    public function makeLeader(string|int $id)
+    {
+        $oldLeader = $this->team->user_id;
+        $this->team->user_id = $id;
+        $this->team->save();
+        $this->team->members()->attach($oldLeader);
+        $this->team->members()->detach($id);
+
+
+        Notification::make()
+            ->title('Líder alterado com sucesso!')
             ->success()
             ->send();
     }
