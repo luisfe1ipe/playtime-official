@@ -12,6 +12,7 @@ use App\Livewire\FindPlayer\ShowFindPlayer;
 use App\Livewire\Friends\Chat;
 use App\Livewire\Friends\FriendshipRequests;
 use App\Livewire\Friends\MyFriends;
+use App\Livewire\Home;
 use App\Livewire\News\ListNews;
 use App\Livewire\News\ShowNews;
 use App\Livewire\Notification\ListNotifications;
@@ -39,6 +40,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/', Home::class)->name('home');
 
 Route::get('aceitar-convite-para-o-time/{id}', [InviteMemberTeamController::class, 'accept'])->name('accept-invite');
 
