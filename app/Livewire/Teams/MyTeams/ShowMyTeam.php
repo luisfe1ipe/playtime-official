@@ -11,7 +11,7 @@ class ShowMyTeam extends Component
 
     public function mount(string $slug)
     {
-        $this->team = Team::where('slug', $slug)->with('user')->firstOrFail();
+        $this->team = Team::where('slug', $slug)->with(['user', 'members'])->firstOrFail();
 
     }
     public function render()
