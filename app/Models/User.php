@@ -197,4 +197,9 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->belongsToMany(Group::class, 'group_users');
     }
+
+    public function forums(): HasMany
+    {
+        return $this->hasMany(related: Forum::class);
+    }
 }
