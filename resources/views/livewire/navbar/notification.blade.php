@@ -127,37 +127,6 @@
                 class="flex w-full p-2 transition-colors ease-linear rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-zinc-950/80">
                 Amigos
             </a>
-            {{-- <div x-data="{ openFindPlayer: false }">
-                <button x-on:click="openFindPlayer = !openFindPlayer"
-                    class="flex items-end justify-between w-full p-2 transition-colors ease-linear rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-zinc-950/80">
-                    Amigos
-                    <svg x-bind:class="{ 'transform -rotate-180': openFindPlayer }" xmlns="http://www.w3.org/2000/svg"
-                        width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="transition-transform duration-200 transform lucide lucide-chevron-down">
-                        <path d="m6 9 6 6 6-6" />
-                    </svg>
-                </button>
-                <div x-show="openFindPlayer" class="pl-2">
-                    <a wire:navigate href="{{ route('friends.chat') }}"
-                        class="flex w-full p-2 transition-colors ease-linear rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-zinc-950/80">
-                        Chat
-                    </a>
-                    <a wire:navigate href="{{ route('friends.friendship-requests') }}"
-                        class="flex w-full p-2 transition-colors ease-linear rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-zinc-950/80">
-                        Solicitações
-                    </a>
-                </div>
-            </div> --}}
-            <button id="theme-toggle" type="button"
-                class="flex w-full p-2 transition-colors ease-linear rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-zinc-950/80">
-                <div id="theme-toggle-dark-icon" class="hidden">
-                    Tema escuro
-                </div>
-                <div id="theme-toggle-light-icon" class="hidden">
-                    <p>Tema claro</p>
-                </div>
-            </button>
             <button wire:click='logout'
                 class="flex w-full p-2 transition-colors ease-linear rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-zinc-950/80">
                 Sair

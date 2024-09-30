@@ -108,7 +108,7 @@
                         @endif
                     @empty
                         <div>
-                            Nada aqui
+                            <h3>Não há nenhuma mensagem.</h3>
                         </div>
                     @endforelse
                 @endif

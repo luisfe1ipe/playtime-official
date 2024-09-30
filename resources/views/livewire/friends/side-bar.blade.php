@@ -43,7 +43,7 @@
         </span>
         {{-- <livewire:friends.side-bar.count-navlink :count="$receivedFriendRequestsCount" /> --}}
     </x-friend.nav-link>
-    <x-friend.nav-link :href="route('friends.friendship-requests')" :active="request()->routeIs('friends.friendship-requests')">
+    <x-friend.nav-link :href="route('friends.friendship-requests')">
         <span class="flex items-end gap-1">
             <svg class="size-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
