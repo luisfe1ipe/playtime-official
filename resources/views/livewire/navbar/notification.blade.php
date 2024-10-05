@@ -117,7 +117,7 @@
                         class="flex w-full p-2 transition-colors ease-linear rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-zinc-950/80">
                         Minhas vagas
                     </a>
-                    <a wire:navigate href="{{ route('find-player.create-for-my') }}"
+                    <a wire:navigate href="{{ route('find-player.my-registrations') }}"
                         class="flex w-full p-2 transition-colors ease-linear rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-zinc-950/80">
                         Minhas inscrições
                     </a>
